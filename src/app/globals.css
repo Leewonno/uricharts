@@ -1,49 +1,62 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@import 'tailwindcss';
+
+/*
+ * 색: Tailwind 기본 팔레트(cyan)를 의미 이름에 연결한다.
+ * 팔레트를 바꿀 때는 여기만 고치면 된다.
+ */
+@theme inline {
+  --color-page: var(--color-cyan-50); /* 바탕 */
+  --color-surface: var(--color-white); /* 카드 */
+  --color-fill-soft: var(--color-cyan-100); /* 행 호버 */
+  --color-fill: var(--color-cyan-200); /* 채움 포인트, 조회수 막대 */
+  --color-accent: var(--color-cyan-600); /* 강조 글자/아이콘 */
+  --color-muted: var(--color-cyan-700); /* 보조 글자 */
+  --color-ink: var(--color-cyan-900); /* 본문 글자, 채움 위 글자 */
+  --color-strong: var(--color-cyan-950); /* 섹션 제목 */
+
+  --font-sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@theme {
+  /* 순위 행 호버: >>> 가 오른쪽으로 한 번 지나감 (화살표별 시차는 RowGo) */
+  --animate-race: race 1.1s cubic-bezier(0.3, 0, 0.7, 1) both;
+  @keyframes race {
+    0% {
+      transform: translateX(-10px);
+      opacity: 0;
+    }
+    30% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(52px);
+      opacity: 0;
+    }
   }
 }
 
-html {
-  height: 100%;
-}
+/* 마우스가 없는 기기 (터치) */
+@custom-variant no-hover (@media (hover: none));
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+@layer base {
+  body {
+    @apply bg-page text-ink;
+    line-height: 1.5;
+    word-break: keep-all;
   }
+
+  :focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+}
+
+/* 바탕 그라데이션 원 */
+@utility bg-glow {
+  background: radial-gradient(
+    closest-side,
+    var(--color-cyan-100) 0%,
+    color-mix(in oklch, var(--color-cyan-100), var(--color-cyan-50)) 42%,
+    transparent 100%
+  );
 }
