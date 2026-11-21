@@ -18,6 +18,42 @@
 }
 
 @theme {
+  /* 뮤직비디오 모달의 영상: 살짝 아래에서 떠오르며 나타남 */
+  --animate-cinema-in: cinema-in 0.3s ease-out;
+  @keyframes cinema-in {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+  }
+
+  /* 로고 막대 호버: 이퀄라이저처럼 줄었다 늘었다 반복 (막대마다 시차는 SiteHeader) */
+  --animate-equalizer: equalizer 0.9s ease-in-out infinite;
+  @keyframes equalizer {
+    50% {
+      transform: scaleY(0.55);
+    }
+  }
+
+  /* 제자리에서 서서히 나타남 (fixed 요소에 쓴다: transform이 들어가면 위치 기준이 바뀐다) */
+  --animate-fade-in: fade-in 0.3s ease-out;
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+
+  /* 기간별 카드 호버: 그라데이션이 옆으로 천천히 흘러감 (bg-flow와 같이 쓴다) */
+  --animate-flow: flow 4s linear infinite;
+  @keyframes flow {
+    from {
+      background-position: 0% 0;
+    }
+    to {
+      background-position: 150% 0;
+    }
+  }
+
   /* 순위 행 호버: >>> 가 오른쪽으로 한 번 지나감 (화살표별 시차는 RowGo) */
   --animate-race: race 1.1s cubic-bezier(0.3, 0, 0.7, 1) both;
   @keyframes race {
@@ -37,6 +73,8 @@
 
 /* 마우스가 없는 기기 (터치) */
 @custom-variant no-hover (@media (hover: none));
+/* 마우스가 있는 기기 */
+@custom-variant can-hover (@media (hover: hover));
 
 @layer base {
   body {
@@ -45,10 +83,28 @@
     word-break: keep-all;
   }
 
+  /* 모달(<dialog>)이 열려 있는 동안 뒤 페이지가 스크롤되지 않게 */
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+
   :focus-visible {
     outline: 3px solid var(--color-accent);
     outline-offset: 3px;
   }
+}
+
+/* 흐르는 물결 그라데이션. 처음과 끝 색이 같아 animate-flow로 옆으로 흘려도 이음매가 보이지 않는다 */
+@utility bg-flow {
+  background: linear-gradient(
+    100deg,
+    var(--color-cyan-100),
+    var(--color-cyan-200),
+    var(--color-sky-200),
+    var(--color-teal-200),
+    var(--color-cyan-100)
+  );
+  background-size: 300% 100%;
 }
 
 /* 바탕 그라데이션 원 */
@@ -59,4 +115,25 @@
     color-mix(in oklch, var(--color-cyan-100), var(--color-cyan-50)) 42%,
     transparent 100%
   );
+}
+
+/*
+ * 상단 고정 헤더: 페이지를 조금 내리면 아래쪽에 옅은 그림자가 생긴다.
+ * 스크롤 위치에 맞춰 CSS만으로 움직인다 (지원하지 않는 브라우저에서는 그림자 없이 고정만 된다).
+ */
+@utility scroll-shadow {
+  @supports (animation-timeline: scroll()) {
+    animation: scroll-shadow linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 48px;
+  }
+}
+
+@keyframes scroll-shadow {
+  from {
+    box-shadow: 0 1px 0 transparent, 0 6px 20px -14px transparent;
+  }
+  to {
+    box-shadow: 0 1px 0 rgb(8 145 178 / 0.06), 0 6px 20px -14px rgb(8 51 68 / 0.12);
+  }
 }

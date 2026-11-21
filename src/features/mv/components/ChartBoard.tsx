@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { PillSelect } from '@/components/PillSelect'
+import { PillDropdown, type PillOption } from '@/components/PillDropdown'
 import { dailyAverage, rankMvs } from '../lib/ranking'
 import { chartPath } from '../lib/routes'
 import { RELEASED_PARAM, parseReleaseYear, scopeQuery } from '../lib/scope'
@@ -19,6 +19,14 @@ interface BoardProps {
   refDate: string
 }
 
+/** 차트에 보여줄 최대 순위 */
+const CHART_SIZE = 100
+
+const SCOPE_OPTIONS: readonly PillOption<'all' | 'release'>[] = [
+  { value: 'all', label: '누적' },
+  { value: 'release', label: '공개연도' },
+]
+
 /**
  * 범위(누적/공개연도) 드롭다운 + 기간 탭 + 순위 표.
  * releaseYear가 null이면 누적(모든 곡), 연도면 그 해에 공개된 곡만 보여준다.
@@ -29,7 +37,7 @@ export function ChartBoard({ period, periods, mvs, years, refDate, releaseYear }
   const setReleaseYear = (year: string | null) => router.replace(`${pathname}${scopeQuery(year)}`, { scroll: false })
 
   const info = periods.find((p) => p.key === period)
-  const rows = rankMvs(mvs, period, { releaseYear })
+  const rows = rankMvs(mvs, period, { releaseYear }).slice(0, CHART_SIZE)
   const maxViews = Math.max(rows[0]?.views ?? 0, 1)
   // 연간 + 올해 공개곡이면 연간 조회수 = 누적이라, 오른쪽 칸은 하루 평균으로 바꿔 보여준다
   const showDailyAverage = period === 'year' && releaseYear === info?.year
@@ -37,22 +45,19 @@ export function ChartBoard({ period, periods, mvs, years, refDate, releaseYear }
   return (
     <>
       <div className="mb-5 flex flex-wrap items-stretch gap-2">
-        <PillSelect
-          aria-label="순위 범위"
+        <PillDropdown
+          label="순위 범위"
           value={releaseYear ? 'release' : 'all'}
-          onChange={(e) => setReleaseYear(e.target.value === 'release' ? (years[0] ?? null) : null)}
-        >
-          <option value="all">누적</option>
-          <option value="release">공개연도</option>
-        </PillSelect>
+          options={SCOPE_OPTIONS}
+          onChange={(scope) => setReleaseYear(scope === 'release' ? (years[0] ?? null) : null)}
+        />
         {releaseYear && (
-          <PillSelect aria-label="공개 연도" value={releaseYear} onChange={(e) => setReleaseYear(e.target.value)}>
-            {years.map((y) => (
-              <option key={y} value={y}>
-                {y}년
-              </option>
-            ))}
-          </PillSelect>
+          <PillDropdown
+            label="공개 연도"
+            value={releaseYear}
+            options={years.map((y) => ({ value: y, label: `${y}년` }))}
+            onChange={setReleaseYear}
+          />
         )}
         <nav aria-label="기간" className="inline-flex gap-1 rounded-full bg-surface p-1.5">
           {periods.map((p) => (
@@ -78,9 +83,9 @@ export function ChartBoard({ period, periods, mvs, years, refDate, releaseYear }
         <span />
       </div>
       <ol className="grid gap-2">
-        {rows.map((mv, i) => (
+        {rows.map((mv) => (
           <li key={mv.yt}>
-            <ChartRow mv={mv} maxViews={maxViews} lead={i === 0} sub={showDailyAverage ? dailyAverage(mv, refDate) : undefined} />
+            <ChartRow mv={mv} maxViews={maxViews} sub={showDailyAverage ? dailyAverage(mv, refDate) : undefined} />
           </li>
         ))}
       </ol>

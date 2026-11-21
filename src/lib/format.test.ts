@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { formatNumber, formatShort } from './format'
+import { formatDateKo, formatNumber, formatShort } from './format'
 
 describe('formatNumber', () => {
   it('천 단위마다 쉼표를 넣는다', () => {
@@ -30,5 +30,17 @@ describe('formatShort', () => {
     expect(formatShort(2767419100)).toBe('27.7억')
     expect(formatShort(3000000000)).toBe('30억')
     expect(formatShort(10000000000)).toBe('100억')
+  })
+})
+
+describe('formatDateKo', () => {
+  it('YYYY-MM-DD 날짜를 "YYYY년 M월 D일"로 쓴다 (앞자리 0은 뺀다)', () => {
+    expect(formatDateKo('2026-11-20')).toBe('2026년 11월 20일')
+    expect(formatDateKo('2026-01-05')).toBe('2026년 1월 5일')
+  })
+
+  it('YYYY-MM-DD 형식이 아니면 오류를 낸다', () => {
+    expect(() => formatDateKo('2026/11/20')).toThrow()
+    expect(() => formatDateKo('')).toThrow()
   })
 })

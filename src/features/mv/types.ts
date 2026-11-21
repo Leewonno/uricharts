@@ -24,6 +24,13 @@ export interface Mv {
   readonly prevM: number | null
 }
 
+/** 서버가 내려주는 MV 데이터 묶음. 조회수와 그 조회수를 집계한 기준일이 같이 온다 */
+export interface MvSnapshot {
+  /** 집계 기준일 YYYY-MM-DD */
+  readonly asOf: string
+  readonly mvs: readonly Mv[]
+}
+
 export type RankChange =
   | { readonly kind: 'up' | 'down'; readonly amount: number }
   | { readonly kind: 'same' }

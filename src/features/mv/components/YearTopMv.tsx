@@ -15,7 +15,7 @@ export function YearTopMv({ mv, year }: { mv: RankedMv; year: string }) {
           <dt className="text-sm font-semibold text-muted">아티스트</dt>
           <dd className="text-[22px] font-semibold">{mv.artist}</dd>
           <dt className="mt-4 text-sm font-semibold text-muted">누적 조회수</dt>
-          <dd className="mt-0.5 text-[32px] leading-[1.1] font-bold tracking-[-0.02em] text-accent tabular-nums">
+          <dd className="mt-0.5 text-[32px] leading-[1.1] font-bold tracking-[-0.04em] text-accent tabular-nums">
             <CountUp value={mv.total} />
           </dd>
         </dl>
