@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Chevron } from '@/components/Chevron'
+import { ChevronRight } from 'akar-icons'
 import { SectionHeading } from '@/components/SectionHeading'
 import { chartPath } from '../lib/routes'
 import type { PeriodInfo } from '../types'
@@ -18,7 +18,7 @@ export function PeriodCards({ periods }: { periods: readonly PeriodInfo[] }) {
             >
               <h3 className="text-[28px] font-bold tracking-[-0.03em]">{p.name}</h3>
               <p className="text-[15px] font-semibold text-muted group-hover:text-ink">{p.label}</p>
-              <Chevron className="absolute top-1/2 right-6 h-[19px] w-3 -translate-y-1/2 text-accent transition-transform duration-200 group-hover:translate-x-1 group-hover:text-ink" />
+              <ChevronRight size={22} strokeWidth={3} aria-hidden="true" className="absolute top-1/2 right-5 -translate-y-1/2 text-accent transition-colors duration-200 group-hover:text-ink" />
             </Link>
           </li>
         ))}

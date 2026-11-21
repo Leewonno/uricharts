@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Chevron } from './Chevron'
+import { ChevronRight } from 'akar-icons'
 
 interface Props {
   /** 섹션을 aria-labelledby로 가리킬 때 쓰는 제목 id */
@@ -19,9 +19,9 @@ export function SectionHeading({ id, title, description, more }: Props) {
         {description && <span className="text-[15px] font-medium text-muted">{description}</span>}
       </div>
       {more && (
-        <Link href={more.href} className="group inline-flex items-center gap-1.5 font-bold text-accent">
+        <Link href={more.href} className="inline-flex items-center gap-1.5 font-bold text-accent">
           {more.label}
-          <Chevron className="h-[13px] w-2 transition-transform duration-200 group-hover:translate-x-[3px]" />
+          <ChevronRight size={15} strokeWidth={3.2} aria-hidden="true" />
         </Link>
       )}
     </div>

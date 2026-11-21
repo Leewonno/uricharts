@@ -1,4 +1,4 @@
-import { Chevron } from '@/components/Chevron'
+import { ChevronRight } from 'akar-icons'
 import { formatNumber } from '@/lib/format'
 import type { RankChange, RankedMv } from '../types'
 
@@ -54,9 +54,11 @@ export function RowGo({ lead = false }: { lead?: boolean }) {
     <div aria-hidden="true" className="relative flex items-center justify-end gap-1">
       <span className={`relative h-5 w-[52px] overflow-hidden max-md:hidden no-hover:hidden motion-reduce:hidden ${lead ? 'text-ink' : 'text-accent'}`}>
         {TRAIL_DELAYS.map((delay) => (
-          <Chevron
+          <ChevronRight
             key={delay}
-            className="absolute top-0.5 left-0 h-4 w-2.5 opacity-0 group-hover:animate-race group-focus-visible:animate-race"
+            size={18}
+            strokeWidth={3.2}
+            className="absolute top-px -left-1 opacity-0 group-hover:animate-race group-focus-visible:animate-race"
             style={{ animationDelay: delay }}
           />
         ))}
@@ -64,7 +66,7 @@ export function RowGo({ lead = false }: { lead?: boolean }) {
       <span
         className={`grid size-9 shrink-0 -translate-x-3.5 scale-85 place-items-center rounded-full opacity-0 transition-[opacity,translate,scale] duration-200 ease-[cubic-bezier(.2,.9,.3,1.3)] group-hover:translate-x-0 group-hover:scale-100 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:scale-100 group-focus-visible:opacity-100 no-hover:size-8 no-hover:translate-x-0 no-hover:scale-100 no-hover:opacity-100 motion-reduce:transition-none ${lead ? 'bg-ink text-fill' : 'bg-fill text-ink'}`}
       >
-        <Chevron className="ml-0.5 h-4 w-2.5" />
+        <ChevronRight size={18} strokeWidth={3.2} className="ml-px" />
       </span>
     </div>
   )
