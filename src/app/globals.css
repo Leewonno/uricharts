@@ -53,6 +53,8 @@
 
 /* 마우스가 없는 기기 (터치) */
 @custom-variant no-hover (@media (hover: none));
+/* 마우스가 있는 기기 */
+@custom-variant can-hover (@media (hover: hover));
 
 @layer base {
   body {
