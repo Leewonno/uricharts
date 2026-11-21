@@ -25,7 +25,7 @@ CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 WIDTH=1360
 
 PAGES=(
-  "home|/|1400"
+  "home|/|2000"
   "chart|/mv/chart/day|1900"
 )
 
