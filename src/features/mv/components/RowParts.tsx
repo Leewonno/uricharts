@@ -2,15 +2,15 @@ import { ChevronRight } from 'akar-icons'
 import { formatNumber } from '@/lib/format'
 import type { RankChange, RankedMv } from '../types'
 
-/** 순위 변동: ▲2 / ▼1 / 재진입 / – . 채움 행(lead) 위에서는 모두 보조 글자색 */
-export function ChangeBadge({ change, lead = false }: { change: RankChange; lead?: boolean }) {
+/** 순위 변동: ▲2 / ▼1 / 재진입 / – */
+export function ChangeBadge({ change }: { change: RankChange }) {
   switch (change.kind) {
     case 'up':
-      return <span className={lead ? 'text-muted' : 'text-accent'}>▲{change.amount}</span>
+      return <span className="text-accent">▲{change.amount}</span>
     case 'down':
       return <span className="text-muted">▼{change.amount}</span>
     case 'reentry':
-      return <span className={lead ? 'text-muted' : 'text-pink-600'}>재진입</span>
+      return <span className="text-pink-600">재진입</span>
     default:
       return <span className="text-muted">–</span>
   }
@@ -49,10 +49,10 @@ const TRAIL_DELAYS = ['0s', '0.22s', '0.44s']
  * 마우스를 올리면 >>> 가 한 번 오른쪽으로 지나가고 끝에 > 버튼이 나타난다.
  * 터치 기기에서는 버튼만 항상 보인다.
  */
-export function RowGo({ lead = false }: { lead?: boolean }) {
+export function RowGo() {
   return (
     <div aria-hidden="true" className="relative flex items-center justify-end gap-1">
-      <span className={`relative h-5 w-[52px] overflow-hidden max-md:hidden no-hover:hidden motion-reduce:hidden ${lead ? 'text-ink' : 'text-accent'}`}>
+      <span className={`relative h-5 w-[52px] overflow-hidden max-md:hidden no-hover:hidden motion-reduce:hidden text-accent`}>
         {TRAIL_DELAYS.map((delay) => (
           <ChevronRight
             key={delay}
@@ -64,7 +64,7 @@ export function RowGo({ lead = false }: { lead?: boolean }) {
         ))}
       </span>
       <span
-        className={`grid size-9 shrink-0 -translate-x-3.5 scale-85 place-items-center rounded-full opacity-0 transition-[opacity,translate,scale] duration-200 ease-[cubic-bezier(.2,.9,.3,1.3)] group-hover:translate-x-0 group-hover:scale-100 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:scale-100 group-focus-visible:opacity-100 no-hover:size-8 no-hover:translate-x-0 no-hover:scale-100 no-hover:opacity-100 motion-reduce:transition-none ${lead ? 'bg-ink text-fill' : 'bg-fill text-ink'}`}
+        className={`grid size-9 shrink-0 -translate-x-3.5 scale-85 place-items-center rounded-full opacity-0 transition-[opacity,translate,scale] duration-200 ease-[cubic-bezier(.2,.9,.3,1.3)] group-hover:translate-x-0 group-hover:scale-100 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:scale-100 group-focus-visible:opacity-100 no-hover:size-8 no-hover:translate-x-0 no-hover:scale-100 no-hover:opacity-100 motion-reduce:transition-none bg-fill text-ink`}
       >
         <ChevronRight size={18} strokeWidth={3.2} className="ml-px" />
       </span>

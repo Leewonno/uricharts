@@ -81,9 +81,9 @@ export function ChartBoard({ period, periods, mvs, years, refDate, releaseYear }
         <span />
       </div>
       <ol className="grid gap-2">
-        {rows.map((mv, i) => (
+        {rows.map((mv) => (
           <li key={mv.yt}>
-            <ChartRow mv={mv} maxViews={maxViews} lead={i === 0} sub={showDailyAverage ? dailyAverage(mv, refDate) : undefined} />
+            <ChartRow mv={mv} maxViews={maxViews} sub={showDailyAverage ? dailyAverage(mv, refDate) : undefined} />
           </li>
         ))}
       </ol>
