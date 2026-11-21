@@ -18,6 +18,14 @@
 }
 
 @theme {
+  /* 로고 막대 호버: 이퀄라이저처럼 줄었다 늘었다 반복 (막대마다 시차는 SiteHeader) */
+  --animate-equalizer: equalizer 0.9s ease-in-out infinite;
+  @keyframes equalizer {
+    50% {
+      transform: scaleY(0.55);
+    }
+  }
+
   /* 제자리에서 서서히 나타남 (fixed 요소에 쓴다: transform이 들어가면 위치 기준이 바뀐다) */
   --animate-fade-in: fade-in 0.3s ease-out;
   @keyframes fade-in {
@@ -67,4 +75,25 @@
     color-mix(in oklch, var(--color-cyan-100), var(--color-cyan-50)) 42%,
     transparent 100%
   );
+}
+
+/*
+ * 상단 고정 헤더: 페이지를 조금 내리면 아래쪽에 옅은 그림자가 생긴다.
+ * 스크롤 위치에 맞춰 CSS만으로 움직인다 (지원하지 않는 브라우저에서는 그림자 없이 고정만 된다).
+ */
+@utility scroll-shadow {
+  @supports (animation-timeline: scroll()) {
+    animation: scroll-shadow linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 48px;
+  }
+}
+
+@keyframes scroll-shadow {
+  from {
+    box-shadow: 0 1px 0 transparent, 0 6px 20px -14px transparent;
+  }
+  to {
+    box-shadow: 0 1px 0 rgb(8 145 178 / 0.06), 0 6px 20px -14px rgb(8 51 68 / 0.12);
+  }
 }
