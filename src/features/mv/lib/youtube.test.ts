@@ -10,6 +10,12 @@ describe('embedUrl', () => {
     expect(url.searchParams.get('rel')).toBe('0')
   })
 
+  it('페이지에 바로 넣는 플레이어는 자동 재생하지 않는다', () => {
+    const url = new URL(embedUrl('FyS5dAywkEo', { autoplay: false }))
+    expect(url.searchParams.has('autoplay')).toBe(false)
+    expect(url.searchParams.get('rel')).toBe('0')
+  })
+
   it('영상 ID를 주소에 안전하게 넣는다', () => {
     expect(new URL(embedUrl('a/b?c')).pathname).toBe('/embed/a%2Fb%3Fc')
   })

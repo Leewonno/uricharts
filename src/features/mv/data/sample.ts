@@ -4,6 +4,7 @@ import type { Mv, Period, PeriodInfo } from '../types'
  * 샘플 데이터 (2026-11-20 기준). 실제 수집 파이프라인이 생기면 교체한다.
  * - 실제 값: 곡/아티스트/공개일, 유튜브 영상 ID(yt), 누적 조회수(total).
  *   2026-11-21 유튜브에서 확인했고, 영상 ID는 oEmbed로 공식 MV인지 검증했다.
+ *   단, ILLIT "It's Me"는 1위로 보이게 누적 조회수를 예시 값으로 올렸다 (실제 220,516,909).
  * - 예시 값: 일간/주간/월간/연간 조회수(day/week/month/yearViews)와 이전 순위(prev*).
  *   연간 조회수는 올해 공개곡이면 누적과 같고, 그 전 공개곡은 월간의 약 11배(누적의 60% 이하)로 만들었다.
  *   일간 이전 순위는 아직 따로 없어 주간 이전 순위를 그대로 쓴다.
@@ -15,9 +16,9 @@ export const REF_DATE = '2026-11-20'
 export const REF_YEAR = REF_DATE.slice(0, 4)
 
 export const SAMPLE_MVS: readonly Mv[] = [
-  { yt: 'FyS5dAywkEo', title: 'SaWaDiKa', artist: 'LISA', type: '솔로', released: '2026-09-04', total: 241490802, day: 1573000, week: 9800000, month: 43500000, yearViews: 241490802, prevD: 1, prevW: 1, prevM: 1 },
+  { yt: 'bMhDJ0S0OBA', title: "It's Me", artist: 'ILLIT', type: '걸그룹', released: '2026-04-30', total: 258347120, day: 1573000, week: 9800000, month: 43500000, yearViews: 258347120, prevD: 1, prevW: 1, prevM: 1 },
   { yt: '_gyultVTesk', title: '2.0', artist: 'BTS', type: '보이그룹', released: '2026-04-02', total: 219088671, day: 1182000, week: 7400000, month: 31900000, yearViews: 219088671, prevD: 3, prevW: 3, prevM: 2 },
-  { yt: 'bMhDJ0S0OBA', title: "It's Me", artist: 'ILLIT', type: '걸그룹', released: '2026-04-30', total: 220516909, day: 970000, week: 6100000, month: 27800000, yearViews: 220516909, prevD: 2, prevW: 2, prevM: 4 },
+  { yt: 'FyS5dAywkEo', title: 'SaWaDiKa', artist: 'LISA', type: '솔로', released: '2026-09-04', total: 241490802, day: 970000, week: 6100000, month: 27800000, yearViews: 241490802, prevD: 2, prevW: 2, prevM: 4 },
   { yt: 'x3eqqoZPV_E', title: 'CHOOM', artist: 'BABYMONSTER', type: '걸그룹', released: '2026-05-04', total: 212298699, day: 886000, week: 5600000, month: 25400000, yearViews: 212298699, prevD: 4, prevW: 4, prevM: 3 },
   { yt: '27C4pfRsf9g', title: 'ICONIC BY MISTAKE', artist: 'LE SSERAFIM x ILLIT x KATSEYE', type: '걸그룹', released: '2026-06-11', total: 208724951, day: 819000, week: 5200000, month: 23100000, yearViews: 208724951, prevD: 6, prevW: 6, prevM: 5 },
   { yt: 'ekr2nIex040', title: 'APT.', artist: 'ROSÉ & Bruno Mars', type: '솔로', released: '2024-10-18', total: 2767419100, day: 752000, week: 4800000, month: 21000000, yearViews: 224820000, prevD: 5, prevW: 5, prevM: 7 },
