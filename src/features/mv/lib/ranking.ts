@@ -46,6 +46,13 @@ export function rankMvs(mvs: readonly Mv[], period: Period, { releaseYear }: Ran
     })
 }
 
+/** 누적 조회수 순위. 공개일과 관계없이 모든 곡을 모으고, 순위 변동은 표시하지 않는다 */
+export function rankByTotal(mvs: readonly Mv[]): RankedMv[] {
+  return mvs
+    .toSorted((a, b) => b.total - a.total)
+    .map((m, i) => ({ ...m, rank: i + 1, views: m.total, change: { kind: 'none' } }))
+}
+
 /** 곡들의 공개 연도 (중복 없이, 최근 연도부터) */
 export function releaseYears(mvs: readonly Mv[]): string[] {
   return [...new Set(mvs.map((m) => m.released.slice(0, 4)))].toSorted().toReversed()

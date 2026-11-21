@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { Mv } from '../types'
-import { dailyAverage, rankMvs, releaseYears } from './ranking'
+import { dailyAverage, rankByTotal, rankMvs, releaseYears } from './ranking'
 
 const mv = (overrides: Partial<Mv>): Mv => ({
   yt: 'id',
@@ -93,5 +93,25 @@ describe('dailyAverage', () => {
 
   it('기준일에 공개된 곡은 하루로 친다', () => {
     expect(dailyAverage(mv({ released: '2026-11-20', total: 1000 }), '2026-11-20')).toBe(1000)
+  })
+})
+
+describe('rankByTotal', () => {
+  it('공개일과 관계없이 누적 조회수가 많은 순서로 순위를 매기고 views에 누적 조회수를 넣는다', () => {
+    expect(rankByTotal([A, B, C]).map((m) => [m.title, m.rank, m.views])).toEqual([
+      ['B', 1, 900],
+      ['C', 2, 500],
+      ['A', 3, 300],
+    ])
+  })
+
+  it('순위 변동을 표시하지 않는다', () => {
+    expect(rankByTotal([A, B, C]).every((m) => m.change.kind === 'none')).toBe(true)
+  })
+
+  it('입력 배열을 바꾸지 않는다', () => {
+    const input = [A, B, C]
+    rankByTotal(input)
+    expect(input).toEqual([A, B, C])
   })
 })
