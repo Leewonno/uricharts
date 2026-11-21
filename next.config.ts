@@ -10,6 +10,8 @@ const nextConfig: NextConfig = {
   images: {
     // 정적 export에서는 기본 이미지 최적화 서버를 쓸 수 없다.
     unoptimized: true,
+    // 유튜브 뮤직비디오 썸네일만 허용한다.
+    remotePatterns: [new URL("https://i.ytimg.com/vi/**")],
   },
   // cacheComponents / partialPrefetching(PPR)은 서버 런타임이 필요해 export 모드와 함께 쓸 수 없다.
   reactCompiler: true,

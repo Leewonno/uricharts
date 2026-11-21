@@ -1,69 +1,29 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import { SiteHeader } from '@/components/SiteHeader'
+import { DailyTopList } from '@/features/mv/components/DailyTopList'
+import { PeriodCards } from '@/features/mv/components/PeriodCards'
+import { YearTopMv } from '@/features/mv/components/YearTopMv'
+import { PERIOD_ORDER, PERIODS, REF_YEAR, SAMPLE_MVS } from '@/features/mv/data/sample'
+import { rankMvs } from '@/features/mv/lib/ranking'
 
-export default function Home() {
+const TOP_COUNT = 5
+
+export default function HomePage() {
+  // 올해 공개곡끼리는 연간 조회수 = 누적 조회수
+  const yearTop = rankMvs(SAMPLE_MVS, 'year', { releaseYear: REF_YEAR })[0]
+  const dailyTop = rankMvs(SAMPLE_MVS, 'day').slice(0, TOP_COUNT)
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>
-            To get started, edit the{" "}
-            <code className={styles.code}>page.tsx</code> file.
-          </h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    <>
+      {/* 바탕 그라데이션 원: 화면 아래 가운데에 고정 */}
+      <div aria-hidden="true" className="bg-glow pointer-events-none fixed top-full left-1/2 -z-10 size-[600px] -translate-1/2 rounded-full" />
+      <SiteHeader current="home" />
+      <main>
+        <h1 className="sr-only">우리의차트 · K-pop 뮤직비디오 유튜브 조회수 차트</h1>
+        {yearTop && <YearTopMv mv={yearTop} year={REF_YEAR} />}
+        <DailyTopList items={dailyTop} />
+        <PeriodCards periods={PERIOD_ORDER.map((key) => PERIODS[key])} />
       </main>
-    </div>
-  );
+      <footer className="p-8 text-center text-[13px] text-muted">유튜브 공개 조회수 기준 · 일간/주간/월간/연간 조회수는 예시 수치</footer>
+    </>
+  )
 }
