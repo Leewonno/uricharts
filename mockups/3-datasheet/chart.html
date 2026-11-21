@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>시안 3 · 데이터 시트 — 차트</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root { --paper: #F3F4F2; --white: #FFFFFF; --ink: #16181D; --slate: #5B6170; --line: #DADDD6; --red: #E8002D; --mark: #FFF1B8; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { word-break: keep-all; background: var(--paper); color: var(--ink); font-family: 'IBM Plex Sans KR', sans-serif; line-height: 1.5; font-size: 15px; }
+  a { color: inherit; }
+  button, input, select { font: inherit; color: inherit; }
+  button { background: none; border: 0; cursor: pointer; }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  .n { font-variant-numeric: tabular-nums; }
+
+  header { background: var(--white); border-bottom: 1px solid var(--line); }
+  .bar { max-width: 1240px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; gap: 28px; }
+  .logo { font-weight: 700; font-size: 18px; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+  .logo i { width: 18px; height: 12px; background: var(--red); border-radius: 3px; display: inline-block; position: relative; }
+  .logo i::after { content: ''; position: absolute; left: 7px; top: 3px; border-left: 5px solid #fff; border-top: 3px solid transparent; border-bottom: 3px solid transparent; }
+  nav { display: flex; gap: 20px; }
+  nav a { text-decoration: none; color: var(--slate); }
+  nav a[aria-current] { color: var(--ink); font-weight: 700; }
+
+  main { max-width: 1240px; margin: 0 auto; padding: 32px 24px 64px; }
+  h1 { font-size: 30px; letter-spacing: -0.5px; }
+  .meta { color: var(--slate); margin: 4px 0 24px; }
+
+  .controls { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 14px; }
+  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; background: var(--white); overflow: hidden; }
+  .seg button { padding: 8px 18px; border-left: 1px solid var(--line); }
+  .seg button:first-child { border-left: 0; }
+  .seg button[aria-selected="true"] { background: var(--ink); color: #fff; }
+  select, input[type=search] { border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; background: var(--white); }
+  input[type=search] { margin-left: auto; width: 240px; }
+  .dl { padding: 8px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--white); }
+
+  .table-wrap { background: var(--white); border: 1px solid var(--line); border-radius: 12px; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; min-width: 900px; }
+  th { text-align: left; font-weight: 500; color: var(--slate); font-size: 13px; padding: 12px 14px; border-bottom: 1px solid var(--line); white-space: nowrap; position: sticky; top: 0; background: var(--white); }
+  th.num, td.num { text-align: right; }
+  th button { color: inherit; font-size: 13px; }
+  th button::after { content: ' ↕'; opacity: .4; }
+  th button[data-dir="desc"]::after { content: ' ↓'; opacity: 1; }
+  th button[data-dir="asc"]::after { content: ' ↑'; opacity: 1; }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  tbody tr:hover { background: #FAFAF7; }
+  td.rank { font-weight: 700; width: 48px; }
+  td.chg { width: 64px; font-size: 13px; color: var(--slate); }
+  .up { color: var(--red); }
+  td.song b { font-weight: 500; }
+  td.song span { color: var(--slate); margin-left: 8px; font-size: 13px; }
+  td.views { font-weight: 700; }
+  td.muted { color: var(--slate); }
+  svg.spark { display: block; }
+  .tag { font-size: 12px; border: 1px solid var(--line); border-radius: 4px; padding: 1px 6px; color: var(--slate); }
+  .empty { padding: 40px; text-align: center; color: var(--slate); }
+  .note { color: var(--slate); font-size: 13px; margin-top: 12px; }
+  @media (max-width: 720px) { input[type=search] { margin-left: 0; width: 100%; } }
+</style>
+</head>
+<body>
+<header><div class="bar">
+  <a class="logo" href="home.html"><i></i>kpop mv data</a>
+  <nav><a href="home.html">홈</a><a href="#" aria-current="page">차트</a><a href="#">아티스트</a><a href="#">소개</a></nav>
+</div></header>
+<main>
+  <h1 id="title"></h1>
+  <p class="meta" id="meta"></p>
+  <div class="controls">
+    <div class="seg" role="tablist">
+      <button role="tab" data-p="week">주간</button>
+      <button role="tab" data-p="month">월간</button>
+      <button role="tab" data-p="year">연간</button>
+    </div>
+    <select id="period" aria-label="기간 선택"></select>
+    <select id="type" aria-label="유형 필터">
+      <option value="">전체 유형</option><option>걸그룹</option><option>보이그룹</option><option>솔로</option>
+    </select>
+    <input type="search" id="q" placeholder="곡이나 아티스트로 찾기" aria-label="곡이나 아티스트로 찾기">
+    <button class="dl">CSV 내려받기</button>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr id="thead"></tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+  <p class="note">조회수는 매일 오전 9시에 수집한 유튜브 공개 조회수의 차이로 계산해요. 연간 차트는 그해 공개된 뮤직비디오만 포함해요.</p>
+</main>
+<script src="../data.js"></script>
+<script>
+  const { ranking, PERIODS, num, short, date, sparkPath, esc } = KCHART
+  let period = new URLSearchParams(location.search).get('p') || 'week'
+  let sort = { key: 'rank', dir: 'asc' }
+
+  const options = {
+    week: ['2025년 47주차 (11.14 ~ 11.20)', '2025년 46주차 (11.07 ~ 11.13)', '2025년 45주차 (10.31 ~ 11.06)'],
+    month: ['2025년 10월', '2025년 9월', '2025년 8월'],
+    year: ['2025년', '2024년', '2023년'],
+  }
+
+  function cols() {
+    const c = [
+      { key: 'rank', label: '순위', cls: 'rank n', get: m => m.rank, show: m => m.rank },
+    ]
+    if (period !== 'year') c.push({ key: 'chg', label: '변동', cls: 'chg', show: m => m.change.kind === 'up' ? `<span class="up">▲ ${m.change.text}</span>` : m.change.kind === 'down' ? `▼ ${m.change.text}` : m.change.text })
+    c.push(
+      { key: 'title', label: '뮤직비디오', cls: 'song', get: m => m.title, show: m => `<b>${esc(m.title)}</b><span>${esc(m.artist)}</span>` },
+      { key: 'type', label: '유형', show: m => `<span class="tag">${m.type}</span>` },
+      { key: 'views', label: PERIODS[period].metric, cls: 'num views n', get: m => m.views, show: m => num(m.views) },
+    )
+    if (period === 'year') c.push({ key: 'daily', label: '하루 평균', cls: 'num muted n', get: m => m.daily, show: m => num(m.daily) })
+    else c.push({ key: 'total', label: '누적 조회수', cls: 'num muted n', get: m => m.total, show: m => short(m.total) })
+    c.push(
+      { key: 'released', label: '공개일', cls: 'muted n', get: m => m.released, show: m => date(m.released) },
+      { key: 'spark', label: '최근 8주', show: m => `<svg class="spark" width="88" height="24" aria-hidden="true"><path d="${sparkPath(m.spark, 88, 24)}" fill="none" stroke="${m.change.kind === 'down' ? '#5B6170' : '#E8002D'}" stroke-width="1.5"/></svg>` },
+    )
+    return c
+  }
+
+  function render() {
+    const p = PERIODS[period]
+    document.querySelectorAll('.seg button').forEach(b => b.setAttribute('aria-selected', b.dataset.p === period))
+    document.getElementById('title').textContent = `${p.name} 뮤직비디오 조회수 순위`
+    document.getElementById('meta').textContent = `${p.label} · ${p.range}`
+    const sel = document.getElementById('period')
+    sel.innerHTML = options[period].map(o => `<option>${o}</option>`).join('')
+
+    const c = cols()
+    document.getElementById('thead').innerHTML = c.map(col => `<th class="${col.cls?.includes('num') ? 'num' : ''}">${col.get
+      ? `<button data-key="${col.key}" ${sort.key === col.key ? `data-dir="${sort.dir}"` : ''}>${col.label}</button>` : col.label}</th>`).join('')
+    document.querySelectorAll('th button').forEach(b => b.onclick = () => {
+      const key = b.dataset.key
+      const dir = sort.key === key
+        ? (sort.dir === 'asc' ? 'desc' : 'asc')
+        : (key === 'rank' || key === 'title' ? 'asc' : 'desc')
+      sort = { key, dir }
+      render()
+    })
+
+    const q = document.getElementById('q').value.trim().toLowerCase()
+    const t = document.getElementById('type').value
+    const col = c.find(x => x.key === sort.key) || c[0]
+    const rows = ranking(period)
+      .filter(m => (!t || m.type === t) && (!q || (m.title + m.artist).toLowerCase().includes(q)))
+      .sort((a, b) => {
+        const x = col.get(a), y = col.get(b)
+        const r = x > y ? 1 : x < y ? -1 : 0
+        return sort.dir === 'asc' ? r : -r
+      })
+    document.getElementById('tbody').innerHTML = rows.length
+      ? rows.map(m => `<tr>${c.map(col => `<td class="${col.cls || ''}">${col.show(m)}</td>`).join('')}</tr>`).join('')
+      : `<tr><td colspan="${c.length}" class="empty">‘${esc(q)}’에 맞는 뮤직비디오가 없어요. 영문 표기로도 검색해 보세요.</td></tr>`
+  }
+
+  document.querySelectorAll('.seg button').forEach(b => b.onclick = () => { period = b.dataset.p; sort = { key: 'rank', dir: 'asc' }; render() })
+  document.getElementById('q').oninput = render
+  document.getElementById('type').onchange = render
+  render()
+</script>
+</body>
+</html>

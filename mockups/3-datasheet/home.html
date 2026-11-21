@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>시안 3 · 데이터 시트 — 홈</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F3F4F2;
+    --white: #FFFFFF;
+    --ink: #16181D;
+    --slate: #5B6170;
+    --line: #DADDD6;
+    --red: #E8002D;
+    --mark: #FFF1B8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { word-break: keep-all; background: var(--paper); color: var(--ink); font-family: 'IBM Plex Sans KR', sans-serif; line-height: 1.55; font-size: 15px; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  .n { font-variant-numeric: tabular-nums; }
+
+  header { background: var(--white); border-bottom: 1px solid var(--line); }
+  .bar { max-width: 1240px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; gap: 28px; }
+  .logo { font-weight: 700; font-size: 18px; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+  .logo i { width: 18px; height: 12px; background: var(--red); border-radius: 3px; display: inline-block; position: relative; }
+  .logo i::after { content: ''; position: absolute; left: 7px; top: 3px; border-left: 5px solid #fff; border-top: 3px solid transparent; border-bottom: 3px solid transparent; }
+  nav { display: flex; gap: 20px; }
+  nav a { text-decoration: none; color: var(--slate); }
+  nav a[aria-current] { color: var(--ink); font-weight: 700; }
+  .search { margin-left: auto; border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; width: 260px; font: inherit; background: var(--paper); }
+
+  main { max-width: 1240px; margin: 0 auto; padding: 40px 24px 64px; }
+  .summary { font-size: clamp(24px, 3.2vw, 38px); font-weight: 500; line-height: 1.35; max-width: 30em; letter-spacing: -0.5px; }
+  .summary b { font-weight: 700; background: var(--mark); padding: 0 4px; }
+  .updated { color: var(--slate); margin: 12px 0 36px; font-size: 14px; }
+
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); background: var(--white); border-radius: 12px; margin-bottom: 40px; }
+  .stat { padding: 18px 20px; border-left: 1px solid var(--line); }
+  .stat:first-child { border-left: 0; }
+  .stat dt { color: var(--slate); font-size: 13px; }
+  .stat dd { font-size: 26px; font-weight: 700; }
+  .stat dd small { font-size: 13px; font-weight: 500; color: var(--red); margin-left: 6px; }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .panel { background: var(--white); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .panel-head { display: flex; justify-content: space-between; align-items: baseline; padding: 16px 18px 10px; }
+  .panel-head h2 { font-size: 18px; }
+  .panel-head span { color: var(--slate); font-size: 13px; }
+  table { width: 100%; border-collapse: collapse; }
+  td { padding: 9px 18px; border-top: 1px solid var(--line); vertical-align: middle; }
+  td.r { width: 28px; color: var(--slate); padding-right: 0; }
+  td.t b { display: block; font-weight: 500; }
+  td.t span { color: var(--slate); font-size: 13px; }
+  td.v { text-align: right; font-weight: 700; white-space: nowrap; }
+  td.v small { display: block; font-weight: 400; font-size: 12px; color: var(--slate); }
+  .more { display: block; padding: 12px 18px; border-top: 1px solid var(--line); text-decoration: none; font-weight: 500; font-size: 14px; }
+  .more:hover { background: var(--paper); }
+  .up { color: var(--red); }
+
+  footer { max-width: 1240px; margin: 0 auto; padding: 0 24px 40px; color: var(--slate); font-size: 13px; }
+  @media (max-width: 960px) {
+    .grid { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(3) { border-left: 0; }
+    .stat:nth-child(n+3) { border-top: 1px solid var(--line); }
+    .search { display: none; }
+  }
+</style>
+</head>
+<body>
+<header><div class="bar">
+  <a class="logo" href="#"><i></i>kpop mv data</a>
+  <nav><a href="#" aria-current="page">홈</a><a href="chart.html">차트</a><a href="#">아티스트</a><a href="#">소개</a></nav>
+  <input class="search" type="search" placeholder="곡이나 아티스트 검색" aria-label="곡이나 아티스트 검색">
+</div></header>
+<main>
+  <p class="summary" id="summary"></p>
+  <p class="updated">2025년 11월 20일 오전 9시 집계 · 하루 한 번 업데이트</p>
+
+  <dl class="stats" id="stats"></dl>
+
+  <div class="grid" id="grid"></div>
+</main>
+<footer>유튜브 Data API 공개 조회수 기준. 시안용 예시 수치입니다.</footer>
+<script src="../data.js"></script>
+<script>
+  const { ranking, PERIODS, num, short, esc } = KCHART
+  const week = ranking('week'), year = ranking('year')
+  const weekSum = week.reduce((s, m) => s + m.views, 0)
+  document.getElementById('summary').innerHTML =
+    `이번 주 K-pop 뮤직비디오는 유튜브에서 <b>${short(weekSum)}회</b> 재생됐고, 가장 많이 본 영상은 ${esc(week[0].artist)}의 ‘${esc(week[0].title)}’이에요.`
+
+  const stats = [
+    ['집계 중인 뮤직비디오', `${week.length}개`],
+    ['이번 주 총 조회수', short(weekSum), '+4.2%'],
+    ['2025년 공개 MV 1위', short(year[0].views)],
+    ['1억 뷰를 넘긴 2025년 MV', `${year.filter(m => m.views >= 1e8).length}개`],
+  ]
+  document.getElementById('stats').innerHTML = stats.map(([k, v, d]) =>
+    `<div class="stat"><dt>${k}</dt><dd class="n">${v}${d ? `<small>${d}</small>` : ''}</dd></div>`).join('')
+
+  document.getElementById('grid').innerHTML = ['week', 'month', 'year'].map(k => {
+    const p = PERIODS[k]
+    const rows = ranking(k).slice(0, 7).map(m => `
+      <tr><td class="r n">${m.rank}</td>
+      <td class="t"><b>${esc(m.title)}</b><span>${esc(m.artist)}</span></td>
+      <td class="v n">${short(m.views)}<small>${k === 'year' ? `하루 ${short(m.daily)}` : m.change.kind === 'up' ? `<span class="up">▲${m.change.text}</span>` : m.change.kind === 'down' ? `▼${m.change.text}` : m.change.text}</small></td></tr>`).join('')
+    return `<div class="panel">
+      <div class="panel-head"><h2>${p.name} 차트</h2><span>${p.label}</span></div>
+      <table>${rows}</table>
+      <a class="more" href="chart.html?p=${k}">${p.name} 차트 전체 보기</a>
+    </div>`
+  }).join('')
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>K-pop MV 차트 시안 모음</title>
+<style>
+  body { font-family: system-ui, -apple-system, 'Apple SD Gothic Neo', sans-serif; max-width: 880px; margin: 48px auto; padding: 0 24px; color: #1a1a1a; line-height: 1.6; }
+  h1 { font-size: 28px; margin-bottom: 4px; }
+  .lead { color: #666; margin-bottom: 32px; }
+  .item { display: grid; grid-template-columns: 56px 1fr auto; gap: 16px; align-items: center; padding: 18px 0; border-top: 1px solid #e5e5e5; }
+  .sw { display: flex; height: 40px; border-radius: 8px; overflow: hidden; }
+  .sw i { flex: 1; }
+  h2 { font-size: 18px; }
+  p { color: #555; font-size: 14px; }
+  .links { display: flex; gap: 8px; }
+  .links a { padding: 6px 14px; border: 1px solid #ccc; border-radius: 999px; text-decoration: none; color: inherit; font-size: 14px; }
+  .links a:hover { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
+</style>
+</head>
+<body>
+<h1>K-pop MV 조회수 차트 시안</h1>
+<p class="lead">콘셉트 5개 × 홈/차트 페이지. 모든 시안은 같은 샘플 데이터(<code>data.js</code>, 예시 수치)를 씁니다.</p>
+
+<div class="item">
+  <div class="sw"><i style="background:#5D5499"></i><i style="background:#DCD3FF"></i></div>
+  <div><h2>1. 우리의차트 (스코어보드, 채택안)</h2><p>Pretendard, 라벤더 톤. 행에 마우스를 올리면 &gt;&gt;&gt; 가 달려가며 유튜브 보러가기 버튼이 나타남.</p></div>
+  <div class="links"><a href="1-scoreboard/home.html">홈</a><a href="1-scoreboard/chart.html">차트</a></div>
+</div>
+<div class="item">
+  <div class="sw"><i style="background:#ECE6FF"></i><i style="background:#2B1E5C"></i></div>
+  <div><h2>2. 포토카드 바인더</h2><p>순위를 수집하는 포토카드로. 1위는 홀로그램 슬리브, 연간 순위는 바인더 포켓.</p></div>
+  <div class="links"><a href="2-photocard/home.html">홈</a><a href="2-photocard/chart.html">차트</a></div>
+</div>
+<div class="item">
+  <div class="sw"><i style="background:#F3F4F2"></i><i style="background:#E8002D"></i></div>
+  <div><h2>3. 데이터 시트</h2><p>kworb를 잘 정리한 버전. 정렬·검색·필터 되는 표, 8주 스파크라인, CSV.</p></div>
+  <div class="links"><a href="3-datasheet/home.html">홈</a><a href="3-datasheet/chart.html">차트</a></div>
+</div>
+<div class="item">
+  <div class="sw"><i style="background:#15123D"></i><i style="background:#F25C8C"></i><i style="background:#9B7CFF"></i></div>
+  <div><h2>4. 응원봉</h2><p>1,000석 공연장을 조회수 비율로 색칠. 범례에 마우스를 올리면 해당 곡 좌석만 빛남.</p></div>
+  <div class="links"><a href="4-lightstick/home.html">홈</a><a href="4-lightstick/chart.html">차트</a></div>
+</div>
+<div class="item">
+  <div class="sw"><i style="background:#DCEFE6"></i><i style="background:#0C3B2E"></i><i style="background:#B8902A"></i></div>
+  <div><h2>5. 연말 결산</h2><p>시상식 프로그램처럼. 연간 1위를 상패로, 주간·월간은 후보 목록으로.</p></div>
+  <div class="links"><a href="5-awards/home.html">홈</a><a href="5-awards/chart.html">차트</a></div>
+</div>
+</body>
+</html>
