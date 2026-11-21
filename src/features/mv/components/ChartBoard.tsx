@@ -19,6 +19,9 @@ interface BoardProps {
   refDate: string
 }
 
+/** 차트에 보여줄 최대 순위 */
+const CHART_SIZE = 100
+
 /**
  * 범위(누적/공개연도) 드롭다운 + 기간 탭 + 순위 표.
  * releaseYear가 null이면 누적(모든 곡), 연도면 그 해에 공개된 곡만 보여준다.
@@ -29,7 +32,7 @@ export function ChartBoard({ period, periods, mvs, years, refDate, releaseYear }
   const setReleaseYear = (year: string | null) => router.replace(`${pathname}${scopeQuery(year)}`, { scroll: false })
 
   const info = periods.find((p) => p.key === period)
-  const rows = rankMvs(mvs, period, { releaseYear })
+  const rows = rankMvs(mvs, period, { releaseYear }).slice(0, CHART_SIZE)
   const maxViews = Math.max(rows[0]?.views ?? 0, 1)
   // 연간 + 올해 공개곡이면 연간 조회수 = 누적이라, 오른쪽 칸은 하루 평균으로 바꿔 보여준다
   const showDailyAverage = period === 'year' && releaseYear === info?.year
