@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 import { YoutubeFill } from 'akar-icons'
 import { ChartBoard, ChartBoardFromUrl } from '@/features/mv/components/ChartBoard'
+import { MvPlayerProvider } from '@/features/mv/components/MvPlayer'
 import { PERIOD_ORDER, PERIODS, REF_DATE, SAMPLE_MVS } from '@/features/mv/data/sample'
 import { releaseYears } from '@/features/mv/lib/ranking'
 import type { Period } from '@/features/mv/types'
@@ -46,9 +47,11 @@ export default async function ChartPage(props: PageProps<'/mv/chart/[period]'>) 
           <p className="font-semibold text-muted">{PERIODS[period].range} 기준</p>
         </div>
         {/* 정적 HTML에는 누적 차트가 들어가고, 주소에 ?released=연도 가 있으면 화면이 뜬 뒤 바꿔 그린다 */}
-        <Suspense fallback={<ChartBoard {...boardProps} releaseYear={null} />}>
-          <ChartBoardFromUrl {...boardProps} />
-        </Suspense>
+        <MvPlayerProvider>
+          <Suspense fallback={<ChartBoard {...boardProps} releaseYear={null} />}>
+            <ChartBoardFromUrl {...boardProps} />
+          </Suspense>
+        </MvPlayerProvider>
       </main>
     </>
   )

@@ -34,11 +34,11 @@ function changeLabel(change: RankChange): string {
 
 /**
  * 순위 행 링크의 접근성 이름. aria-label이 안쪽 글자를 대신하므로 조회수·변동까지 담는다.
- * 예: "2위 BTS 2.0, 조회수 1,182,000회, 1계단 상승. 유튜브에서 보기 (새 창)"
+ * 예: "2위 BTS 2.0, 조회수 1,182,000회, 1계단 상승. 뮤직비디오 보기"
  */
 export function rowLabel(mv: RankedMv): string {
   const parts = [`${mv.rank}위 ${mv.artist} ${mv.title}`, `조회수 ${formatNumber(mv.views)}회`, changeLabel(mv.change)].filter(Boolean)
-  return `${parts.join(', ')}. 유튜브에서 보기 (새 창)`
+  return `${parts.join(', ')}. 뮤직비디오 보기`
 }
 
 /** >>> 가 한 번 지나가는 시차 (--animate-race 길이와 맞춘다) */

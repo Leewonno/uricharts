@@ -1,3 +1,4 @@
+import { MvPlayerProvider } from '@/features/mv/components/MvPlayer'
 import { PeriodCards } from '@/features/mv/components/PeriodCards'
 import { TotalTopList } from '@/features/mv/components/TotalTopList'
 import { YearTopMv } from '@/features/mv/components/YearTopMv'
@@ -19,12 +20,14 @@ export default async function HomePage() {
     <>
       {/* 바탕 그라데이션 원: 화면 아래 가운데에 고정 */}
       <div aria-hidden="true" className="bg-glow pointer-events-none fixed top-full left-1/2 -z-10 size-[600px] -translate-1/2 rounded-full" />
-      <main>
-        <h1 className="sr-only">우리의차트 · K-pop 뮤직비디오 유튜브 조회수 차트</h1>
-        {yearTop && <YearTopMv mv={yearTop} year={year} />}
-        <TotalTopList items={totalTop} asOf={asOf} />
-        <PeriodCards periods={PERIOD_ORDER.map((key) => PERIODS[key])} />
-      </main>
+      <MvPlayerProvider>
+        <main>
+          <h1 className="sr-only">우리의차트 · K-pop 뮤직비디오 유튜브 조회수 차트</h1>
+          {yearTop && <YearTopMv mv={yearTop} year={year} />}
+          <TotalTopList items={totalTop} asOf={asOf} />
+          <PeriodCards periods={PERIOD_ORDER.map((key) => PERIODS[key])} />
+        </main>
+      </MvPlayerProvider>
     </>
   )
 }

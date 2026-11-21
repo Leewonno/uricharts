@@ -18,6 +18,15 @@
 }
 
 @theme {
+  /* 뮤직비디오 모달의 영상: 살짝 아래에서 떠오르며 나타남 */
+  --animate-cinema-in: cinema-in 0.3s ease-out;
+  @keyframes cinema-in {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+  }
+
   /* 로고 막대 호버: 이퀄라이저처럼 줄었다 늘었다 반복 (막대마다 시차는 SiteHeader) */
   --animate-equalizer: equalizer 0.9s ease-in-out infinite;
   @keyframes equalizer {
@@ -61,6 +70,11 @@
     @apply bg-page text-ink;
     line-height: 1.5;
     word-break: keep-all;
+  }
+
+  /* 모달(<dialog>)이 열려 있는 동안 뒤 페이지가 스크롤되지 않게 */
+  html:has(dialog[open]) {
+    overflow: hidden;
   }
 
   :focus-visible {

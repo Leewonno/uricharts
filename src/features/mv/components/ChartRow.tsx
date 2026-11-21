@@ -1,6 +1,6 @@
 import { formatNumber, formatShort } from '@/lib/format'
 import type { RankedMv } from '../types'
-import { watchUrl } from '../lib/youtube'
+import { useMvPlayer } from './MvPlayer'
 import { MvThumbnail } from './MvThumbnail'
 import { ChangeBadge, RowGo, rowLabel } from './RowParts'
 
@@ -15,15 +15,16 @@ interface Props {
   sub?: number
 }
 
-/** 차트 페이지의 순위 한 줄. 누르면 유튜브 뮤직비디오로 이동한다. */
+/** 차트 페이지의 순위 한 줄. 누르면 뮤직비디오 모달이 열린다. */
 export function ChartRow({ mv, maxViews, sub }: Props) {
+  const openPlayer = useMvPlayer()
   return (
-    <a
-      href={watchUrl(mv.yt)}
-      target="_blank"
-      rel="noopener"
+    <button
+      type="button"
+      onClick={() => openPlayer(mv)}
+      aria-haspopup="dialog"
       aria-label={rowLabel(mv)}
-      className={`group relative grid grid-cols-[40px_1fr_auto_auto] items-center gap-3 overflow-hidden rounded-[14px] px-5 py-3.5 transition-colors duration-200 bg-surface hover:bg-fill-soft focus-visible:bg-fill-soft md:gap-4 ${CHART_COLUMNS}`}
+      className={`group relative grid w-full cursor-pointer text-left grid-cols-[40px_1fr_auto_auto] items-center gap-3 overflow-hidden rounded-[14px] px-5 py-3.5 transition-colors duration-200 bg-surface hover:bg-fill-soft focus-visible:bg-fill-soft md:gap-4 ${CHART_COLUMNS}`}
     >
       <div
         aria-hidden="true"
@@ -44,6 +45,6 @@ export function ChartRow({ mv, maxViews, sub }: Props) {
       </div>
       <div className="relative text-right text-[15px] text-muted max-md:hidden">{formatShort(sub ?? mv.total)}</div>
       <RowGo />
-    </a>
+    </button>
   )
 }
