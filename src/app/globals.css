@@ -18,6 +18,14 @@
 }
 
 @theme {
+  /* 제자리에서 서서히 나타남 (fixed 요소에 쓴다: transform이 들어가면 위치 기준이 바뀐다) */
+  --animate-fade-in: fade-in 0.3s ease-out;
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+
   /* 순위 행 호버: >>> 가 오른쪽으로 한 번 지나감 (화살표별 시차는 RowGo) */
   --animate-race: race 1.1s cubic-bezier(0.3, 0, 0.7, 1) both;
   @keyframes race {
