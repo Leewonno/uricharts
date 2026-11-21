@@ -16,7 +16,8 @@ export function CountUp({ value, durationMs = 1400 }: { value: number; durationM
     let frame = 0
     const start = performance.now()
     const tick = (now: number) => {
-      const progress = Math.min(1, (now - start) / durationMs)
+      // 첫 프레임의 now는 start보다 앞설 수 있다 (프레임 시작 시각). 음수 진행률이면 음수가 잠깐 보인다
+      const progress = Math.min(1, Math.max(0, (now - start) / durationMs))
       const eased = 1 - Math.pow(1 - progress, 4)
       setShown(Math.round(value * eased))
       if (progress < 1) frame = requestAnimationFrame(tick)
