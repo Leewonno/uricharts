@@ -24,6 +24,7 @@ on:
 permissions:
   contents: write # data 브랜치에 커밋
   issues: write # 확인이 필요한 영상·주간 요약 이슈
+  actions: write # 새 기록으로 사이트 다시 배포 (deploy.yml 실행)
 
 concurrency:
   group: collect-mv
@@ -74,9 +75,18 @@ jobs:
 
       # 수집이 일부 실패해도 받은 만큼은 올리고 이슈를 남긴다 (이 job은 실패로 끝나 메일이 온다)
       - name: data 브랜치에 올리기
+        id: push
         if: ${{ !cancelled() }}
         working-directory: .data
         run: bash ../pipeline/mv/push-data.sh
+
+      # GITHUB_TOKEN으로 올린 push는 다른 워크플로를 실행시키지 않아서, 배포를 직접 부른다.
+      # 수집이 일부 실패했어도 올린 기록은 사이트에 반영한다
+      - name: 사이트 다시 배포
+        if: ${{ !cancelled() && steps.push.outcome == 'success' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy.yml --ref main
 
       - name: 확인이 필요한 것 이슈로 남기기
         if: ${{ !cancelled() }}
