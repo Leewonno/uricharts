@@ -66,6 +66,8 @@ export const snapshotSchema = z.strictObject({
   views: z.record(z.string(), z.number().int().nonnegative()),
   /** 삭제·비공개·조회수 비공개 등으로 값을 못 받은 영상 */
   missing: z.array(z.string()),
+  /** 0시 기록을 놓쳐 나중에 받은 값을 그날 0시 기록으로 쓰기로 한 것 (사람이 --as-midnight로 남김) */
+  asMidnight: z.literal(true).optional(),
 })
 export type Snapshot = z.infer<typeof snapshotSchema>
 

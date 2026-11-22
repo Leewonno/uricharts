@@ -16,6 +16,10 @@ on:
         description: '낮이어도 오늘 조회수를 지금 기록할까요? (오늘 기록이 이미 있으면 건너뜀)'
         type: boolean
         default: false
+      as_midnight:
+        description: '0시 기록을 놓쳤을 때: 지금 값을 오늘 0시 기록으로 쓸까요? (낮 기록은 바꿔 쓰고, 진짜 0시 기록은 두기)'
+        type: boolean
+        default: false
 
 permissions:
   contents: write # data 브랜치에 커밋
@@ -65,6 +69,7 @@ jobs:
           --digest-out "$RUNNER_TEMP/digest.md"
           ${{ (github.event_name == 'schedule' || inputs.search) && '--search' || '' }}
           ${{ inputs.force_snapshot && '--force-snapshot' || '' }}
+          ${{ inputs.as_midnight && '--as-midnight' || '' }}
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
 

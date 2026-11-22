@@ -1,6 +1,6 @@
 import { writeFile } from 'node:fs/promises'
 import { bootstrapFromSample } from './bootstrap'
-import { collectSnapshot } from './collect'
+import { collectSnapshot, isMidnightRecord, MIDNIGHT_CUTOFF_HOUR } from './collect'
 import { addDays, kstDate, kstHour, kstWeekday } from './dates'
 import { discoverNewMvs, type DiscoverResult } from './discover'
 import { dailyIssue, weeklyDigest } from './report'
@@ -29,7 +29,7 @@ import type { YoutubeClient } from './youtube-api'
  */
 
 /** 조회수 기록은 0시~6시(KST)에만 남긴다. 낮에 손으로 돌려서 그날 0시 기록이 낮 값으로 채워지는 걸 막는다 */
-export const SNAPSHOT_CUTOFF_HOUR = 6
+export const SNAPSHOT_CUTOFF_HOUR = MIDNIGHT_CUTOFF_HOUR
 /** 검색 기준 시각을 이보다 오래 거슬러 가지 않는다 */
 const MAX_SEARCH_LOOKBACK_DAYS = 7
 const MONDAY = 1
@@ -47,6 +47,11 @@ export interface DailyInput {
   /** MV 검색(100유닛)을 할지. 해도 하루 한 번만 한다 */
   readonly search: boolean
   readonly forceSnapshot?: boolean
+  /**
+   * 0시 기록을 놓쳤을 때: 지금 받은 값을 오늘 0시 기록으로 남긴다 (시각과 관계없이).
+   * 낮에 남긴 오늘 기록이 있으면 바꿔 쓰지만, 진짜 0시 기록은 건드리지 않는다
+   */
+  readonly asMidnight?: boolean
   /** 사람이 볼 것이 있으면 이슈 본문을 이 파일에 쓴다 */
   readonly issueOut?: string
   /** 월요일이면 주간 요약을 이 파일에 쓴다 */
@@ -66,6 +71,7 @@ export async function runDaily({
   now,
   search,
   forceSnapshot = false,
+  asMidnight = false,
   issueOut,
   digestOut,
   log = console,
@@ -100,16 +106,22 @@ export async function runDaily({
   // 1. 조회수 기록
   const snapshotPath = paths.snapshot(today)
   let snapshot: Snapshot | null = null
-  if (await exists(snapshotPath)) {
+  const existing = (await exists(snapshotPath)) ? await readJson(snapshotPath, snapshotSchema).catch(() => null) : undefined
+  // 오늘 기록이 있으면 두되, 0시 대체 기록을 남기라고 했고 있는 것이 낮 기록이면 바꿔 쓴다
+  const replaceDaytime = asMidnight && existing !== null && existing !== undefined && !isMidnightRecord(existing)
+  if (existing !== undefined && !replaceDaytime) {
     log.info(`${today} 기록이 이미 있어 건너뜁니다`)
-  } else if (kstHour(now) >= SNAPSHOT_CUTOFF_HOUR && !forceSnapshot) {
+  } else if (kstHour(now) >= SNAPSHOT_CUTOFF_HOUR && !forceSnapshot && !asMidnight) {
     log.warn(`지금은 ${kstHour(now)}시(KST)라 조회수 기록을 건너뜁니다 (0~${SNAPSHOT_CUTOFF_HOUR}시에만 기록)`)
   } else {
     try {
       const ids = registry ? registry.map((r) => r.yt) : await idsFromLatestSnapshot(paths)
-      snapshot = await collectSnapshot(client, ids, today, now)
+      const taken = await collectSnapshot(client, ids, today, now)
+      snapshot = asMidnight ? { ...taken, asMidnight: true } : taken
       await writeJson(snapshotPath, snapshot)
-      log.info(`${today} 조회수 기록: ${Object.keys(snapshot.views).length}곡, 못 받음 ${snapshot.missing.length}`)
+      log.info(
+        `${today} 조회수 기록: ${Object.keys(snapshot.views).length}곡, 못 받음 ${snapshot.missing.length}${asMidnight ? ' (0시 기록 대신 사용)' : ''}`,
+      )
     } catch (error) {
       snapshot = null
       fail('조회수 기록 실패', error)

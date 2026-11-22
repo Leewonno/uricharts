@@ -172,6 +172,33 @@ describe('runDaily', () => {
     expect(await readSnapshot('2026-11-23')).toEqual(existing)
   })
 
+  it('0시를 놓쳤으면 asMidnight로 지금 값을 그날 0시 기록으로 남긴다 (낮에 남긴 기록은 바꿔 쓴다)', async () => {
+    await seedFiles()
+    await writeJson(paths.snapshot('2026-11-23'), { date: '2026-11-23', fetchedAt: '2026-11-23T09:15:00+09:00', views: { a: 1 }, missing: [] })
+
+    const { snapshot } = await runDaily({
+      client: fakeClient({ videos: [views('a', 10), views('b', 20)], uploads: { [HYBE]: [] } }),
+      dataDir: dir,
+      now: AFTERNOON,
+      search: false,
+      asMidnight: true,
+      log: silent,
+    })
+
+    expect(snapshot?.asMidnight).toBe(true)
+    expect(await readSnapshot('2026-11-23')).toMatchObject({ asMidnight: true, views: { a: 10, b: 20 } })
+  })
+
+  it('진짜 0시 기록은 asMidnight로도 바꿔 쓰지 않는다', async () => {
+    await seedFiles()
+    const real = { date: '2026-11-23', fetchedAt: '2026-11-23T00:05:00+09:00', views: { a: 1 }, missing: [] }
+    await writeJson(paths.snapshot('2026-11-23'), real)
+
+    await runDaily({ client: fakeClient({ videos: [views('a', 999)], uploads: { [HYBE]: [] } }), dataDir: dir, now: AFTERNOON, search: false, asMidnight: true, log: silent })
+
+    expect(await readSnapshot('2026-11-23')).toEqual(real)
+  })
+
   it('새로 찾은 MV도 오늘 기록에 넣는다 (공개 첫날 기준값)', async () => {
     await seedFiles()
     const client = fakeClient({
