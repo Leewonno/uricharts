@@ -27,6 +27,7 @@ WIDTH=1360
 PAGES=(
   "home|/|2000"
   "chart|/mv/chart/day|1900"
+  "chart-year|/mv/chart/year|1900"
 )
 
 mkdir -p "$OUT"

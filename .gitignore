@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# MV 수집 데이터 (data 브랜치 워크트리)
+/.data
