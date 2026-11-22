@@ -51,7 +51,7 @@ export interface PeriodInfo {
   readonly name: string
   /** 짧은 기간 표기. 예: "2026년 47주차" */
   readonly label: string
-  /** 차트 위에 보여줄 기준 기간. 예: "2026년 47주차 (11월 14일 ~ 11월 20일)" */
+  /** 차트 위에 보여줄 기준 기간. 예: "2026년 47주차 (11월 14일 ~ 11월 20일)", 월간·연간은 날짜 없이 "2026년 10월" */
   readonly range: string
   /** 이 기간이 속한 연도 */
   readonly year: string

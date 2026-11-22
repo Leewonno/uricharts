@@ -162,23 +162,21 @@ export function buildChartData(src: ChartSource): MvSnapshot {
 
   const weekFrom = addDays(asOf, -6)
   const monthOf = monthStart
-  const monthLast = addDays(monthEnd, -1)
   // 연간은 기준일까지 늘어난 조회수라 끝 기록의 시각은 따지지 않는다
   function yearNote(): string | null {
     const start = snap(yearWindow.start)
-    if (!start) return `${year}년 1월 1일 기록이 없어 ${year}년에 공개된 곡만 집계했어요`
-    return isMidnightRecord(start) ? null : PARTIAL_NOTE
+    return start && !isMidnightRecord(start) ? PARTIAL_NOTE : null
   }
 
   const periods: Record<Period, PeriodInfo> = {
     day: info('day', md(asOf), `${y(asOf)} ${md(asOf)} (${weekday(asOf)})`),
     week: info('week', `${y(asOf)} ${isoWeek(asOf)}주차`, `${y(asOf)} ${isoWeek(asOf)}주차 (${md(weekFrom)} ~ ${md(asOf)})`),
-    month: info('month', ym(monthOf), `${ym(monthOf)} (${md(monthOf)} ~ ${md(monthLast)})`),
+    month: info('month', ym(monthOf), ym(monthOf)),
     year: {
       key: 'year',
       name: PERIOD_NAMES.year,
       label: y(asOf),
-      range: `${y(asOf)} (1월 1일 ~ ${md(asOf)})`,
+      range: y(asOf),
       year,
       available: true,
       availableFrom: null,

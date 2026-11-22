@@ -60,8 +60,8 @@ describe('buildChartData', () => {
     expect(data.periods.day).toMatchObject({ available: false, availableFrom: '2026-11-23', label: '11월 22일' })
     expect(data.periods.week).toMatchObject({ available: false, availableFrom: '2026-11-29' })
     expect(data.periods.month).toMatchObject({ available: false, availableFrom: '2027-01-01' })
-    expect(data.periods.year).toMatchObject({ available: true, label: '2026년', range: '2026년 (1월 1일 ~ 11월 22일)' })
-    expect(data.periods.year.note).toContain('2026년에 공개된 곡만')
+    expect(data.periods.year).toMatchObject({ available: true, label: '2026년', range: '2026년' })
+    expect(data.periods.year.note).toBeNull()
   })
 
   it('0시 기록이 이어지면 두 기록의 차이로 일간 조회수를 내고, 전날 순위와 비교한다', () => {
@@ -123,7 +123,7 @@ describe('buildChartData', () => {
 
     const today = buildChartData(source([late], [entry('a', '2025-01-01')]))
     expect(today.asOf).toBe('2026-11-21')
-    expect(today.periods.year.range).toBe('2026년 (1월 1일 ~ 11월 21일)')
+    expect(today.periods.year.range).toBe('2026년')
 
     const tomorrow = buildChartData(source([late, midnight('2026-11-23', { a: 150 })], [entry('a', '2025-01-01')]))
     expect(tomorrow.asOf).toBe('2026-11-22')
@@ -153,7 +153,7 @@ describe('buildChartData', () => {
 
     expect(data.mvs[0]).toMatchObject({ week: 600, month: 3_000, yearViews: 8_600, prevW: null })
     expect(data.periods.week).toMatchObject({ label: '2026년 47주차', range: '2026년 47주차 (11월 16일 ~ 11월 22일)', hasPrev: false })
-    expect(data.periods.month).toMatchObject({ label: '2026년 10월', range: '2026년 10월 (10월 1일 ~ 10월 31일)', hasPrev: false })
+    expect(data.periods.month).toMatchObject({ label: '2026년 10월', range: '2026년 10월', hasPrev: false })
     expect(data.periods.year.note).toBeNull()
   })
 })

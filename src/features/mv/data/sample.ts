@@ -124,6 +124,6 @@ const SAMPLE_PERIOD = { year: REF_YEAR, available: true, availableFrom: null, no
 export const PERIODS: Readonly<Record<Period, PeriodInfo>> = {
   day: { ...SAMPLE_PERIOD, key: 'day', name: PERIOD_NAMES.day, label: '11월 20일', range: '2026년 11월 20일 (금)' },
   week: { ...SAMPLE_PERIOD, key: 'week', name: PERIOD_NAMES.week, label: '2026년 47주차', range: '2026년 47주차 (11월 14일 ~ 11월 20일)' },
-  month: { ...SAMPLE_PERIOD, key: 'month', name: PERIOD_NAMES.month, label: '2026년 10월', range: '2026년 10월 (10월 1일 ~ 10월 31일)' },
-  year: { ...SAMPLE_PERIOD, key: 'year', name: PERIOD_NAMES.year, label: `${REF_YEAR}년`, range: `${REF_YEAR}년 (1월 1일 ~ 11월 20일)`, hasPrev: false },
+  month: { ...SAMPLE_PERIOD, key: 'month', name: PERIOD_NAMES.month, label: '2026년 10월', range: '2026년 10월' },
+  year: { ...SAMPLE_PERIOD, key: 'year', name: PERIOD_NAMES.year, label: `${REF_YEAR}년`, range: `${REF_YEAR}년`, hasPrev: false },
 }
