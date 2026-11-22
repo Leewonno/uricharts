@@ -1,4 +1,4 @@
-import { kstIso } from './dates'
+import { kstDate, kstHour, kstIso } from './dates'
 import type { Snapshot } from './schema'
 import type { YoutubeClient } from './youtube-api'
 
@@ -25,4 +25,14 @@ export async function collectSnapshot(
     views,
     missing: [...new Set(ids)].filter((id) => !(id in views)),
   }
+}
+
+/** 0시 기록이 늦어져도 이 시각(KST) 전에 받았으면 그날 0시 기록으로 본다 */
+export const MIDNIGHT_CUTOFF_HOUR = 6
+
+/** 그날 0시 기록으로 쓸 수 있는가: 0~6시에 받았거나, 놓친 0시 기록 대신 쓰기로 한 기록 */
+export function isMidnightRecord(s: Snapshot): boolean {
+  if (s.asMidnight) return true
+  const at = new Date(s.fetchedAt)
+  return kstDate(at) === s.date && kstHour(at) < MIDNIGHT_CUTOFF_HOUR
 }

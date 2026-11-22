@@ -18,6 +18,7 @@ async function main() {
       data: { type: 'string', default: '.data' },
       search: { type: 'boolean', default: false },
       'force-snapshot': { type: 'boolean', default: false },
+      'as-midnight': { type: 'boolean', default: false },
       'issue-out': { type: 'string' },
       'digest-out': { type: 'string' },
     },
@@ -31,6 +32,7 @@ async function main() {
     now: new Date(),
     search: args.search,
     forceSnapshot: args['force-snapshot'],
+    asMidnight: args['as-midnight'],
     issueOut: args['issue-out'],
     digestOut: args['digest-out'],
   })
