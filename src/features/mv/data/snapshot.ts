@@ -41,15 +41,20 @@ async function loadFromData(dataDir: string): Promise<MvSnapshot> {
   return buildChartData({ registry, artists, snapshots, firstDate: dates[0], latestDate })
 }
 
+const load = async (): Promise<MvSnapshot> => {
+  const dir = await resolveDataDir()
+  return dir ? loadFromData(dir) : { asOf: REF_DATE, mvs: SAMPLE_MVS, periods: PERIODS }
+}
+
 let cached: Promise<MvSnapshot> | null = null
 
 /**
- * MV 조회수와 그 집계 기준일, 기간 정보를 함께 가져온다. 빌드할 때 한 번 읽고 페이지끼리 같이 쓴다.
+ * MV 조회수와 그 집계 기준일, 기간 정보를 함께 가져온다.
+ * 빌드할 때는 한 번 읽어 페이지끼리 같이 쓰고, 개발 서버에서는 기록이 바뀌면 바로 보이도록 요청마다 읽는다.
  * 화면에서 기준일을 오늘 날짜로 계산하지 말고 이 값을 쓴다 (집계가 늦어지면 날짜가 어긋난다).
  */
 export function getMvSnapshot(): Promise<MvSnapshot> {
-  cached ??= resolveDataDir().then((dir) =>
-    dir ? loadFromData(dir) : { asOf: REF_DATE, mvs: SAMPLE_MVS, periods: PERIODS },
-  )
+  if (process.env.NODE_ENV !== 'production') return load()
+  cached ??= load()
   return cached
 }

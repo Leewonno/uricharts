@@ -118,6 +118,19 @@ describe('buildChartData', () => {
     expect(data.periods.day.note).toContain('일부')
   })
 
+  it('0시 대신 쓰기로 한 기록(asMidnight)은 0시 기록으로 본다: 기준일은 전날, 부분 집계 안내도 없다', () => {
+    const late: Snapshot = { date: '2026-11-22', fetchedAt: '2026-11-22T15:30:00+09:00', views: { a: 100 }, missing: [], asMidnight: true }
+
+    const today = buildChartData(source([late], [entry('a', '2025-01-01')]))
+    expect(today.asOf).toBe('2026-11-21')
+    expect(today.periods.year.range).toBe('2026년 (1월 1일 ~ 11월 21일)')
+
+    const tomorrow = buildChartData(source([late, midnight('2026-11-23', { a: 150 })], [entry('a', '2025-01-01')]))
+    expect(tomorrow.asOf).toBe('2026-11-22')
+    expect(tomorrow.periods.day).toMatchObject({ available: true, note: null, label: '11월 22일' })
+    expect(tomorrow.mvs[0].day).toBe(50)
+  })
+
   it('조회수가 줄어든 것으로 나오면(유튜브 보정) 0으로 본다', () => {
     const data = buildChartData(source([midnight('2026-11-22', { a: 100 }), midnight('2026-11-23', { a: 90 })], [entry('a', '2025-01-01')]))
     expect(data.mvs[0].day).toBe(0)

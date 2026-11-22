@@ -1,4 +1,5 @@
-import { addDays, kstDate, kstHour } from '../../../../pipeline/mv/dates'
+import { isMidnightRecord } from '../../../../pipeline/mv/collect'
+import { addDays, kstDate } from '../../../../pipeline/mv/dates'
 import type { Artist, RegistryEntry, Snapshot } from '../../../../pipeline/mv/schema'
 import type { Mv, MvSnapshot, Period, PeriodInfo } from '../types'
 import { PERIOD_NAMES } from './periods'
@@ -25,10 +26,6 @@ export interface ChartSource {
   /** 가장 최근 기록 날짜 */
   readonly latestDate: string
 }
-
-/** 0시 기록이 늦어져도 6시 전이면 그날 0시 기록으로 본다 (수집기의 SNAPSHOT_CUTOFF_HOUR와 같다) */
-const MIDNIGHT_GRACE_HOURS = 6
-const HOUR_MS = 3_600_000
 
 const firstOfMonth = (date: string) => `${date.slice(0, 7)}-01`
 const prevMonthFirst = (date: string) => firstOfMonth(addDays(firstOfMonth(date), -1))
@@ -57,12 +54,6 @@ export function chartSnapshotDates(latest: string): string[] {
   ]
 }
 
-/** 그날 0시 무렵에 받은 기록인가. 아니면(낮에 수동으로 남긴 기록) 그 기록이 낀 기간은 일부만 집계된다 */
-function isMidnight(s: Snapshot): boolean {
-  const at = new Date(s.fetchedAt)
-  return kstDate(at) === s.date && kstHour(at) < MIDNIGHT_GRACE_HOURS
-}
-
 interface Window {
   readonly start: string
   readonly end: string
@@ -74,8 +65,8 @@ export function buildChartData(src: ChartSource): MvSnapshot {
   if (!latest) throw new Error(`최신 기록(${src.latestDate})이 없습니다`)
 
   const L = src.latestDate
-  // 0시 5분 기록이면 전날까지의 조회수다. 6시간을 빼서 그 기록이 담은 마지막 날을 구한다
-  const asOf = kstDate(new Date(Date.parse(latest.fetchedAt) - MIDNIGHT_GRACE_HOURS * HOUR_MS))
+  // 0시 기록(또는 0시 대신 쓰기로 한 기록)은 전날까지의 조회수다. 낮에 남긴 기록은 그날 그 시각까지다
+  const asOf = isMidnightRecord(latest) ? addDays(L, -1) : kstDate(new Date(latest.fetchedAt))
   const year = asOf.slice(0, 4)
 
   const monthEnd = firstOfMonth(L)
@@ -143,7 +134,7 @@ export function buildChartData(src: ChartSource): MvSnapshot {
     prevM: prevRanks.month.get(e.yt) ?? null,
   }))
 
-  const partial = (w: Window) => [snap(w.start), snap(w.end)].some((s) => s !== undefined && !isMidnight(s))
+  const partial = (w: Window) => [snap(w.start), snap(w.end)].some((s) => s !== undefined && !isMidnightRecord(s))
   const PARTIAL_NOTE = '0시가 아닌 시각에 남긴 기록이 섞여 있어 기간의 일부만 집계했어요'
   const firstMonth = src.firstDate.endsWith('-01') ? src.firstDate : nextMonthFirst(src.firstDate)
   const availableFrom = {
@@ -176,7 +167,7 @@ export function buildChartData(src: ChartSource): MvSnapshot {
   function yearNote(): string | null {
     const start = snap(yearWindow.start)
     if (!start) return `${year}년 1월 1일 기록이 없어 ${year}년에 공개된 곡만 집계했어요`
-    return isMidnight(start) ? null : PARTIAL_NOTE
+    return isMidnightRecord(start) ? null : PARTIAL_NOTE
   }
 
   const periods: Record<Period, PeriodInfo> = {
