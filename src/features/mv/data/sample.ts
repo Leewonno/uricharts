@@ -1,3 +1,4 @@
+import { PERIOD_NAMES } from '../lib/periods'
 import type { Mv, Period, PeriodInfo } from '../types'
 
 /**
@@ -118,11 +119,11 @@ export const SAMPLE_MVS: readonly Mv[] = [
   { yt: 'pSUydWEqKwE', title: 'Ditto', artist: 'NewJeans', type: '걸그룹', released: '2022-12-19', total: 67320597, day: 15500, week: 100000, month: 440000, yearViews: 4840000, prevD: 95, prevW: 95, prevM: 97 },
 ]
 
-export const PERIODS: Readonly<Record<Period, PeriodInfo>> = {
-  day: { key: 'day', name: '일간', label: '11월 20일', range: '2026년 11월 20일 (금)', year: REF_YEAR },
-  week: { key: 'week', name: '주간', label: '2026년 47주차', range: '2026년 47주차 (11월 14일 ~ 11월 20일)', year: REF_YEAR },
-  month: { key: 'month', name: '월간', label: '2026년 10월', range: '2026년 10월 (10월 1일 ~ 10월 31일)', year: REF_YEAR },
-  year: { key: 'year', name: '연간', label: `${REF_YEAR}년`, range: `${REF_YEAR}년 (1월 1일 ~ 11월 20일)`, year: REF_YEAR },
-}
+const SAMPLE_PERIOD = { year: REF_YEAR, available: true, availableFrom: null, note: null, hasPrev: true } as const
 
-export const PERIOD_ORDER: readonly Period[] = ['day', 'week', 'month', 'year']
+export const PERIODS: Readonly<Record<Period, PeriodInfo>> = {
+  day: { ...SAMPLE_PERIOD, key: 'day', name: PERIOD_NAMES.day, label: '11월 20일', range: '2026년 11월 20일 (금)' },
+  week: { ...SAMPLE_PERIOD, key: 'week', name: PERIOD_NAMES.week, label: '2026년 47주차', range: '2026년 47주차 (11월 14일 ~ 11월 20일)' },
+  month: { ...SAMPLE_PERIOD, key: 'month', name: PERIOD_NAMES.month, label: '2026년 10월', range: '2026년 10월 (10월 1일 ~ 10월 31일)' },
+  year: { ...SAMPLE_PERIOD, key: 'year', name: PERIOD_NAMES.year, label: `${REF_YEAR}년`, range: `${REF_YEAR}년 (1월 1일 ~ 11월 20일)`, hasPrev: false },
+}

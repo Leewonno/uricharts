@@ -6,6 +6,8 @@ const PREV_FIELD = { day: 'prevD', week: 'prevW', month: 'prevM', year: null } a
 export interface RankOptions {
   /** 이 연도에 공개된 곡만 모은다. 없으면 공개일과 관계없이 모든 곡 (누적) */
   readonly releaseYear?: string | null
+  /** 직전 기간 순위와 비교해 변동을 표시할지. 직전 기간 기록이 없으면 false (모두 "재진입"으로 보이지 않게) */
+  readonly withChange?: boolean
 }
 
 function rankChange(prev: number | undefined, rank: number): RankChange {
@@ -20,37 +22,34 @@ function rankChange(prev: number | undefined, rank: number): RankChange {
  * 공개 연도로 좁히면 이전 순위도 좁힌 곡들 안에서 다시 매겨 비교한다
  * (전체 순위와 비교하면 변동 폭이 부풀려진다). 연간은 순위 변동을 표시하지 않는다.
  */
-export function rankMvs(mvs: readonly Mv[], period: Period, { releaseYear }: RankOptions = {}): RankedMv[] {
+export function rankMvs(mvs: readonly Mv[], period: Period, { releaseYear, withChange = true }: RankOptions = {}): RankedMv[] {
   const field = VIEWS_FIELD[period]
-  const prevField = PREV_FIELD[period]
-  const pool = releaseYear ? mvs.filter((m) => m.released.startsWith(releaseYear)) : mvs
+  const prevField = withChange ? PREV_FIELD[period] : null
+  // 그 기간 조회수를 모르는 곡(비교할 기록이 없음)은 순위에 넣지 않는다
+  const pool = mvs.flatMap((m) => {
+    const views = m[field]
+    return views !== null && (!releaseYear || m.released.startsWith(releaseYear)) ? [{ mv: m, views }] : []
+  })
 
   const prevRanks = new Map<string, number>()
   if (prevField) {
     pool
-      .filter((m) => m[prevField] !== null)
-      .toSorted((a, b) => (a[prevField] ?? 0) - (b[prevField] ?? 0))
-      .forEach((m, i) => prevRanks.set(m.yt, i + 1))
+      .filter(({ mv }) => mv[prevField] !== null)
+      .toSorted((a, b) => (a.mv[prevField] ?? 0) - (b.mv[prevField] ?? 0))
+      .forEach(({ mv }, i) => prevRanks.set(mv.yt, i + 1))
   }
 
   return pool
-    .toSorted((a, b) => b[field] - a[field])
-    .map((m, i) => {
+    .toSorted((a, b) => b.views - a.views)
+    .map(({ mv, views }, i) => {
       const rank = i + 1
       return {
-        ...m,
+        ...mv,
         rank,
-        views: m[field],
-        change: prevField ? rankChange(prevRanks.get(m.yt), rank) : { kind: 'none' },
+        views,
+        change: prevField ? rankChange(prevRanks.get(mv.yt), rank) : { kind: 'none' },
       }
     })
-}
-
-/** 누적 조회수 순위. 공개일과 관계없이 모든 곡을 모으고, 순위 변동은 표시하지 않는다 */
-export function rankByTotal(mvs: readonly Mv[]): RankedMv[] {
-  return mvs
-    .toSorted((a, b) => b.total - a.total)
-    .map((m, i) => ({ ...m, rank: i + 1, views: m.total, change: { kind: 'none' } }))
 }
 
 /** 곡들의 공개 연도 (중복 없이, 최근 연도부터) */

@@ -37,7 +37,7 @@ export function PeriodCards({ periods }: { periods: readonly PeriodInfo[] }) {
                   <Icon size={26} strokeWidth={2.4} aria-hidden="true" className="shrink-0 text-accent transition-colors duration-200 group-hover:text-ink" />
                   {p.name}
                 </h3>
-                <p className="text-[15px] font-semibold text-muted group-hover:text-ink">{p.label}</p>
+                <p className="text-[15px] font-semibold text-muted group-hover:text-ink">{p.available ? p.label : '집계 중'}</p>
                 <ChevronRight size={22} strokeWidth={3} aria-hidden="true" className="absolute top-1/2 right-5 -translate-y-1/2 text-accent transition-colors duration-200 group-hover:text-ink" />
               </Link>
             </li>

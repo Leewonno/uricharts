@@ -6,8 +6,9 @@ import { PillDropdown, type PillOption } from '@/components/PillDropdown'
 import { dailyAverage, rankMvs } from '../lib/ranking'
 import { chartPath } from '../lib/routes'
 import { RELEASED_PARAM, parseReleaseYear, scopeQuery } from '../lib/scope'
-import type { Mv, Period, PeriodInfo } from '../types'
+import type { Mv, Period, PeriodInfo, RankedMv } from '../types'
 import { CHART_COLUMNS, ChartRow } from './ChartRow'
+import { EmptyChart } from './EmptyChart'
 
 interface BoardProps {
   period: Period
@@ -37,7 +38,8 @@ export function ChartBoard({ period, periods, mvs, years, refDate, releaseYear }
   const setReleaseYear = (year: string | null) => router.replace(`${pathname}${scopeQuery(year)}`, { scroll: false })
 
   const info = periods.find((p) => p.key === period)
-  const rows = rankMvs(mvs, period, { releaseYear }).slice(0, CHART_SIZE)
+  const available = info?.available ?? true
+  const rows = available ? rankMvs(mvs, period, { releaseYear, withChange: info?.hasPrev ?? true }).slice(0, CHART_SIZE) : []
   const maxViews = Math.max(rows[0]?.views ?? 0, 1)
   // 연간 + 올해 공개곡이면 연간 조회수 = 누적이라, 오른쪽 칸은 하루 평균으로 바꿔 보여준다
   const showDailyAverage = period === 'year' && releaseYear === info?.year
@@ -74,6 +76,30 @@ export function ChartBoard({ period, periods, mvs, years, refDate, releaseYear }
         </nav>
       </div>
 
+      {info?.note && <p className="mb-4 text-[15px] font-semibold text-muted">{info.note}</p>}
+
+      {rows.length === 0 ? (
+        <EmptyChart info={info} />
+      ) : (
+        <ChartTable rows={rows} maxViews={maxViews} showDailyAverage={showDailyAverage} refDate={refDate} />
+      )}
+    </>
+  )
+}
+
+function ChartTable({
+  rows,
+  maxViews,
+  showDailyAverage,
+  refDate,
+}: {
+  rows: readonly RankedMv[]
+  maxViews: number
+  showDailyAverage: boolean
+  refDate: string
+}) {
+  return (
+    <>
       <div aria-hidden="true" className={`grid gap-4 px-5 pb-2 text-[13px] font-semibold text-muted max-md:hidden ${CHART_COLUMNS}`}>
         <span>순위</span>
         <span>노래</span>
