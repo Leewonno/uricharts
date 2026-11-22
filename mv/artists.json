@@ -1,0 +1,251 @@
+[
+  {
+    "name": "ILLIT",
+    "type": "걸그룹",
+    "aliases": []
+  },
+  {
+    "name": "BTS",
+    "type": "보이그룹",
+    "aliases": []
+  },
+  {
+    "name": "LISA",
+    "type": "솔로",
+    "aliases": []
+  },
+  {
+    "name": "BABYMONSTER",
+    "type": "걸그룹",
+    "aliases": []
+  },
+  {
+    "name": "LE SSERAFIM x ILLIT x KATSEYE",
+    "type": "걸그룹",
+    "aliases": []
+  },
+  {
+    "name": "ROSÉ & Bruno Mars",
+    "type": "솔로",
+    "aliases": []
+  },
+  {
+    "name": "Stray Kids",
+    "type": "보이그룹",
+    "aliases": []
+  },
+  {
+    "name": "Hearts2Hearts",
+    "type": "걸그룹",
+    "aliases": []
+  },
+  {
+    "name": "BLACKPINK",
+    "type": "걸그룹",
+    "aliases": []
+  },
+  {
+    "name": "TREASURE",
+    "type": "보이그룹",
+    "aliases": []
+  },
+  {
+    "name": "JENNIE",
+    "type": "솔로",
+    "aliases": []
+  },
+  {
+    "name": "aespa",
+    "type": "걸그룹",
+    "aliases": []
+  },
+  {
+    "name": "TWICE",
+    "type": "걸그룹",
+    "aliases": []
+  },
+  {
+    "name": "PSY",
+    "type": "솔로",
+    "aliases": []
+  },
+  {
+    "name": "JISOO",
+    "type": "솔로",
+    "aliases": []
+  },
+  {
+    "name": "i-dle",
+    "type": "걸그룹",
+    "aliases": []
+  },
+  {
+    "name": "Jung Kook",
+    "type": "솔로",
+    "aliases": []
+  },
+  {
+    "name": "BIGBANG",
+    "type": "보이그룹",
+    "aliases": []
+  },
+  {
+    "name": "MOMOLAND",
+    "type": "걸그룹",
+    "aliases": []
+  },
+  {
+    "name": "ITZY",
+    "type": "걸그룹",
+    "aliases": []
+  },
+  {
+    "name": "IVE",
+    "type": "걸그룹",
+    "aliases": []
+  },
+  {
+    "name": "ROSÉ",
+    "type": "솔로",
+    "aliases": []
+  },
+  {
+    "name": "MAMAMOO",
+    "type": "걸그룹",
+    "aliases": []
+  },
+  {
+    "name": "Red Velvet",
+    "type": "걸그룹",
+    "aliases": []
+  },
+  {
+    "name": "SEVENTEEN",
+    "type": "보이그룹",
+    "aliases": []
+  },
+  {
+    "name": "NewJeans",
+    "type": "걸그룹",
+    "aliases": []
+  },
+  {
+    "name": "LE SSERAFIM",
+    "type": "걸그룹",
+    "aliases": []
+  },
+  {
+    "name": "IU",
+    "type": "솔로",
+    "aliases": []
+  },
+  {
+    "name": "NCT 127",
+    "type": "보이그룹",
+    "aliases": []
+  },
+  {
+    "name": "EXO",
+    "type": "보이그룹",
+    "aliases": []
+  },
+  {
+    "name": "NMIXX",
+    "type": "걸그룹",
+    "aliases": []
+  },
+  {
+    "name": "SANTOS BRAVOS x &TEAM",
+    "type": null,
+    "aliases": []
+  },
+  {
+    "name": "The Wildcard Club",
+    "type": null,
+    "aliases": []
+  },
+  {
+    "name": "TXT",
+    "type": null,
+    "aliases": [
+      "투모로우바이투게더"
+    ]
+  },
+  {
+    "name": "NAYEON",
+    "type": null,
+    "aliases": []
+  },
+  {
+    "name": "YAOCHEN",
+    "type": null,
+    "aliases": [
+      "야오천"
+    ]
+  },
+  {
+    "name": "Huie",
+    "type": null,
+    "aliases": [
+      "휴이"
+    ]
+  },
+  {
+    "name": "WE GO-6",
+    "type": null,
+    "aliases": []
+  },
+  {
+    "name": "Hong Sung Yun",
+    "type": null,
+    "aliases": [
+      "홍성윤"
+    ]
+  },
+  {
+    "name": "Kassy",
+    "type": null,
+    "aliases": [
+      "케이시"
+    ]
+  },
+  {
+    "name": "sunwoojunga",
+    "type": null,
+    "aliases": [
+      "선우정아"
+    ]
+  },
+  {
+    "name": "Huh Gak",
+    "type": null,
+    "aliases": [
+      "허각"
+    ]
+  },
+  {
+    "name": "NTAKE",
+    "type": null,
+    "aliases": []
+  },
+  {
+    "name": "KORB",
+    "type": null,
+    "aliases": [
+      "코브"
+    ]
+  },
+  {
+    "name": "YOON JI HWAN",
+    "type": null,
+    "aliases": [
+      "순순희",
+      "지환"
+    ]
+  },
+  {
+    "name": "KCM",
+    "type": null,
+    "aliases": []
+  }
+]
