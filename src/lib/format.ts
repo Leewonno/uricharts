@@ -5,12 +5,17 @@ export function formatNumber(n: number): string {
   return numberFormat.format(n)
 }
 
-/** 큰 수를 만/억 단위로 줄여 쓴다. 157만, 2.41억, 27.7억 */
+/**
+ * 큰 수를 만/억 단위로 줄여 쓴다. 157만, 2.10억, 27.67억
+ * 억 단위는 반올림하지 않고 소수 둘째 자리에서 자른다.
+ */
 export function formatShort(n: number): string {
   if (n >= 1e8) {
-    const digits = n >= 1e9 ? 1 : 2
-    const trimmed = (n / 1e8).toFixed(digits).replace(/\.?0+$/, '')
-    return `${trimmed}억`
+    // 정수로 계산해 부동소수점 오차로 자릿수가 밀리지 않게 한다. (1억의 1/100 = 100만)
+    const hundredths = Math.floor(n / 1e6)
+    const whole = Math.floor(hundredths / 100)
+    const fraction = String(hundredths % 100).padStart(2, '0')
+    return `${formatNumber(whole)}.${fraction}억`
   }
   if (n >= 1e4) return `${formatNumber(Math.round(n / 1e4))}만`
   return formatNumber(n)

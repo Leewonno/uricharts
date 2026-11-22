@@ -19,17 +19,21 @@ describe('formatShort', () => {
     expect(formatShort(68297737)).toBe('6,830만')
   })
 
-  it('1억 이상 10억 미만은 소수 둘째 자리까지, 끝의 0은 뺀다', () => {
+  it('1억 이상은 반올림하지 않고 소수 둘째 자리에서 자른다 (끝의 0도 쓴다)', () => {
     expect(formatShort(241490802)).toBe('2.41억')
-    expect(formatShort(220516909)).toBe('2.21억')
-    expect(formatShort(200000000)).toBe('2억')
-    expect(formatShort(130276403)).toBe('1.3억')
+    expect(formatShort(220516909)).toBe('2.20억')
+    expect(formatShort(219999999)).toBe('2.19억')
+    expect(formatShort(210000000)).toBe('2.10억')
+    expect(formatShort(200000000)).toBe('2.00억')
+    expect(formatShort(130276403)).toBe('1.30억')
+    expect(formatShort(100000000)).toBe('1.00억')
   })
 
-  it('10억 이상은 소수 첫째 자리까지, 끝의 0은 뺀다', () => {
-    expect(formatShort(2767419100)).toBe('27.7억')
-    expect(formatShort(3000000000)).toBe('30억')
-    expect(formatShort(10000000000)).toBe('100억')
+  it('10억 이상도 소수 둘째 자리에서 자른다', () => {
+    expect(formatShort(2767419100)).toBe('27.67억')
+    expect(formatShort(3000000000)).toBe('30.00억')
+    expect(formatShort(10000000000)).toBe('100.00억')
+    expect(formatShort(123456789012)).toBe('1,234.56억')
   })
 })
 
