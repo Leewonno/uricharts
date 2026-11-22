@@ -25,13 +25,12 @@ export default async function ChartPage(props: PageProps<'/mv/chart/[period]'>) 
   const { period } = await props.params
   if (!isPeriod(period)) notFound()
 
-  const { asOf, mvs, periods } = await getMvSnapshot()
+  const { mvs, periods } = await getMvSnapshot()
   const boardProps = {
     period,
     periods: PERIOD_ORDER.map((key) => periods[key]),
     mvs,
     years: releaseYears(mvs),
-    refDate: asOf,
   }
 
   return (
@@ -41,7 +40,7 @@ export default async function ChartPage(props: PageProps<'/mv/chart/[period]'>) 
           {/* 아이콘은 인라인으로 둬서 h1의 기준선이 글자에 남아 있게 한다 (오른쪽 "기준" 문구와 baseline 정렬) */}
           <h1 className="text-[clamp(28px,3.5vw,40px)] leading-[1.1] font-bold tracking-[-0.04em] text-strong">
             <YoutubeFill aria-hidden="true" className="mr-[0.25em] inline-block size-[1.15em] align-[-0.24em]" />
-            YouTube 조회수
+            YouTube K-POP MV 조회수
           </h1>
           <p className="font-semibold text-muted">{periods[period].range} 기준</p>
         </div>

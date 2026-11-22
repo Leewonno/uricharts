@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { Mv } from '../types'
-import { dailyAverage, rankMvs, releaseYears } from './ranking'
+import { rankMvs, releaseYears } from './ranking'
 
 const mv = (overrides: Partial<Mv>): Mv => ({
   yt: 'id',
@@ -96,15 +96,5 @@ describe('rankMvs', () => {
 describe('releaseYears', () => {
   it('곡들의 공개 연도를 중복 없이 최근 연도부터 돌려준다', () => {
     expect(releaseYears([A, B, C])).toEqual(['2026', '2025'])
-  })
-})
-
-describe('dailyAverage', () => {
-  it('누적 조회수를 공개일부터 기준일까지 일수로 나눈다', () => {
-    expect(dailyAverage(mv({ released: '2026-11-10', total: 1000 }), '2026-11-20')).toBe(100)
-  })
-
-  it('기준일에 공개된 곡은 하루로 친다', () => {
-    expect(dailyAverage(mv({ released: '2026-11-20', total: 1000 }), '2026-11-20')).toBe(1000)
   })
 })

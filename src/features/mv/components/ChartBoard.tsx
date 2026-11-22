@@ -3,7 +3,8 @@
 import Link from 'next/link'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { PillDropdown, type PillOption } from '@/components/PillDropdown'
-import { dailyAverage, rankMvs } from '../lib/ranking'
+import { describeChart } from '../lib/periods'
+import { rankMvs } from '../lib/ranking'
 import { chartPath } from '../lib/routes'
 import { RELEASED_PARAM, parseReleaseYear, scopeQuery } from '../lib/scope'
 import type { Mv, Period, PeriodInfo, RankedMv } from '../types'
@@ -16,8 +17,6 @@ interface BoardProps {
   mvs: readonly Mv[]
   /** 공개연도 드롭다운에 보여줄 연도 (최근 연도부터) */
   years: readonly string[]
-  /** 하루 평균을 계산할 기준일 YYYY-MM-DD */
-  refDate: string
 }
 
 /** 차트에 보여줄 최대 순위 */
@@ -32,7 +31,7 @@ const SCOPE_OPTIONS: readonly PillOption<'all' | 'release'>[] = [
  * 범위(누적/공개연도) 드롭다운 + 기간 탭 + 순위 표.
  * releaseYear가 null이면 누적(모든 곡), 연도면 그 해에 공개된 곡만 보여준다.
  */
-export function ChartBoard({ period, periods, mvs, years, refDate, releaseYear }: BoardProps & { releaseYear: string | null }) {
+export function ChartBoard({ period, periods, mvs, years, releaseYear }: BoardProps & { releaseYear: string | null }) {
   const router = useRouter()
   const pathname = usePathname()
   const setReleaseYear = (year: string | null) => router.replace(`${pathname}${scopeQuery(year)}`, { scroll: false })
@@ -41,8 +40,6 @@ export function ChartBoard({ period, periods, mvs, years, refDate, releaseYear }
   const available = info?.available ?? true
   const rows = available ? rankMvs(mvs, period, { releaseYear, withChange: info?.hasPrev ?? true }).slice(0, CHART_SIZE) : []
   const maxViews = Math.max(rows[0]?.views ?? 0, 1)
-  // 연간 + 올해 공개곡이면 연간 조회수 = 누적이라, 오른쪽 칸은 하루 평균으로 바꿔 보여준다
-  const showDailyAverage = period === 'year' && releaseYear === info?.year
 
   return (
     <>
@@ -76,28 +73,21 @@ export function ChartBoard({ period, periods, mvs, years, refDate, releaseYear }
         </nav>
       </div>
 
-      {info?.note && <p className="mb-4 text-[15px] font-semibold text-muted">{info.note}</p>}
+      <div className="mb-4 text-[15px] font-semibold text-muted">
+        <p>{describeChart(period, releaseYear)}</p>
+        {info?.note && <p>{info.note}</p>}
+      </div>
 
       {rows.length === 0 ? (
         <EmptyChart info={info} />
       ) : (
-        <ChartTable rows={rows} maxViews={maxViews} showDailyAverage={showDailyAverage} refDate={refDate} />
+        <ChartTable rows={rows} maxViews={maxViews} />
       )}
     </>
   )
 }
 
-function ChartTable({
-  rows,
-  maxViews,
-  showDailyAverage,
-  refDate,
-}: {
-  rows: readonly RankedMv[]
-  maxViews: number
-  showDailyAverage: boolean
-  refDate: string
-}) {
+function ChartTable({ rows, maxViews }: { rows: readonly RankedMv[]; maxViews: number }) {
   return (
     <>
       <div aria-hidden="true" className={`grid gap-4 px-5 pb-2 text-[13px] font-semibold text-muted max-md:hidden ${CHART_COLUMNS}`}>
@@ -105,13 +95,12 @@ function ChartTable({
         <span>노래</span>
         <span className="text-right">조회수</span>
         <span className="text-center">변동</span>
-        <span className="text-right">{showDailyAverage ? '하루 평균' : '누적'}</span>
         <span />
       </div>
       <ol className="grid gap-2">
         {rows.map((mv) => (
           <li key={mv.yt}>
-            <ChartRow mv={mv} maxViews={maxViews} sub={showDailyAverage ? dailyAverage(mv, refDate) : undefined} />
+            <ChartRow mv={mv} maxViews={maxViews} />
           </li>
         ))}
       </ol>

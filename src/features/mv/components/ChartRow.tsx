@@ -1,22 +1,20 @@
-import { formatNumber, formatShort } from '@/lib/format'
+import { formatNumber } from '@/lib/format'
 import type { RankedMv } from '../types'
 import { useMvPlayer } from './MvPlayer'
 import { MvThumbnail } from './MvThumbnail'
 import { ChangeBadge, RowGo, rowLabel } from './RowParts'
 
-/** 차트 표의 칸: 순위 · 노래 · 조회수 · 변동 · 누적(또는 하루 평균) · 보러가기 */
-export const CHART_COLUMNS = 'md:grid-cols-[64px_1fr_170px_72px_110px_100px]'
+/** 차트 표의 칸: 순위 · 노래 · 조회수 · 변동 · 보러가기 */
+export const CHART_COLUMNS = 'md:grid-cols-[64px_1fr_170px_72px_100px]'
 
 interface Props {
   mv: RankedMv
   /** 조회수 막대 길이의 기준 (1위 조회수) */
   maxViews: number
-  /** 오른쪽 칸에 누적 대신 보여줄 값 (예: 하루 평균). 없으면 누적 */
-  sub?: number
 }
 
 /** 차트 페이지의 순위 한 줄. 누르면 뮤직비디오 모달이 열린다. */
-export function ChartRow({ mv, maxViews, sub }: Props) {
+export function ChartRow({ mv, maxViews }: Props) {
   const openPlayer = useMvPlayer()
   return (
     <button
@@ -43,7 +41,6 @@ export function ChartRow({ mv, maxViews, sub }: Props) {
       <div className="relative text-center text-sm font-bold max-md:hidden">
         <ChangeBadge change={mv.change} />
       </div>
-      <div className="relative text-right text-[15px] text-muted max-md:hidden">{formatShort(sub ?? mv.total)}</div>
       <RowGo />
     </button>
   )

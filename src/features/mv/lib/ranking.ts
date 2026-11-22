@@ -56,11 +56,3 @@ export function rankMvs(mvs: readonly Mv[], period: Period, { releaseYear, withC
 export function releaseYears(mvs: readonly Mv[]): string[] {
   return [...new Set(mvs.map((m) => m.released.slice(0, 4)))].toSorted().toReversed()
 }
-
-const DAY_MS = 24 * 60 * 60 * 1000
-
-/** 하루 평균 조회수: 누적 조회수 ÷ 공개일부터 기준일까지 일수 (최소 1일) */
-export function dailyAverage(mv: Mv, refDate: string): number {
-  const days = Math.max(1, Math.round((Date.parse(refDate) - Date.parse(mv.released)) / DAY_MS))
-  return Math.round(mv.total / days)
-}
