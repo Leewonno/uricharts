@@ -3,6 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  # 매일 조회수를 기록한 뒤 collect-mv.yml이 실행시킨다
   workflow_dispatch:
 
 permissions:
@@ -19,6 +20,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # 차트 데이터(조회수 기록)는 data 브랜치에 있다. 빌드할 때 읽는다
+      - name: data 브랜치를 .data에 꺼내기
+        run: |
+          git fetch -q --depth=1 origin +refs/heads/data:refs/remotes/origin/data
+          git worktree add -q --detach .data origin/data
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -29,6 +35,8 @@ jobs:
       - run: npm run lint
       - run: npm run build
         env:
+          # 기록이 없으면 샘플로 빌드하지 않고 멈춘다
+          MV_DATA_DIR: .data
           # 프로젝트 페이지면 "/<repo>", 사용자 페이지·커스텀 도메인이면 "" 가 들어온다.
           BASE_PATH: ${{ steps.pages.outputs.base_path }}
       - uses: actions/upload-pages-artifact@v3
