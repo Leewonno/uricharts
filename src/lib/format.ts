@@ -23,6 +23,14 @@ export function formatShort(n: number): string {
 
 const ISO_DATE = /^(\d{4})-(\d{2})-(\d{2})$/
 
+/** 공개일 "2026-04-30" → "2026.04.30" (차트 표의 좁은 칸용) */
+export function formatDateDot(isoDate: string): string {
+  const match = ISO_DATE.exec(isoDate)
+  if (!match) throw new Error(`날짜 형식이 YYYY-MM-DD가 아닙니다: "${isoDate}"`)
+  const [, year, month, day] = match
+  return `${year}.${month}.${day}`
+}
+
 /**
  * 서버가 준 기준일 "2026-11-20" → "2026년 11월 20일".
  * Date로 바꾸지 않고 글자만 나눠, 보는 사람의 시간대에 따라 날짜가 밀리지 않게 한다.

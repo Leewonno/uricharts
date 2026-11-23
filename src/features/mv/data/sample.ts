@@ -1,3 +1,6 @@
+import { addDays } from '../../../../pipeline/mv/dates'
+import type { RegistryEntry, Snapshot } from '../../../../pipeline/mv/schema'
+import type { ChartSource } from '../lib/chart-data'
 import { PERIOD_NAMES } from '../lib/periods'
 import type { Mv, Period, PeriodInfo } from '../types'
 
@@ -126,4 +129,47 @@ export const PERIODS: Readonly<Record<Period, PeriodInfo>> = {
   week: { ...SAMPLE_PERIOD, key: 'week', name: PERIOD_NAMES.week, label: '2026년 47주차', range: '2026년 47주차 (11월 14일 ~ 11월 20일)' },
   month: { ...SAMPLE_PERIOD, key: 'month', name: PERIOD_NAMES.month, label: '2026년 10월', range: '2026년 10월' },
   year: { ...SAMPLE_PERIOD, key: 'year', name: PERIOD_NAMES.year, label: `${REF_YEAR}년`, range: `${REF_YEAR}년`, hasPrev: false },
+}
+
+/** 샘플 기록을 만들기 시작하는 날 */
+const SAMPLE_FROM = '2026-09-01'
+
+/** 같은 입력이면 늘 같은 0~1 값 (샘플 조회수를 날마다 조금씩 흔드는 데 쓴다) */
+function noise(text: string): number {
+  let h = 2166136261
+  for (const c of text) h = Math.imul(h ^ c.charCodeAt(0), 16777619)
+  return (h >>> 0) / 2 ** 32
+}
+
+/**
+ * 수집 기록이 없을 때(.data 없이 개발할 때) 차트 페이지가 쓸 예시 기록.
+ * 기준일 다음 날 0시 기록을 누적 조회수(total)로 두고, 하루씩 거슬러 올라가며
+ * 일간 조회수(day)의 60~140%를 뺀다. 그래서 기간마다 순위가 조금씩 바뀐다.
+ * 공개 전 날짜의 기록에는 그 곡이 없다.
+ */
+export function sampleChartSource(): ChartSource {
+  const latest = addDays(REF_DATE, 1)
+  const registry: RegistryEntry[] = SAMPLE_MVS.map((m) => ({
+    yt: m.yt,
+    title: m.title,
+    artist: m.artist,
+    released: m.released,
+    addedAt: SAMPLE_FROM,
+    source: 'seed',
+  }))
+
+  const snapshots = new Map<string, Snapshot>()
+  let views = new Map(SAMPLE_MVS.map((m) => [m.yt, m.total]))
+  for (let date = latest; date >= SAMPLE_FROM; date = addDays(date, -1)) {
+    const onDate = SAMPLE_MVS.flatMap((m) => (m.released < date ? [[m.yt, views.get(m.yt) ?? 0] as const] : []))
+    snapshots.set(date, { date, fetchedAt: `${date}T00:05:00+09:00`, views: Object.fromEntries(onDate), missing: [] })
+    views = new Map(
+      SAMPLE_MVS.map((m) => {
+        const day = Math.round((m.day ?? 0) * (0.6 + 0.8 * noise(`${m.yt}${date}`)))
+        return [m.yt, Math.max(0, (views.get(m.yt) ?? 0) - day)]
+      }),
+    )
+  }
+
+  return { registry, artists: [], snapshots, firstDate: SAMPLE_FROM, latestDate: latest }
 }

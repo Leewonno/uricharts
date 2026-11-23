@@ -54,6 +54,15 @@
     }
   }
 
+  /* 소개 페이지 답 말풍선: "쓰는 중" 점 세 개가 차례로 통통 튐 (점별 시차는 TypingReveal) */
+  --animate-typing: typing 0.9s ease-in-out infinite;
+  @keyframes typing {
+    50% {
+      transform: translateY(-4px);
+      background-color: var(--color-accent);
+    }
+  }
+
   /* 순위 행 호버: >>> 가 오른쪽으로 한 번 지나감 (화살표별 시차는 RowGo) */
   --animate-race: race 1.1s cubic-bezier(0.3, 0, 0.7, 1) both;
   @keyframes race {

@@ -5,7 +5,10 @@ import { createContext, use, useEffect, useRef, useState, type ReactNode } from 
 import { embedUrl } from '../lib/youtube'
 import type { Mv } from '../types'
 
-type OpenPlayer = (mv: Mv) => void
+/** 모달에 필요한 값만 받는다 (순위 행 어디서든 열 수 있게) */
+type PlayableMv = Pick<Mv, 'yt' | 'title' | 'artist'>
+
+type OpenPlayer = (mv: PlayableMv) => void
 
 const MvPlayerContext = createContext<OpenPlayer | null>(null)
 
@@ -18,7 +21,7 @@ export function useMvPlayer(): OpenPlayer {
 
 /** 페이지에 뮤직비디오 모달을 하나 두고, 안쪽 순위 행들이 같이 쓰게 한다. */
 export function MvPlayerProvider({ children }: { children: ReactNode }) {
-  const [mv, setMv] = useState<Mv | null>(null)
+  const [mv, setMv] = useState<PlayableMv | null>(null)
   return (
     <MvPlayerContext value={setMv}>
       {children}
@@ -32,7 +35,7 @@ export function MvPlayerProvider({ children }: { children: ReactNode }) {
  * 브라우저 기본 <dialog>를 써서 포커스 가두기 · Esc로 닫기 · 닫은 뒤 원래 행으로 포커스 돌려주기를 맡긴다.
  * 닫으면 iframe을 지워 재생을 멈춘다.
  */
-function MvPlayerDialog({ mv, onClose }: { mv: Mv | null; onClose: () => void }) {
+function MvPlayerDialog({ mv, onClose }: { mv: PlayableMv | null; onClose: () => void }) {
   const ref = useRef<HTMLDialogElement>(null)
 
   useEffect(() => {

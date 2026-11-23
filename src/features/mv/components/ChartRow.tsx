@@ -1,20 +1,31 @@
-import { formatNumber } from '@/lib/format'
-import type { RankedMv } from '../types'
+import { formatDateDot, formatNumber } from '@/lib/format'
+import type { ChartEntry } from '../types'
 import { useMvPlayer } from './MvPlayer'
 import { MvThumbnail } from './MvThumbnail'
 import { ChangeBadge, RowGo, rowLabel } from './RowParts'
 
-/** 차트 표의 칸: 순위 · 노래 · 조회수 · 변동 · 보러가기 */
-export const CHART_COLUMNS = 'md:grid-cols-[64px_1fr_170px_72px_100px]'
+/**
+ * 차트 표의 칸.
+ * - 일간·주간·월간: 순위 · 노래 · 조회수 · 변동 · 보러가기
+ * - 연간: 순위 · 노래 · 공개일 · 조회수 · 보러가기 (직전 해와 비교하지 않아 변동 칸이 없다)
+ */
+export const CHART_COLUMNS = {
+  change: 'md:grid-cols-[64px_1fr_170px_72px_100px]',
+  released: 'md:grid-cols-[64px_1fr_110px_170px_100px]',
+} as const
+
+/** 조회수 옆에 붙는 칸: 변동(일간·주간·월간) 또는 공개일(연간) */
+export type ChartExtra = keyof typeof CHART_COLUMNS
 
 interface Props {
-  mv: RankedMv
+  mv: ChartEntry
   /** 조회수 막대 길이의 기준 (1위 조회수) */
   maxViews: number
+  extra: ChartExtra
 }
 
 /** 차트 페이지의 순위 한 줄. 누르면 뮤직비디오 모달이 열린다. */
-export function ChartRow({ mv, maxViews }: Props) {
+export function ChartRow({ mv, maxViews, extra }: Props) {
   const openPlayer = useMvPlayer()
   return (
     <button
@@ -22,7 +33,7 @@ export function ChartRow({ mv, maxViews }: Props) {
       onClick={() => openPlayer(mv)}
       aria-haspopup="dialog"
       aria-label={rowLabel(mv)}
-      className={`group relative grid w-full cursor-pointer text-left grid-cols-[40px_1fr_auto_auto] items-center gap-3 overflow-hidden rounded-[14px] px-5 py-3.5 transition-colors duration-200 bg-surface hover:bg-fill-soft focus-visible:bg-fill-soft md:gap-4 ${CHART_COLUMNS}`}
+      className={`group relative grid w-full cursor-pointer text-left grid-cols-[40px_1fr_auto_auto] items-center gap-3 overflow-hidden rounded-[14px] px-5 py-3.5 transition-colors duration-200 bg-surface hover:bg-fill-soft focus-visible:bg-fill-soft md:gap-4 ${CHART_COLUMNS[extra]}`}
     >
       <div
         aria-hidden="true"
@@ -37,10 +48,15 @@ export function ChartRow({ mv, maxViews }: Props) {
           <div className="truncate text-sm text-muted">{mv.artist}</div>
         </div>
       </div>
+      {extra === 'released' && (
+        <div className="relative text-center text-sm font-normal tracking-[-0.04em] text-muted tabular-nums max-md:hidden">{formatDateDot(mv.released)}</div>
+      )}
       <div className="relative text-right text-xl font-semibold tracking-[-0.04em] tabular-nums max-sm:text-[15px]">{formatNumber(mv.views)}</div>
-      <div className="relative text-center text-sm font-bold max-md:hidden">
-        <ChangeBadge change={mv.change} />
-      </div>
+      {extra === 'change' && (
+        <div className="relative text-center text-sm font-bold max-md:hidden">
+          <ChangeBadge change={mv.change} />
+        </div>
+      )}
       <RowGo />
     </button>
   )

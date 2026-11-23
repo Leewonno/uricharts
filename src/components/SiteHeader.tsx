@@ -1,15 +1,13 @@
 'use client'
 
-import { Sparkles, YoutubeFill } from 'akar-icons'
+import { YoutubeFill } from 'akar-icons'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useLayoutEffect, useRef } from 'react'
 
 // 홈은 로고로 들어간다. 선택 표시(알약)가 메뉴 사이를 미끄러져 다닌다.
-const NAV = [
-  { href: '/mv/chart/day', match: '/mv', label: 'YouTube 조회수', Icon: YoutubeFill },
-  { href: '/about', match: '/about', label: '우리의차트는?', Icon: Sparkles },
-] as const
+// 소개(/about, "우리의차트는?" · Sparkles 아이콘)는 공개 전이라 메뉴에서 뺐다. 공개할 때 다시 넣는다.
+const NAV = [{ href: '/mv/chart/day', match: '/mv', label: 'K-POP MV 조회수', Icon: YoutubeFill }] as const
 
 /** 로고 막대 3개의 높이(모바일은 작게)와 출렁이는 시차 */
 const LOGO_BARS = [
