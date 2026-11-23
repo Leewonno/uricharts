@@ -1,9 +1,10 @@
 import { join } from 'node:path'
 import { exists, mvPaths, readJson, snapshotDates } from '../../../../pipeline/mv/store'
 import { artistsSchema, registrySchema, snapshotSchema, type Snapshot } from '../../../../pipeline/mv/schema'
-import { buildChartData, chartSnapshotDates } from '../lib/chart-data'
+import { buildChartBook, type ChartBook } from '../lib/chart-book'
+import { buildChartData, chartSnapshotDates, type ChartSource } from '../lib/chart-data'
 import type { MvSnapshot } from '../types'
-import { PERIODS, REF_DATE, SAMPLE_MVS } from './sample'
+import { PERIODS, REF_DATE, SAMPLE_MVS, sampleChartSource } from './sample'
 
 /**
  * 수집 기록이 있는 폴더 (data 브랜치를 꺼내 둔 곳).
@@ -57,4 +58,37 @@ export function getMvSnapshot(): Promise<MvSnapshot> {
   if (process.env.NODE_ENV !== 'production') return load()
   cached ??= load()
   return cached
+}
+
+/** 모든 기록을 읽는다 (차트 페이지에서 지난 기간도 고를 수 있게) */
+async function loadSource(dataDir: string): Promise<ChartSource> {
+  const paths = mvPaths(dataDir)
+  const [registry, artists, dates] = await Promise.all([
+    readJson(paths.registry, registrySchema),
+    readJson(paths.artists, artistsSchema, []),
+    snapshotDates(paths.snapshots),
+  ])
+  const latestDate = dates.at(-1)
+  if (!latestDate) throw new Error(`${paths.snapshots}에 조회수 기록이 없습니다`)
+  const snapshots = new Map<string, Snapshot>(
+    await Promise.all(dates.map(async (d) => [d, await readJson(paths.snapshot(d), snapshotSchema)] as const)),
+  )
+  return { registry, artists, snapshots, firstDate: dates[0], latestDate }
+}
+
+const loadBook = async (): Promise<ChartBook> => {
+  const dir = await resolveDataDir()
+  return buildChartBook(dir ? await loadSource(dir) : sampleChartSource())
+}
+
+let cachedBook: Promise<ChartBook> | null = null
+
+/**
+ * 차트 페이지용: 기간(하루·주·달·해)마다 고를 수 있는 차트 묶음.
+ * getMvSnapshot처럼 빌드할 때는 한 번만 읽고, 개발 서버에서는 요청마다 읽는다.
+ */
+export function getMvChartBook(): Promise<ChartBook> {
+  if (process.env.NODE_ENV !== 'production') return loadBook()
+  cachedBook ??= loadBook()
+  return cachedBook
 }

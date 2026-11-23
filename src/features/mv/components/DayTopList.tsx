@@ -23,7 +23,7 @@ export function DayTopList({ items, count, day, asOf }: Props) {
     <section aria-labelledby="day-top" className="mx-auto max-w-[1280px] px-[clamp(16px,4vw,48px)] pb-14">
       <SectionHeading id="day-top" title={`누적 일간 조회수 TOP ${count}`} description={formatDateKo(asOf)} more={{ href: chartPath('day'), label: '더보기' }} />
       {items.length === 0 ? (
-        <EmptyChart info={day} />
+        <EmptyChart available={day.available} availableFrom={day.availableFrom} />
       ) : (
         <ol className="grid gap-2">
           {items.map((mv) => (

@@ -1,6 +1,6 @@
 import { ChevronRight } from 'akar-icons'
 import { formatNumber } from '@/lib/format'
-import type { RankChange, RankedMv } from '../types'
+import type { ChartEntry, RankChange } from '../types'
 
 /** 순위 변동: ▲2 / ▼1 / 재진입 / – */
 export function ChangeBadge({ change }: { change: RankChange }) {
@@ -36,7 +36,7 @@ function changeLabel(change: RankChange): string {
  * 순위 행 링크의 접근성 이름. aria-label이 안쪽 글자를 대신하므로 조회수·변동까지 담는다.
  * 예: "2위 BTS 2.0, 조회수 1,182,000회, 1계단 상승. 뮤직비디오 보기"
  */
-export function rowLabel(mv: RankedMv): string {
+export function rowLabel(mv: ChartEntry): string {
   const parts = [`${mv.rank}위 ${mv.artist} ${mv.title}`, `조회수 ${formatNumber(mv.views)}회`, changeLabel(mv.change)].filter(Boolean)
   return `${parts.join(', ')}. 뮤직비디오 보기`
 }

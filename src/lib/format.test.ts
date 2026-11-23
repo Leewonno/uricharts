@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { formatDateKo, formatNumber, formatShort } from './format'
+import { formatDateDot, formatDateKo, formatNumber, formatShort } from './format'
 
 describe('formatNumber', () => {
   it('천 단위마다 쉼표를 넣는다', () => {
@@ -46,5 +46,16 @@ describe('formatDateKo', () => {
   it('YYYY-MM-DD 형식이 아니면 오류를 낸다', () => {
     expect(() => formatDateKo('2026/11/20')).toThrow()
     expect(() => formatDateKo('')).toThrow()
+  })
+})
+
+describe('formatDateDot', () => {
+  it('YYYY-MM-DD를 점으로 이어 쓴다', () => {
+    expect(formatDateDot('2026-04-30')).toBe('2026.04.30')
+    expect(formatDateDot('2026-01-05')).toBe('2026.01.05')
+  })
+
+  it('형식이 다르면 에러', () => {
+    expect(() => formatDateDot('2026/04/30')).toThrow()
   })
 })
