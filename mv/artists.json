@@ -255,5 +255,668 @@
       "탑현",
       "황인혁"
     ]
+  },
+  {
+    "name": "KATSEYE",
+    "type": "걸그룹",
+    "aliases": [
+      "캣츠아이"
+    ]
+  },
+  {
+    "name": "ATEEZ",
+    "type": "보이그룹",
+    "aliases": [
+      "에이티즈"
+    ]
+  },
+  {
+    "name": "CORTIS",
+    "type": "보이그룹",
+    "aliases": [
+      "코르티스"
+    ]
+  },
+  {
+    "name": "ALPHA DRIVE ONE",
+    "type": "보이그룹",
+    "aliases": []
+  },
+  {
+    "name": "LNGSHOT",
+    "type": "보이그룹",
+    "aliases": []
+  },
+  {
+    "name": "YENA",
+    "type": "솔로",
+    "aliases": [
+      "최예나"
+    ]
+  },
+  {
+    "name": "ENHYPEN",
+    "type": "보이그룹",
+    "aliases": [
+      "엔하이픈"
+    ]
+  },
+  {
+    "name": "ZEROBASEONE",
+    "type": "보이그룹",
+    "aliases": [
+      "제로베이스원"
+    ]
+  },
+  {
+    "name": "KISS OF LIFE",
+    "type": "걸그룹",
+    "aliases": [
+      "키스오브라이프"
+    ]
+  },
+  {
+    "name": "NEXZ",
+    "type": "보이그룹",
+    "aliases": [
+      "넥스지"
+    ]
+  },
+  {
+    "name": "AHOF",
+    "type": "보이그룹",
+    "aliases": [
+      "아홉"
+    ]
+  },
+  {
+    "name": "tripleS",
+    "type": "걸그룹",
+    "aliases": [
+      "트리플에스"
+    ]
+  },
+  {
+    "name": "Anyma & LISA",
+    "type": null,
+    "aliases": []
+  },
+  {
+    "name": "AND2BLE",
+    "type": null,
+    "aliases": [
+      "앤더블"
+    ]
+  },
+  {
+    "name": "MEOVV",
+    "type": "걸그룹",
+    "aliases": [
+      "미야오"
+    ]
+  },
+  {
+    "name": "HWASA",
+    "type": "솔로",
+    "aliases": [
+      "화사"
+    ]
+  },
+  {
+    "name": "TUIDE",
+    "type": "걸그룹",
+    "aliases": [
+      "튜이드"
+    ]
+  },
+  {
+    "name": "idntt",
+    "type": "보이그룹",
+    "aliases": [
+      "아이덴티티"
+    ]
+  },
+  {
+    "name": "KiiiKiii",
+    "type": "걸그룹",
+    "aliases": [
+      "키키"
+    ]
+  },
+  {
+    "name": "BOYNEXTDOOR",
+    "type": "보이그룹",
+    "aliases": [
+      "보이넥스트도어"
+    ]
+  },
+  {
+    "name": "I.O.I",
+    "type": "걸그룹",
+    "aliases": [
+      "아이오아이"
+    ]
+  },
+  {
+    "name": "AtHeart",
+    "type": "걸그룹",
+    "aliases": [
+      "앳하트"
+    ]
+  },
+  {
+    "name": "TUNEXX",
+    "type": "보이그룹",
+    "aliases": []
+  },
+  {
+    "name": "&TEAM",
+    "type": "보이그룹",
+    "aliases": []
+  },
+  {
+    "name": "TWS",
+    "type": "보이그룹",
+    "aliases": [
+      "투어스"
+    ]
+  },
+  {
+    "name": "Kep1er",
+    "type": "걸그룹",
+    "aliases": [
+      "케플러"
+    ]
+  },
+  {
+    "name": "AKMU",
+    "type": null,
+    "aliases": []
+  },
+  {
+    "name": "NiziU",
+    "type": "걸그룹",
+    "aliases": [
+      "니쥬"
+    ]
+  },
+  {
+    "name": "RESCENE",
+    "type": "걸그룹",
+    "aliases": [
+      "리센느"
+    ]
+  },
+  {
+    "name": "P1Harmony",
+    "type": "보이그룹",
+    "aliases": [
+      "피원하모니"
+    ]
+  },
+  {
+    "name": "RIIZE",
+    "type": "보이그룹",
+    "aliases": [
+      "라이즈"
+    ]
+  },
+  {
+    "name": "ZICO & Lilas",
+    "type": null,
+    "aliases": [
+      "지코"
+    ]
+  },
+  {
+    "name": "YANG YOSEOP",
+    "type": "솔로",
+    "aliases": [
+      "양요섭"
+    ]
+  },
+  {
+    "name": "YUNA",
+    "type": "솔로",
+    "aliases": []
+  },
+  {
+    "name": "OURBIRTHDAY",
+    "type": null,
+    "aliases": []
+  },
+  {
+    "name": "NCT WISH",
+    "type": "보이그룹",
+    "aliases": [
+      "엔시티",
+      "위시"
+    ]
+  },
+  {
+    "name": "Apink",
+    "type": "걸그룹",
+    "aliases": [
+      "에이핑크"
+    ]
+  },
+  {
+    "name": "V8",
+    "type": null,
+    "aliases": []
+  },
+  {
+    "name": "UNCHILD",
+    "type": null,
+    "aliases": [
+      "언차일드"
+    ]
+  },
+  {
+    "name": "EVAN",
+    "type": null,
+    "aliases": [
+      "에반"
+    ]
+  },
+  {
+    "name": "T.O.P",
+    "type": "솔로",
+    "aliases": []
+  },
+  {
+    "name": "KIIRAS",
+    "type": null,
+    "aliases": [
+      "키라스"
+    ]
+  },
+  {
+    "name": "DK X SEUNGKWAN",
+    "type": "보이그룹",
+    "aliases": [
+      "도겸X승관"
+    ]
+  },
+  {
+    "name": "ALL(H)OURS",
+    "type": "보이그룹",
+    "aliases": [
+      "올아워즈"
+    ]
+  },
+  {
+    "name": "KickFlip",
+    "type": "보이그룹",
+    "aliases": [
+      "킥플립"
+    ]
+  },
+  {
+    "name": "ONF",
+    "type": "보이그룹",
+    "aliases": [
+      "온앤오프"
+    ]
+  },
+  {
+    "name": "izna",
+    "type": "걸그룹",
+    "aliases": []
+  },
+  {
+    "name": "ifeye",
+    "type": "걸그룹",
+    "aliases": [
+      "이프아이"
+    ]
+  },
+  {
+    "name": "TNX",
+    "type": "보이그룹",
+    "aliases": []
+  },
+  {
+    "name": "cosmosy",
+    "type": null,
+    "aliases": []
+  },
+  {
+    "name": "MADEIN",
+    "type": "걸그룹",
+    "aliases": []
+  },
+  {
+    "name": "WOODZ",
+    "type": "솔로",
+    "aliases": []
+  },
+  {
+    "name": "Baby DONT Cry",
+    "type": "걸그룹",
+    "aliases": []
+  },
+  {
+    "name": "VAYONN",
+    "type": null,
+    "aliases": [
+      "베이온"
+    ]
+  },
+  {
+    "name": "ALLDAY PROJECT",
+    "type": null,
+    "aliases": []
+  },
+  {
+    "name": "fromis_9",
+    "type": "걸그룹",
+    "aliases": [
+      "프로미스나인"
+    ]
+  },
+  {
+    "name": "PLAVE",
+    "type": "보이그룹",
+    "aliases": []
+  },
+  {
+    "name": "TAEYANG",
+    "type": "솔로",
+    "aliases": []
+  },
+  {
+    "name": "dodree",
+    "type": null,
+    "aliases": [
+      "도드리"
+    ]
+  },
+  {
+    "name": "xikers",
+    "type": "보이그룹",
+    "aliases": [
+      "싸이커스"
+    ]
+  },
+  {
+    "name": "WHIB",
+    "type": "보이그룹",
+    "aliases": [
+      "휘브"
+    ]
+  },
+  {
+    "name": "NouerA",
+    "type": null,
+    "aliases": [
+      "누에라"
+    ]
+  },
+  {
+    "name": "SHINWONHO",
+    "type": null,
+    "aliases": [
+      "신원호"
+    ]
+  },
+  {
+    "name": "Keyveatz",
+    "type": null,
+    "aliases": [
+      "키비츠"
+    ]
+  },
+  {
+    "name": "Jay Park & LNGSHOT",
+    "type": null,
+    "aliases": []
+  },
+  {
+    "name": "FIFTY FIFTY",
+    "type": "걸그룹",
+    "aliases": [
+      "피프티피프티"
+    ]
+  },
+  {
+    "name": "X:IN",
+    "type": "걸그룹",
+    "aliases": [
+      "엑신"
+    ]
+  },
+  {
+    "name": "Picheolin",
+    "type": null,
+    "aliases": [
+      "피철인"
+    ]
+  },
+  {
+    "name": "YOON SAN-HA",
+    "type": "솔로",
+    "aliases": [
+      "윤산하"
+    ]
+  },
+  {
+    "name": "BIBI",
+    "type": "솔로",
+    "aliases": [
+      "비비"
+    ]
+  },
+  {
+    "name": "IDID",
+    "type": "보이그룹",
+    "aliases": [
+      "아이딧"
+    ]
+  },
+  {
+    "name": "WONPIL",
+    "type": "솔로",
+    "aliases": [
+      "원필"
+    ]
+  },
+  {
+    "name": "CNBLUE",
+    "type": "보이그룹",
+    "aliases": [
+      "씨엔블루"
+    ]
+  },
+  {
+    "name": "CATCH THE YOUNG",
+    "type": null,
+    "aliases": []
+  },
+  {
+    "name": "Xdinary Heroes",
+    "type": "보이그룹",
+    "aliases": []
+  },
+  {
+    "name": "STAYC",
+    "type": "걸그룹",
+    "aliases": [
+      "스테이씨"
+    ]
+  },
+  {
+    "name": "MISAMO",
+    "type": "걸그룹",
+    "aliases": []
+  },
+  {
+    "name": "KANGMIN",
+    "type": "솔로",
+    "aliases": []
+  },
+  {
+    "name": "EVNNE",
+    "type": "보이그룹",
+    "aliases": [
+      "이븐"
+    ]
+  },
+  {
+    "name": "H//PE Princess",
+    "type": "걸그룹",
+    "aliases": [
+      "하입프린세스"
+    ]
+  },
+  {
+    "name": "82MAJOR",
+    "type": "보이그룹",
+    "aliases": [
+      "82메이저"
+    ]
+  },
+  {
+    "name": "Moon Byul",
+    "type": "솔로",
+    "aliases": [
+      "문별"
+    ]
+  },
+  {
+    "name": "KEYVITUP",
+    "type": null,
+    "aliases": [
+      "키빗업"
+    ]
+  },
+  {
+    "name": "AMPERS&ONE",
+    "type": "보이그룹",
+    "aliases": [
+      "앰퍼샌드원"
+    ]
+  },
+  {
+    "name": "OWIS",
+    "type": null,
+    "aliases": [
+      "오위스"
+    ]
+  },
+  {
+    "name": "QWER",
+    "type": "걸그룹",
+    "aliases": []
+  },
+  {
+    "name": "XLOV",
+    "type": null,
+    "aliases": [
+      "엑스러브"
+    ]
+  },
+  {
+    "name": "FLARE U",
+    "type": null,
+    "aliases": [
+      "플레어 유"
+    ]
+  },
+  {
+    "name": "Queenz Eye",
+    "type": "걸그룹",
+    "aliases": [
+      "퀸즈아이"
+    ]
+  },
+  {
+    "name": "TAEYONG",
+    "type": "솔로",
+    "aliases": [
+      "태용"
+    ]
+  },
+  {
+    "name": "USPEER",
+    "type": null,
+    "aliases": [
+      "유스피어"
+    ]
+  },
+  {
+    "name": "HANRORO",
+    "type": "솔로",
+    "aliases": [
+      "한로로"
+    ]
+  },
+  {
+    "name": "AmbiO",
+    "type": null,
+    "aliases": [
+      "엠비오"
+    ]
+  },
+  {
+    "name": "YOUNITE",
+    "type": "보이그룹",
+    "aliases": []
+  },
+  {
+    "name": "EPEX",
+    "type": "보이그룹",
+    "aliases": [
+      "이펙스"
+    ]
+  },
+  {
+    "name": "CHUU",
+    "type": "솔로",
+    "aliases": [
+      "츄"
+    ]
+  },
+  {
+    "name": "H1-KEY",
+    "type": "걸그룹",
+    "aliases": [
+      "하이키"
+    ]
+  },
+  {
+    "name": "HEART OF WOMAN",
+    "type": null,
+    "aliases": [
+      "하트오브우먼"
+    ]
+  },
+  {
+    "name": "AxMxP",
+    "type": null,
+    "aliases": [
+      "에이엠피"
+    ]
+  },
+  {
+    "name": "AB6IX",
+    "type": "보이그룹",
+    "aliases": [
+      "에이비식스"
+    ]
+  },
+  {
+    "name": "WayV",
+    "type": "보이그룹",
+    "aliases": [
+      "威神V"
+    ]
+  },
+  {
+    "name": "ONEW",
+    "type": "솔로",
+    "aliases": [
+      "온유"
+    ]
   }
 ]
