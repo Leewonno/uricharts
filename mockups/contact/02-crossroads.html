@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>시안 2 · 갈림길 — 문의</title>
+    <link rel="stylesheet" href="shared.css" />
+    <style>
+      /* 시안 2: 먼저 큰 카드 네 장 중 하나를 고르면, 그 일에 꼭 맞는 짧은 폼이 아래에 펼쳐진다 */
+      .wrap {
+        width: 100%;
+        max-width: calc(960px + 2 * var(--gutter));
+        margin: 0 auto;
+        padding: clamp(40px, 8vh, 88px) var(--gutter) 120px;
+        box-sizing: border-box;
+      }
+
+      .head {
+        text-align: center;
+      }
+
+      .head h1 {
+        font-size: clamp(36px, 5.4vw, 64px);
+        line-height: 1.1;
+        font-weight: 800;
+        letter-spacing: -0.055em;
+        color: var(--strong);
+      }
+
+      .head p {
+        margin-top: 14px;
+        font-size: 18px;
+        color: var(--muted);
+      }
+
+      .roads {
+        margin-top: 48px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .road {
+        position: relative;
+        display: grid;
+        align-content: space-between;
+        min-height: 220px;
+        padding: 28px;
+        border: 0;
+        border-radius: 28px;
+        text-align: left;
+        cursor: pointer;
+        overflow: hidden;
+        transition: transform 0.35s var(--ease-pop), min-height 0.45s var(--ease-pop), opacity 0.3s, box-shadow 0.3s;
+      }
+
+      .road:hover {
+        transform: translateY(-4px);
+      }
+
+      .road:nth-child(1) { background: var(--accent); color: #fff; }
+      .road:nth-child(2) { background: var(--surface); color: var(--strong); }
+      .road:nth-child(3) { background: var(--strong); color: var(--cyan-100); }
+      .road:nth-child(4) { background: var(--fill); color: var(--strong); }
+
+      .road .glyph {
+        position: absolute;
+        right: -6px;
+        bottom: -38px;
+        font-size: 200px;
+        line-height: 1;
+        font-weight: 900;
+        opacity: 0.14;
+        transition: transform 0.5s var(--ease-pop);
+        pointer-events: none;
+      }
+
+      .road:hover .glyph {
+        transform: rotate(-8deg) scale(1.08);
+      }
+
+      .road .no {
+        font-size: 14px;
+        font-weight: 800;
+        opacity: 0.7;
+      }
+
+      .road .t {
+        display: block;
+        font-size: clamp(24px, 2.8vw, 32px);
+        font-weight: 800;
+        letter-spacing: -0.045em;
+      }
+
+      .road .s {
+        display: block;
+        margin-top: 4px;
+        font-size: 16px;
+        opacity: 0.8;
+      }
+
+      /* 고른 뒤: 카드가 낮아지고 고른 카드만 또렷하다 */
+      .roads.picked .road {
+        min-height: 96px;
+        padding: 20px 24px;
+      }
+
+      .roads.picked .road .glyph {
+        font-size: 110px;
+        bottom: -20px;
+      }
+
+      .roads.picked .road .s,
+      .roads.picked .road .no {
+        display: none;
+      }
+
+      .roads.picked .road .t {
+        display: block;
+        font-size: 20px;
+      }
+
+      .roads.picked .road:not(.on) {
+        opacity: 0.45;
+      }
+
+      .roads.picked .road.on {
+        box-shadow: 0 0 0 4px var(--page), 0 0 0 7px var(--accent);
+      }
+
+      /* 펼쳐지는 폼 */
+      .panel {
+        display: none;
+        margin-top: 24px;
+        padding: clamp(24px, 4vw, 40px);
+        border-radius: 32px;
+        background: var(--surface);
+      }
+
+      .panel.show {
+        display: block;
+        animation: pop-in 0.45s var(--ease-pop);
+      }
+
+      .panel h3 {
+        font-size: 24px;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        color: var(--strong);
+      }
+
+      .panel > p {
+        margin-top: 6px;
+        font-size: 16px;
+        color: var(--muted);
+      }
+
+      .panel form {
+        margin-top: 28px;
+        display: grid;
+        gap: 22px;
+      }
+
+      .grid2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      .opt {
+        margin-left: 4px;
+        font-weight: 500;
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .send-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .sent {
+        display: none;
+        text-align: center;
+        padding: 40px 0 16px;
+      }
+
+      .panel.done form {
+        display: none;
+      }
+
+      .panel.done .sent {
+        display: block;
+        animation: pop-in 0.45s var(--ease-pop);
+      }
+
+      .sent b {
+        display: block;
+        font-size: 64px;
+        line-height: 1;
+      }
+
+      .sent h4 {
+        margin-top: 16px;
+        font-size: 26px;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        color: var(--strong);
+      }
+
+      .sent p {
+        margin-top: 8px;
+        color: var(--muted);
+      }
+
+      .direct {
+        margin-top: 40px;
+        text-align: center;
+        font-size: 15px;
+        color: var(--muted);
+      }
+
+      .direct a {
+        font-weight: 700;
+        color: var(--accent);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+
+      @media (max-width: 640px) {
+        .roads,
+        .grid2 {
+          grid-template-columns: 1fr;
+        }
+        .road {
+          min-height: 160px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div data-site-header></div>
+
+    <main class="wrap">
+      <header class="head">
+        <h1>어떤 일로 오셨어요?</h1>
+        <p>하나를 고르면 꼭 필요한 것만 물어볼게요.</p>
+      </header>
+
+      <div class="roads" data-roads></div>
+
+      <section class="panel" data-panel="add">
+        <h3>이 MV도 차트에 넣어 주세요</h3>
+        <p>지금 116곡을 기록하고 있어요. 빠진 곡이 있으면 주소만 알려주세요.</p>
+        <form>
+          <div class="field">
+            <label for="add-yt">유튜브 주소</label>
+            <input class="input" id="add-yt" type="url" placeholder="https://youtu.be/..." required />
+            <div class="yt-preview" data-preview></div>
+            <span class="hint">공식 채널에 올라온 뮤직비디오여야 해요. 퍼포먼스·라이브 영상은 받지 않아요.</span>
+          </div>
+          <div class="field">
+            <label for="add-mail">추가되면 알려드릴까요?<span class="opt">선택</span></label>
+            <input class="input" id="add-mail" type="email" placeholder="메일을 적으면 들어간 날 알려드려요" />
+          </div>
+          <div class="send-row">
+            <span class="mock-note">시안이라 실제로 보내지는 않아요.</span>
+            <button class="btn" type="submit">요청하기</button>
+          </div>
+        </form>
+        <div class="sent" role="status"><b aria-hidden="true">🎬</b><h4>요청 받았어요</h4><p>확인되면 다음 날 0시 기록부터 들어가요.</p></div>
+      </section>
+
+      <section class="panel" data-panel="fix">
+        <h3>순위나 정보가 이상해요</h3>
+        <p>어느 차트의 몇 위인지 알려주시면 기록장을 바로 확인해 볼게요.</p>
+        <form>
+          <div class="grid2">
+            <div class="field">
+              <label for="fix-chart">차트</label>
+              <select class="input" id="fix-chart">
+                <option>일간</option>
+                <option>주간</option>
+                <option>월간</option>
+                <option selected>연간</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="fix-rank">순위<span class="opt">선택</span></label>
+              <input class="input num" id="fix-rank" inputmode="numeric" placeholder="예) 3" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="fix-msg">무엇이 이상한가요?</label>
+            <textarea class="input" id="fix-msg" placeholder="예) 아티스트 이름이 잘못 적혀 있어요 / 조회수가 유튜브와 너무 달라요" required></textarea>
+          </div>
+          <div class="field">
+            <label for="fix-mail">답장 받을 메일<span class="opt">선택</span></label>
+            <input class="input" id="fix-mail" type="email" placeholder="you@example.com" />
+          </div>
+          <div class="send-row">
+            <span class="mock-note">시안이라 실제로 보내지는 않아요.</span>
+            <button class="btn" type="submit">알려주기</button>
+          </div>
+        </form>
+        <div class="sent" role="status"><b aria-hidden="true">🔍</b><h4>고마워요, 확인해 볼게요</h4><p>고치면 차트에 바로 반영돼요.</p></div>
+      </section>
+
+      <section class="panel" data-panel="biz">
+        <h3>함께 일하고 싶어요</h3>
+        <p>데이터 활용, 광고, 협업 제안 모두 반가워요.</p>
+        <form>
+          <div class="grid2">
+            <div class="field">
+              <label for="biz-org">회사·팀 이름</label>
+              <input class="input" id="biz-org" required />
+            </div>
+            <div class="field">
+              <label for="biz-name">담당자 이름</label>
+              <input class="input" id="biz-name" required />
+            </div>
+          </div>
+          <div class="field">
+            <label for="biz-mail">메일</label>
+            <input class="input" id="biz-mail" type="email" placeholder="you@company.com" required />
+          </div>
+          <div class="field">
+            <label for="biz-msg">제안 내용</label>
+            <textarea class="input" id="biz-msg" required></textarea>
+          </div>
+          <div class="send-row">
+            <span class="mock-note">시안이라 실제로 보내지는 않아요.</span>
+            <button class="btn" type="submit">제안 보내기</button>
+          </div>
+        </form>
+        <div class="sent" role="status"><b aria-hidden="true">🤝</b><h4>제안 잘 받았어요</h4><p>2~3일 안에 메일로 답장 드릴게요.</p></div>
+      </section>
+
+      <section class="panel" data-panel="etc">
+        <h3>그 밖의 이야기</h3>
+        <p>쓰면서 불편했던 점, 있었으면 하는 차트, 응원 한마디도 좋아요.</p>
+        <form>
+          <div class="field">
+            <label for="etc-msg">내용</label>
+            <textarea class="input" id="etc-msg" required></textarea>
+          </div>
+          <div class="field">
+            <label for="etc-mail">답장 받을 메일<span class="opt">선택</span></label>
+            <input class="input" id="etc-mail" type="email" placeholder="답장이 필요하면 적어 주세요" />
+          </div>
+          <div class="send-row">
+            <span class="mock-note">시안이라 실제로 보내지는 않아요.</span>
+            <button class="btn" type="submit">보내기</button>
+          </div>
+        </form>
+        <div class="sent" role="status"><b aria-hidden="true">💌</b><h4>잘 받았어요</h4><p>하나하나 다 읽어요. 고마워요!</p></div>
+      </section>
+
+      <p class="direct">폼이 불편하면 <a href="#" data-email></a> 으로 바로 보내도 돼요.</p>
+    </main>
+
+    <div data-site-footer></div>
+
+    <script src="shared.js"></script>
+    <script>
+      const emailLink = document.querySelector('[data-email]')
+      emailLink.textContent = CONTACT.email
+      emailLink.href = `mailto:${CONTACT.email}`
+
+      const roads = document.querySelector('[data-roads]')
+      roads.innerHTML = TOPICS.map(
+        (t, i) => `
+        <button class="road" type="button" data-topic="${t.id}" aria-pressed="false">
+          <span class="glyph" aria-hidden="true">${t.icon}</span>
+          <span class="no">0${i + 1}</span>
+          <span><strong class="t">${t.label}</strong><span class="s">${t.short}</span></span>
+        </button>`,
+      ).join('')
+
+      const panels = document.querySelectorAll('[data-panel]')
+      roads.querySelectorAll('.road').forEach((road) =>
+        road.addEventListener('click', () => {
+          roads.classList.add('picked')
+          roads.querySelectorAll('.road').forEach((r) => {
+            r.classList.toggle('on', r === road)
+            r.setAttribute('aria-pressed', String(r === road))
+          })
+          panels.forEach((p) => {
+            p.classList.toggle('show', p.dataset.panel === road.dataset.topic)
+            p.classList.remove('done')
+          })
+          document.querySelector(`[data-panel=${road.dataset.topic}]`).scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+        }),
+      )
+
+      bindYoutubePreview(document.querySelector('#add-yt'), document.querySelector('[data-preview]'))
+
+      panels.forEach((panel) =>
+        panel.querySelector('form').addEventListener('submit', (e) => {
+          e.preventDefault()
+          panel.classList.add('done')
+        }),
+      )
+    </script>
+  </body>
+</html>
