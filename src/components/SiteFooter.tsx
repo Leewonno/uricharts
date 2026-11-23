@@ -1,10 +1,8 @@
 import Link from 'next/link'
 
-// 소개 · 문의 페이지는 아직 없다 (헤더의 소개 메뉴와 같은 주소)
-const FOOTER_LINKS = [
-  { href: '/about', label: '소개' },
-  { href: '/contact', label: '문의' },
-] as const
+// 문의 페이지는 아직 없다.
+// 소개(/about)는 페이지는 있지만 공개 전이라 링크를 뺐다. 공개할 때 { href: '/about', label: '소개' }를 앞에 다시 넣는다.
+const FOOTER_LINKS = [{ href: '/contact', label: '문의' }] as const
 
 // 헤더 메뉴와 같은 알약 묶음. 어두운 판 위라 바탕은 반투명 흰색으로 깐다
 const linkClass =

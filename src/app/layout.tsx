@@ -7,7 +7,7 @@ import { getMvSnapshot } from '@/features/mv/data/snapshot'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: '우리의차트 URICHARTS — K-pop 뮤직비디오 조회수 차트',
+  title: '우리의차트',
   description: 'K-pop 뮤직비디오 유튜브 조회수 일간 · 주간 · 월간 · 연간 차트',
 }
 
