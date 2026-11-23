@@ -103,5 +103,503 @@
     "addedAt": "2026-11-22",
     "source": "seed",
     "artist": "i-dle"
+  },
+  {
+    "id": "UCQdq-lqPEq_yZ_wP_kuVB9Q",
+    "name": "KQ ENTERTAINMENT",
+    "addedAt": "2026-11-24",
+    "source": "manual"
+  },
+  {
+    "id": "UCC4wzWbk_zdQNZstCwcfFLA",
+    "name": "ALPHA DRIVE ONE",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "ALPHA DRIVE ONE"
+  },
+  {
+    "id": "UCkR_4hIKdUTWz9wMPB-du8Q",
+    "name": "MORE VISION",
+    "addedAt": "2026-11-24",
+    "source": "manual"
+  },
+  {
+    "id": "UCkrDEGNM3mqZXHk2MfnOjMw",
+    "name": "YENA(최예나)",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "YENA"
+  },
+  {
+    "id": "UCRE-097LGtx_Zo7LrHvkycA",
+    "name": "JISOO",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "JISOO"
+  },
+  {
+    "id": "UCSAp0Yl9S0Zq5uDqE6im_XQ",
+    "name": "ZEROBASEONE",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "ZEROBASEONE"
+  },
+  {
+    "id": "UCvEEeBssb4XxIfWWIB8IjMw",
+    "name": "KISS OF LIFE",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "KISS OF LIFE"
+  },
+  {
+    "id": "UCwoSFXX8kraikB-WClx2pVQ",
+    "name": "AHOF",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "AHOF"
+  },
+  {
+    "id": "UCJnL-TBcsYrF2SLs7tmiC8Q",
+    "name": "tripleS official",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "tripleS"
+  },
+  {
+    "id": "UCYfwqXM_RH9o1b5eDlqDA9w",
+    "name": "AnymaVEVO",
+    "addedAt": "2026-11-24",
+    "source": "manual"
+  },
+  {
+    "id": "UCoe0BXYv01VCt0JRhX1zSug",
+    "name": "AND2BLE",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "AND2BLE"
+  },
+  {
+    "id": "UCg8ZzloDPTrOiGztK0C9txQ",
+    "name": "THEBLACKLABEL",
+    "addedAt": "2026-11-24",
+    "source": "manual"
+  },
+  {
+    "id": "UCiM8arBZ-GyuBFG3wy6fEgw",
+    "name": "HWASA",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "HWASA"
+  },
+  {
+    "id": "UCmnuDfK6fqL2hIWKjAmXJ-Q",
+    "name": "idntt",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "idntt"
+  },
+  {
+    "id": "UC_pwIXKXNm5KGhdEVzmY60A",
+    "name": "STONE MUSIC",
+    "addedAt": "2026-11-24",
+    "source": "manual"
+  },
+  {
+    "id": "UCgSDdHK0MNXOHv7oBC2dHXA",
+    "name": "AtHeart",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "AtHeart"
+  },
+  {
+    "id": "UCjyoasKZmVv1uHDIID04ivw",
+    "name": "TUNEXX",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "TUNEXX"
+  },
+  {
+    "id": "UC8whlOg70m2Yr3qSMjUhh0g",
+    "name": "Kep1er",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "Kep1er"
+  },
+  {
+    "id": "UCIcXK1CI8URMIqNO_1cehiQ",
+    "name": "AKMU",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "AKMU"
+  },
+  {
+    "id": "UCtKtCiaWRz-d3EZn2xd1mdA",
+    "name": "RESCENE",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "RESCENE"
+  },
+  {
+    "id": "UCe-XzQhLaq4zS_mPXzuc_2Q",
+    "name": "P1Harmony",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "P1Harmony"
+  },
+  {
+    "id": "UCGdZ_-svzY_hPLYVSKvMFvw",
+    "name": "OFFICIAL HIGHLIGHT",
+    "addedAt": "2026-11-24",
+    "source": "manual"
+  },
+  {
+    "id": "UCmW1Pq56lA-k-GWpX1z8WPg",
+    "name": "Apink (에이핑크)",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "Apink"
+  },
+  {
+    "id": "UCBEu7Q6arDR7GdfnwBL2AUw",
+    "name": "High Up Ent",
+    "addedAt": "2026-11-24",
+    "source": "manual"
+  },
+  {
+    "id": "UCfm26vsKWlC_w-SxzRbh1dg",
+    "name": "T.O.P",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "T.O.P"
+  },
+  {
+    "id": "UCW8rNB6E9ykg1atcYZzozpg",
+    "name": "KIIRAS",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "KIIRAS"
+  },
+  {
+    "id": "UC1buRciG8QIL9kRtHxI_tpw",
+    "name": "올아워즈 ALL(H)OURS",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "ALL(H)OURS"
+  },
+  {
+    "id": "UCgdj5bL5_Il2tqsQ7J4k6zw",
+    "name": "ONF OFFICIAL",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "ONF"
+  },
+  {
+    "id": "UCfbYNlxgLuKJXQZEhkMmaCQ",
+    "name": "izna (이즈나)",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "izna"
+  },
+  {
+    "id": "UCnQRdSArF-aqtycrmMKFQAg",
+    "name": "ifeye 이프아이",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "ifeye"
+  },
+  {
+    "id": "UC8Icvoedxf-HwIKm6o2Gzlg",
+    "name": "TNX",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "TNX"
+  },
+  {
+    "id": "UCFpb1KZtdQgjdbJJL4bvc7Q",
+    "name": "cosmosy_yt",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "cosmosy"
+  },
+  {
+    "id": "UCQZy15R31id90AlisaiOg2Q",
+    "name": "MADEIN",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "MADEIN"
+  },
+  {
+    "id": "UCaMhpehN8xNWkVJB3ZQY0qQ",
+    "name": "WOODZ",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "WOODZ"
+  },
+  {
+    "id": "UCRjREQVSiThsjfgEGXnEBpw",
+    "name": "Baby DONT Cry",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "Baby DONT Cry"
+  },
+  {
+    "id": "UCArLZtok93cO5R9RI4_Y5Jw",
+    "name": "ENHYPEN",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "ENHYPEN"
+  },
+  {
+    "id": "UCTItOHr70Tq_GAOACSGawPw",
+    "name": "iNKODE Official",
+    "addedAt": "2026-11-24",
+    "source": "manual"
+  },
+  {
+    "id": "UCXbRURMKT3H_w8dT-DWLIxA",
+    "name": "fromis_9",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "fromis_9"
+  },
+  {
+    "id": "UCPZIPuQPrfrUG9Xe_okEmQA",
+    "name": "PLAVE 플레이브",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "PLAVE"
+  },
+  {
+    "id": "UC_isDbPZQyyQqXX-POFFPIw",
+    "name": "WHIB",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "WHIB"
+  },
+  {
+    "id": "UCnHsvMKqb4r51xtABSE-h4Q",
+    "name": "NouerA",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "NouerA"
+  },
+  {
+    "id": "UC1sSS7JN2w7BwKxp9I4QFJg",
+    "name": "신원호 / SHINWONHO",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "SHINWONHO"
+  },
+  {
+    "id": "UCuGezLt65lqs_-aMpRmcu5g",
+    "name": "Keyveatz",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "Keyveatz"
+  },
+  {
+    "id": "UCLkAepWjdylmXSltofFvsYQ",
+    "name": "BANGTANTV",
+    "addedAt": "2026-11-24",
+    "source": "manual"
+  },
+  {
+    "id": "UCJEER74X9kBenMT_x9iK9Mw",
+    "name": "FIFTY FIFTY Official",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "FIFTY FIFTY"
+  },
+  {
+    "id": "UCTmx5ntaaBTrzThDw_exaMg",
+    "name": "X:IN",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "X:IN"
+  },
+  {
+    "id": "UC3Ea2-Ut3navgOlTfoq790g",
+    "name": "fantagio 판타지오",
+    "addedAt": "2026-11-24",
+    "source": "manual"
+  },
+  {
+    "id": "UC8GmeiLd5xjh2j5VmdePWQw",
+    "name": "BIBI",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "BIBI"
+  },
+  {
+    "id": "UC-CVBl3-ryi3GtZBXtc2_IA",
+    "name": "CNBLUE (씨엔블루)",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "CNBLUE"
+  },
+  {
+    "id": "UC9WLeJkEHw5_xgaesIdtxXA",
+    "name": "EVERMORE ENTERTAINMENT",
+    "addedAt": "2026-11-24",
+    "source": "manual"
+  },
+  {
+    "id": "UCod5V2dpnpJLklGvVOv5FcQ",
+    "name": "STAYC",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "STAYC"
+  },
+  {
+    "id": "UC4t_pYSKIhLWFgutdzIK66Q",
+    "name": "VERIVERY",
+    "addedAt": "2026-11-24",
+    "source": "manual"
+  },
+  {
+    "id": "UCPfy6bHYRud15zu2tmoSB8Q",
+    "name": "EVNNE",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "EVNNE"
+  },
+  {
+    "id": "UCgCA4Qj2HRVw5STi2F3DY3g",
+    "name": "H//PE Princess",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "H//PE Princess"
+  },
+  {
+    "id": "UC6H_3Rv-q8Z23jtMofgPGsw",
+    "name": "82MAJOR",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "82MAJOR"
+  },
+  {
+    "id": "UCH9IB4tD3U2TSjT3ZLICXTA",
+    "name": "앰퍼샌드원 (AMPERS&ONE)",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "AMPERS&ONE"
+  },
+  {
+    "id": "UC7nzgwXgrT4Po0OEqERZ3vQ",
+    "name": "OWIS",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "OWIS"
+  },
+  {
+    "id": "UCgD0APk2x9uBlLM0UsmhQjw",
+    "name": "QWER",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "QWER"
+  },
+  {
+    "id": "UCHWhn9xw7x8NPPnV6eWQDQA",
+    "name": "XLOV",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "XLOV"
+  },
+  {
+    "id": "UCrHCkXuYLQyx90BtAuunKQg",
+    "name": "FLARE U",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "FLARE U"
+  },
+  {
+    "id": "UCdgVLvuLUIpokhrbpd5GdUQ",
+    "name": "Queenz Eye",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "Queenz Eye"
+  },
+  {
+    "id": "UCStX7ZS-N4xLuLiX5b_Y4lw",
+    "name": "USPEER OFFICIAL",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "USPEER"
+  },
+  {
+    "id": "UCrDa_5OU-rhvXqWlPx5hgKQ",
+    "name": "한로로 HANRORO",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "HANRORO"
+  },
+  {
+    "id": "UCpc-AtrKJ_JlHb7QxrXE5Mg",
+    "name": "AmbiO",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "AmbiO"
+  },
+  {
+    "id": "UCJxiqlG8f1XCAQvgITzkK7A",
+    "name": "YOUNITE",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "YOUNITE"
+  },
+  {
+    "id": "UCKHl-9B-aa4AK5ZR9XLOg8A",
+    "name": "EPEX",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "EPEX"
+  },
+  {
+    "id": "UCiuaRNQQehFOtZUZvuQ30zA",
+    "name": "H//PE Princess",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "H//PE Princess"
+  },
+  {
+    "id": "UCvhVqA_5HnM7M5X6OcZlMbg",
+    "name": "CHUU Official",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "CHUU"
+  },
+  {
+    "id": "UC0novDS2VRX59Trmbf83I3g",
+    "name": "H1-KEY",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "H1-KEY"
+  },
+  {
+    "id": "UCfP7KJRAHghtG_Sn0aLi_DQ",
+    "name": "HEART OF WOMAN",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "HEART OF WOMAN"
+  },
+  {
+    "id": "UC8caKDwgP2a51iuGEb4b3yA",
+    "name": "AxMxP",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "AxMxP"
+  },
+  {
+    "id": "UCAkWpyeieFjzS7GzSJMArhQ",
+    "name": "BRANDNEW MUSIC",
+    "addedAt": "2026-11-24",
+    "source": "manual"
+  },
+  {
+    "id": "UCXVCWwthUVgO4ledMbcKANQ",
+    "name": "온유 ONEW",
+    "addedAt": "2026-11-24",
+    "source": "manual",
+    "artist": "ONEW"
   }
 ]
