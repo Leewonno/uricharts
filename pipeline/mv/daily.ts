@@ -115,7 +115,8 @@ export async function runDaily({
     log.warn(`지금은 ${kstHour(now)}시(KST)라 조회수 기록을 건너뜁니다 (0~${SNAPSHOT_CUTOFF_HOUR}시에만 기록)`)
   } else {
     try {
-      const ids = registry ? registry.map((r) => r.yt) : await idsFromLatestSnapshot(paths)
+      // registry가 깨진 날은 공개일을 몰라 거르지 않고 최근 기록의 영상 목록을 그대로 쓴다
+      const ids = registry ? recordableIds(registry, today) : await idsFromLatestSnapshot(paths)
       const taken = await collectSnapshot(client, ids, today, now)
       snapshot = asMidnight ? { ...taken, asMidnight: true } : taken
       await writeJson(snapshotPath, snapshot)
@@ -164,9 +165,10 @@ export async function runDaily({
   }
 
   // 3. 새로 찾은 곡도 오늘 기록에 넣는다
-  if (snapshot && discovery?.added.length) {
+  const extraIds = discovery ? recordableIds(discovery.added, today) : []
+  if (snapshot && extraIds.length) {
     try {
-      const extra = await collectSnapshot(client, discovery.added.map((a) => a.yt), today, now)
+      const extra = await collectSnapshot(client, extraIds, today, now)
       snapshot = {
         ...snapshot,
         views: { ...snapshot.views, ...extra.views },
@@ -182,8 +184,7 @@ export async function runDaily({
   await writeIssue()
   if (registry && digestOut && kstWeekday(now) === MONDAY) {
     try {
-      const artists = await readJson(paths.artists, artistsSchema, [])
-      const digest = weeklyDigest(today, addDays(today, -7), registry, artists)
+      const digest = weeklyDigest(today, addDays(today, -7), registry)
       if (digest) await writeFile(digestOut, digest)
     } catch (error) {
       log.warn(`주간 요약을 만들지 못했습니다: ${error instanceof Error ? error.message : String(error)}`)
@@ -197,6 +198,15 @@ export async function runDaily({
  * 다음 검색은 마지막 검색 이후 올라온 영상을 찾는다 (실행이 며칠 빠져도 놓치지 않게).
  * 오늘 이미 검색했으면 null — 재실행해도 하루 한 번만 검색한다.
  */
+/**
+ * 그날 기록할 영상. 기록 날짜 D는 (D−1)까지의 조회수라, (D−1)이 속한 해에 공개된 곡만 담는다.
+ * 그래서 1월 1일 0시 기록이 지난해 공개곡의 마지막 기록이 되고, 1월 2일 기록부터는 새해 공개곡만 남는다.
+ */
+export function recordableIds(entries: readonly Pick<RegistryEntry, 'yt' | 'released'>[], date: string): string[] {
+  const year = addDays(date, -1).slice(0, 4)
+  return entries.filter((e) => e.released.slice(0, 4) === year).map((e) => e.yt)
+}
+
 export function nextSearchSince(lastSearchAt: string | undefined, now: Date): Date | null {
   const oneDayAgo = new Date(now.getTime() - 86_400_000)
   if (!lastSearchAt) return oneDayAgo

@@ -1,6 +1,6 @@
 import { join } from 'node:path'
 import { exists, mvPaths, readJson, snapshotDates } from '../../../../pipeline/mv/store'
-import { artistsSchema, registrySchema, snapshotSchema, type Snapshot } from '../../../../pipeline/mv/schema'
+import { registrySchema, snapshotSchema, type Snapshot } from '../../../../pipeline/mv/schema'
 import { buildChartBook, type ChartBook } from '../lib/chart-book'
 import { buildChartData, chartSnapshotDates, type ChartSource } from '../lib/chart-data'
 import type { MvSnapshot } from '../types'
@@ -25,11 +25,7 @@ async function resolveDataDir(): Promise<string | null> {
 
 async function loadFromData(dataDir: string): Promise<MvSnapshot> {
   const paths = mvPaths(dataDir)
-  const [registry, artists, dates] = await Promise.all([
-    readJson(paths.registry, registrySchema),
-    readJson(paths.artists, artistsSchema, []),
-    snapshotDates(paths.snapshots),
-  ])
+  const [registry, dates] = await Promise.all([readJson(paths.registry, registrySchema), snapshotDates(paths.snapshots)])
   const latestDate = dates.at(-1)
   if (!latestDate) throw new Error(`${paths.snapshots}에 조회수 기록이 없습니다`)
 
@@ -39,7 +35,7 @@ async function loadFromData(dataDir: string): Promise<MvSnapshot> {
     await Promise.all(needed.map(async (d) => [d, await readJson(paths.snapshot(d), snapshotSchema)] as const)),
   )
 
-  return buildChartData({ registry, artists, snapshots, firstDate: dates[0], latestDate })
+  return buildChartData({ registry, snapshots, firstDate: dates[0], latestDate })
 }
 
 const load = async (): Promise<MvSnapshot> => {
@@ -63,17 +59,13 @@ export function getMvSnapshot(): Promise<MvSnapshot> {
 /** 모든 기록을 읽는다 (차트 페이지에서 지난 기간도 고를 수 있게) */
 async function loadSource(dataDir: string): Promise<ChartSource> {
   const paths = mvPaths(dataDir)
-  const [registry, artists, dates] = await Promise.all([
-    readJson(paths.registry, registrySchema),
-    readJson(paths.artists, artistsSchema, []),
-    snapshotDates(paths.snapshots),
-  ])
+  const [registry, dates] = await Promise.all([readJson(paths.registry, registrySchema), snapshotDates(paths.snapshots)])
   const latestDate = dates.at(-1)
   if (!latestDate) throw new Error(`${paths.snapshots}에 조회수 기록이 없습니다`)
   const snapshots = new Map<string, Snapshot>(
     await Promise.all(dates.map(async (d) => [d, await readJson(paths.snapshot(d), snapshotSchema)] as const)),
   )
-  return { registry, artists, snapshots, firstDate: dates[0], latestDate }
+  return { registry, snapshots, firstDate: dates[0], latestDate }
 }
 
 const loadBook = async (): Promise<ChartBook> => {

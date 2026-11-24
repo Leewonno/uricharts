@@ -24,7 +24,6 @@ function bookOf(snapshots: Snapshot[], registry: RegistryEntry[]) {
   const dates = snapshots.map((s) => s.date).toSorted()
   const src: ChartSource = {
     registry,
-    artists: [],
     snapshots: new Map(snapshots.map((s) => [s.date, s])),
     firstDate: dates[0],
     latestDate: dates.at(-1)!,
@@ -83,7 +82,7 @@ describe('buildAboutData', () => {
     const byPeriod = Object.fromEntries(data.periods.map((p) => [p.period, p]))
     expect(data.asOf).toBe('2026-11-23')
     expect(byPeriod.day).toMatchObject({ open: true, status: '지금 볼 수 있는 차트: 2026년 11월 23일 (월)' })
-    expect(byPeriod.week).toMatchObject({ open: true, status: '지금 볼 수 있는 차트: 2026년 47주차 (11월 16일 ~ 11월 22일)' })
+    expect(byPeriod.week).toMatchObject({ open: true, status: '지금 볼 수 있는 차트: 2026년 47주차 (11월 16일(월) ~ 11월 22일(일))' })
     // 11월 23일은 올해 327번째 날
     expect(byPeriod.day.span).toBeCloseTo((1 / 327) * 100)
     expect(byPeriod.week.span).toBeCloseTo((7 / 327) * 100)

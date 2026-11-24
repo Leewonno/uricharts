@@ -6,7 +6,6 @@ const mv = (overrides: Partial<Mv>): Mv => ({
   yt: 'id',
   title: 't',
   artist: 'a',
-  type: '솔로',
   released: '2026-01-01',
   total: 0,
   day: 0,

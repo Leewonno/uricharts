@@ -181,8 +181,16 @@ function flattenParens(text: string): string {
   return out
 }
 
+/** 세로줄 대신 쓴 소문자 l. "도경수(D.O.) l 'Darling' MV" */
+const TRAILING_L_SEPARATOR = /\s+l$/
+
 function cleanArtist(raw: string): Pick<ParsedTitle, 'artist' | 'aliases'> {
-  const base = flattenParens(raw).replace(LEADING_TAGS, '').replace(RELEASE_INFO, '').replace(EDGE_SEPARATORS, '').trim()
+  const base = flattenParens(raw)
+    .replace(LEADING_TAGS, '')
+    .replace(RELEASE_INFO, '')
+    .replace(EDGE_SEPARATORS, '')
+    .replace(TRAILING_L_SEPARATOR, '')
+    .trim()
 
   const hangulFirst = HANGUL_THEN_LATIN.exec(base)
   if (hangulFirst) return { artist: hangulFirst[2].trim(), aliases: [hangulFirst[1].trim()] }
