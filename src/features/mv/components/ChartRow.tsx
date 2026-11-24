@@ -6,11 +6,11 @@ import { ChangeBadge, RowGo, rowLabel } from './RowParts'
 
 /**
  * 차트 표의 칸.
- * - 일간·주간·월간: 순위 · 노래 · 조회수 · 변동 · 보러가기
+ * - 일간·주간·월간: 순위 · 노래 · 누적 · 조회수 · 변동 · 보러가기 (누적은 기간 끝 기록의 전체 조회수)
  * - 연간: 순위 · 노래 · 공개일 · 조회수 · 보러가기 (직전 해와 비교하지 않아 변동 칸이 없다)
  */
 export const CHART_COLUMNS = {
-  change: 'md:grid-cols-[64px_1fr_170px_72px_100px]',
+  change: 'md:grid-cols-[64px_1fr_150px_150px_72px_100px]',
   released: 'md:grid-cols-[64px_1fr_110px_170px_100px]',
 } as const
 
@@ -50,6 +50,9 @@ export function ChartRow({ mv, maxViews, extra }: Props) {
       </div>
       {extra === 'released' && (
         <div className="relative text-center text-sm font-normal tracking-[-0.04em] text-muted tabular-nums max-md:hidden">{formatDateDot(mv.released)}</div>
+      )}
+      {extra === 'change' && (
+        <div className="relative text-right text-base font-semibold tracking-[-0.04em] text-muted tabular-nums max-md:hidden">{formatNumber(mv.total)}</div>
       )}
       <div className="relative text-right text-xl font-semibold tracking-[-0.04em] tabular-nums max-sm:text-[15px]">{formatNumber(mv.views)}</div>
       {extra === 'change' && (

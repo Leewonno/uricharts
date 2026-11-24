@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { CHART_METADATA, ChartPage } from '@/features/mv/components/ChartPage'
 import { getMvChartBook } from '@/features/mv/data/snapshot'
+import { chartNav } from '@/features/mv/lib/chart-nav'
 import { PERIOD_ORDER, isPeriod } from '@/features/mv/lib/periods'
 
 // 정적 export: 기록이 있는 기간마다 한 페이지 (예: /mv/chart/week/2026-W47)
@@ -21,5 +22,5 @@ export default async function PeriodChartPage(props: PageProps<'/mv/chart/[perio
   const book = await getMvChartBook()
   const view = book.view(period, key)
   if (!view) notFound()
-  return <ChartPage view={view} slots={book.slots[period]} />
+  return <ChartPage view={view} nav={chartNav(book, view)} />
 }

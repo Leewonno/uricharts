@@ -3,29 +3,27 @@
 import Link from 'next/link'
 import { useEffect, useId, useRef, useState } from 'react'
 import { ChevronLeft, ChevronRight } from 'akar-icons'
+import type { NavSlot } from '../lib/chart-nav'
 import { PERIOD_NAMES } from '../lib/periods'
-import { chartPath } from '../lib/routes'
 import type { ChartSlot, Period } from '../types'
 
 interface Props {
   period: Period
-  /** 고를 수 있는 기간 (최근부터). 비어 있으면 아직 집계 중 */
-  slots: readonly ChartSlot[]
+  /** 지금 보는 해의 고를 수 있는 기간 (최근부터) */
+  slots: readonly NavSlot[]
   /** 지금 보는 기간 */
   current: ChartSlot
+  /** 그 해에 고를 수 있는 기간이 아직 없음 (집계 중). 기간 이름만 흐리게 둔다 */
+  disabled: boolean
 }
 
-/** 가장 최근 기간은 기간 기본 주소로, 나머지는 기간별 주소로 */
-const slotHref = (period: Period, slots: readonly ChartSlot[], key: string) =>
-  slots[0]?.key === key ? chartPath(period) : chartPath(period, key)
-
 /**
- * 차트 목록 위의 기간 고르기: ‹ 2026년 11월 23일 (월) ›
- * - ‹ › 로 바로 이전/다음 기간으로 넘어간다
- * - 글자를 누르면 일간은 달력, 주간·월간·연간은 목록이 열린다 (기록이 있는 기간만 고를 수 있다)
+ * 차트 목록 위의 기간 고르기: ‹ 11월 23일 (월) ›
+ * - ‹ › 로 그 해 안에서 이전/다음 기간으로 넘어간다. 다른 해로는 연도 드롭다운으로만 간다
+ * - 글자를 누르면 일간은 달력, 주간·월간은 목록이 열린다 (기록이 있는 기간만 고를 수 있다)
  * - 바깥을 누르거나 Esc를 누르면 닫힌다
  */
-export function PeriodPicker({ period, slots, current }: Props) {
+export function PeriodPicker({ period, slots, current, disabled }: Props) {
   const popupId = useId()
   const rootRef = useRef<HTMLDivElement>(null)
   const buttonRef = useRef<HTMLButtonElement>(null)
@@ -60,7 +58,7 @@ export function PeriodPicker({ period, slots, current }: Props) {
   return (
     <div className="flex flex-col items-center gap-1">
       <div className="flex items-center">
-        <StepLink href={older && slotHref(period, slots, older.key)} label={`이전 ${name}`} dir="prev" />
+        <StepLink href={older?.href} label={`이전 ${name}`} dir="prev" />
         <div
           ref={rootRef}
           className="relative"
@@ -71,7 +69,7 @@ export function PeriodPicker({ period, slots, current }: Props) {
             if (open && next && !rootRef.current?.contains(next)) setOpen(false)
           }}
         >
-          {slots.length > 0 ? (
+          {!disabled && slots.length > 0 ? (
             <button
               ref={buttonRef}
               type="button"
@@ -80,31 +78,31 @@ export function PeriodPicker({ period, slots, current }: Props) {
               aria-controls={popupId}
               aria-label={`${current.label}, 다른 ${name} 고르기`}
               onClick={() => setOpen((v) => !v)}
-              className={`${LABEL} cursor-pointer decoration-fill decoration-2 underline-offset-[5px] hover:underline aria-expanded:text-accent`}
+              className={`${LABEL} cursor-pointer text-strong decoration-fill decoration-2 underline-offset-[5px] hover:underline aria-expanded:text-accent`}
             >
               {current.label}
             </button>
           ) : (
-            <span className={LABEL}>{current.label}</span>
+            <span className={`${LABEL} ${disabled ? 'text-muted/40' : 'text-strong'}`}>{current.label}</span>
           )}
           {open && (
             <div id={popupId} role="dialog" aria-label={`${name} 고르기`} className="absolute top-full left-1/2 z-20 mt-2 -translate-x-1/2 animate-fade-in">
               {period === 'day' ? (
                 <DayCalendar slots={slots} current={current} onPick={() => setOpen(false)} />
               ) : (
-                <SlotList period={period} slots={slots} current={current} onPick={() => setOpen(false)} />
+                <SlotList slots={slots} current={current} onPick={() => setOpen(false)} />
               )}
             </div>
           )}
         </div>
-        <StepLink href={newer && slotHref(period, slots, newer.key)} label={`다음 ${name}`} dir="next" />
+        <StepLink href={newer?.href} label={`다음 ${name}`} dir="next" />
       </div>
       {current.range && <span className="text-[15px] font-semibold text-muted">{current.range}</span>}
     </div>
   )
 }
 
-const LABEL = 'block rounded-lg px-1 text-xl leading-tight font-semibold tracking-[-0.02em] text-strong max-md:text-lg'
+const LABEL = 'block rounded-lg px-1 text-xl leading-tight font-semibold tracking-[-0.02em] max-md:text-lg'
 const CARD = 'rounded-3xl bg-surface shadow-lg shadow-cyan-900/10'
 
 /** ‹ › 이전/다음 기간. 갈 곳이 없으면 흐리게만 둔다 */
@@ -126,7 +124,7 @@ function StepLink({ href, label, dir }: { href: string | undefined; label: strin
 }
 
 /** 주간·월간·연간: 기간 목록 (최근부터). 열면 지금 기간이 보이게 스크롤한다 */
-function SlotList({ period, slots, current, onPick }: { period: Period; slots: readonly ChartSlot[]; current: ChartSlot; onPick: () => void }) {
+function SlotList({ slots, current, onPick }: { slots: readonly NavSlot[]; current: ChartSlot; onPick: () => void }) {
   const listRef = useRef<HTMLUListElement>(null)
 
   useEffect(() => {
@@ -143,7 +141,7 @@ function SlotList({ period, slots, current, onPick }: { period: Period; slots: r
         return (
           <li key={slot.key}>
             <Link
-              href={slotHref(period, slots, slot.key)}
+              href={slot.href}
               scroll={false}
               onClick={onPick}
               aria-current={selected ? 'page' : undefined}
@@ -168,9 +166,9 @@ const shiftMonth = (month: string, n: number) => {
 }
 
 /** 일간: 달력. 기록이 있는 날만 누를 수 있고, 달은 기록이 있는 범위 안에서만 넘긴다 */
-function DayCalendar({ slots, current, onPick }: { slots: readonly ChartSlot[]; current: ChartSlot; onPick: () => void }) {
+function DayCalendar({ slots, current, onPick }: { slots: readonly NavSlot[]; current: ChartSlot; onPick: () => void }) {
   const [month, setMonth] = useState(() => monthOf(current.key))
-  const available = new Set(slots.map((s) => s.key))
+  const hrefOf = new Map(slots.map((s) => [s.key, s.href]))
   const newest = monthOf(slots[0].key)
   const oldest = monthOf(slots.at(-1)!.key)
 
@@ -217,7 +215,7 @@ function DayCalendar({ slots, current, onPick }: { slots: readonly ChartSlot[]; 
           const date = `${month}-${String(i + 1).padStart(2, '0')}`
           const sunday = (firstWeekday + i) % 7 === 0
           const cell = 'grid size-10 place-items-center rounded-full text-[15px] font-semibold tabular-nums'
-          if (!available.has(date)) {
+          if (!hrefOf.has(date)) {
             return (
               <span key={date} className={`${cell} text-muted/30`}>
                 {i + 1}
@@ -227,7 +225,7 @@ function DayCalendar({ slots, current, onPick }: { slots: readonly ChartSlot[]; 
           return (
             <Link
               key={date}
-              href={slotHref('day', slots, date)}
+              href={hrefOf.get(date)!}
               scroll={false}
               onClick={onPick}
               aria-current={date === current.key ? 'page' : undefined}
