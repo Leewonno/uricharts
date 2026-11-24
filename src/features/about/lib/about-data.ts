@@ -87,7 +87,7 @@ export function buildAboutData(book: ChartBook, mvs: readonly MvTotal[], { count
     const latest = book.slots[period][0]
     const pending = latest ? null : book.view(period)
     const status = latest
-      ? `지금 볼 수 있는 차트: ${latest.label}${latest.range ? ` (${latest.range})` : ''}`
+      ? `지금 볼 수 있는 차트: ${period === 'year' ? latest.label : `${latest.year}년 ${latest.label}`}${latest.range ? ` (${latest.range})` : ''}`
       : pending?.availableFrom
         ? `${formatDateKo(pending.availableFrom)}부터 볼 수 있어요`
         : '기록이 쌓이면 볼 수 있어요'

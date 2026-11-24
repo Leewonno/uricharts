@@ -33,6 +33,8 @@ export type RankChange =
   | { readonly kind: 'up' | 'down'; readonly amount: number }
   | { readonly kind: 'same' }
   | { readonly kind: 'reentry' }
+  /** 직전 기간에 없던 곡 중 이번 기간에 공개된 곡 */
+  | { readonly kind: 'new' }
   | { readonly kind: 'none' }
 
 export interface RankedMv extends Mv {
@@ -52,21 +54,33 @@ export interface ChartEntry {
   readonly rank: number
   /** 이 기간 조회수 */
   readonly views: number
+  /** 기간 끝 기록의 누적 조회수 */
+  readonly total: number
   readonly change: RankChange
 }
 
 /**
- * 고를 수 있는 기간 하나 (하루 · 월~일 한 주 · 한 달 · 한 해).
+ * 고를 수 있는 기간 하나 (하루 · 월~일 한 주 · 한 달 · 한 해). 기간은 해를 넘지 않는다.
  * key 형식: 일간 2026-11-23 / 주간 2026-W47 / 월간 2026-10 / 연간 2026
+ * 주차는 1월 1일이 든 주가 1주차이고, 해가 바뀌는 주는 해에서 잘린다.
  */
 export interface ChartSlot {
   readonly key: string
-  /** 예: "2026년 11월 23일 (월)", "2026년 47주차", "2026년 10월", "2026년" */
+  /** 이 기간이 속한 해 (= 순위에 드는 곡의 공개 연도) */
+  readonly year: string
+  /** 연도 없이. 예: "11월 23일 (월)", "47주차", "10월", 연간만 "2026년" */
   readonly label: string
-  /** 덧붙이는 기간 표기. 주간 "11월 16일 ~ 11월 22일", 집계 중인 달 "11월 23일까지". 없으면 null */
+  /** 덧붙이는 기간 표기. 주간 "11월 16일(월) ~ 11월 22일(일)", 7일이 아니면 " · 4일". 없으면 null */
   readonly range: string | null
-  /** 아직 끝나지 않은 달·해 (최신 기록까지만 셌다) */
+  /** 아직 끝나지 않은 해 (최신 기록까지만 셌다). 연간에만 있다 */
   readonly inProgress: boolean
+}
+
+/** 차트의 해 하나 */
+export interface ChartYear {
+  readonly year: string
+  /** 12월 31일까지 집계를 마친 해 */
+  readonly closed: boolean
 }
 
 /** 한 기간의 차트. 그 기간이 속한 해에 공개된 곡만 순위를 매긴다 */
@@ -75,6 +89,8 @@ export interface ChartView {
   readonly slot: ChartSlot
   /** 이 차트에 들어가는 곡의 공개 연도 */
   readonly releaseYear: string
+  /** 그 해 집계를 마쳤는가 (마감 안내) */
+  readonly closed: boolean
   /** false면 아직 집계 중 (고를 수 있는 기간이 하나도 없을 때 보여주는 자리) */
   readonly available: boolean
   /** 집계 중일 때 볼 수 있게 되는 날 YYYY-MM-DD (알 수 없으면 null) */

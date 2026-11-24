@@ -11,6 +11,8 @@ export function ChangeBadge({ change }: { change: RankChange }) {
       return <span className="text-muted">▼{change.amount}</span>
     case 'reentry':
       return <span className="text-pink-600">재진입</span>
+    case 'new':
+      return <span className="text-pink-600">NEW</span>
     default:
       return <span className="text-muted">–</span>
   }
@@ -27,6 +29,8 @@ function changeLabel(change: RankChange): string {
       return '변동 없음'
     case 'reentry':
       return '재진입'
+    case 'new':
+      return '새로 진입'
     default:
       return ''
   }
@@ -34,10 +38,15 @@ function changeLabel(change: RankChange): string {
 
 /**
  * 순위 행 링크의 접근성 이름. aria-label이 안쪽 글자를 대신하므로 조회수·변동까지 담는다.
- * 예: "2위 BTS 2.0, 조회수 1,182,000회, 1계단 상승. 뮤직비디오 보기"
+ * 예: "2위 BTS 2.0, 조회수 1,182,000회, 누적 219,088,671회, 1계단 상승. 뮤직비디오 보기"
  */
 export function rowLabel(mv: ChartEntry): string {
-  const parts = [`${mv.rank}위 ${mv.artist} ${mv.title}`, `조회수 ${formatNumber(mv.views)}회`, changeLabel(mv.change)].filter(Boolean)
+  const parts = [
+    `${mv.rank}위 ${mv.artist} ${mv.title}`,
+    `조회수 ${formatNumber(mv.views)}회`,
+    `누적 ${formatNumber(mv.total)}회`,
+    changeLabel(mv.change),
+  ].filter(Boolean)
   return `${parts.join(', ')}. 뮤직비디오 보기`
 }
 
