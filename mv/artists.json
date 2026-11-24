@@ -1,243 +1,198 @@
 [
   {
     "name": "ILLIT",
-    "type": "걸그룹",
     "aliases": []
   },
   {
     "name": "BTS",
-    "type": "보이그룹",
     "aliases": []
   },
   {
     "name": "LISA",
-    "type": "솔로",
     "aliases": []
   },
   {
     "name": "BABYMONSTER",
-    "type": "걸그룹",
     "aliases": []
   },
   {
     "name": "LE SSERAFIM x ILLIT x KATSEYE",
-    "type": "걸그룹",
     "aliases": []
   },
   {
     "name": "ROSÉ & Bruno Mars",
-    "type": "솔로",
     "aliases": []
   },
   {
     "name": "Stray Kids",
-    "type": "보이그룹",
     "aliases": []
   },
   {
     "name": "Hearts2Hearts",
-    "type": "걸그룹",
     "aliases": []
   },
   {
     "name": "BLACKPINK",
-    "type": "걸그룹",
     "aliases": []
   },
   {
     "name": "TREASURE",
-    "type": "보이그룹",
     "aliases": []
   },
   {
     "name": "JENNIE",
-    "type": "솔로",
     "aliases": []
   },
   {
     "name": "aespa",
-    "type": "걸그룹",
     "aliases": []
   },
   {
     "name": "TWICE",
-    "type": "걸그룹",
     "aliases": []
   },
   {
     "name": "PSY",
-    "type": "솔로",
     "aliases": []
   },
   {
     "name": "JISOO",
-    "type": "솔로",
     "aliases": []
   },
   {
     "name": "i-dle",
-    "type": "걸그룹",
     "aliases": []
   },
   {
     "name": "Jung Kook",
-    "type": "솔로",
     "aliases": []
   },
   {
     "name": "BIGBANG",
-    "type": "보이그룹",
     "aliases": []
   },
   {
     "name": "MOMOLAND",
-    "type": "걸그룹",
     "aliases": []
   },
   {
     "name": "ITZY",
-    "type": "걸그룹",
     "aliases": []
   },
   {
     "name": "IVE",
-    "type": "걸그룹",
     "aliases": []
   },
   {
     "name": "ROSÉ",
-    "type": "솔로",
     "aliases": []
   },
   {
     "name": "MAMAMOO",
-    "type": "걸그룹",
     "aliases": []
   },
   {
     "name": "Red Velvet",
-    "type": "걸그룹",
     "aliases": []
   },
   {
     "name": "SEVENTEEN",
-    "type": "보이그룹",
     "aliases": []
   },
   {
     "name": "NewJeans",
-    "type": "걸그룹",
     "aliases": []
   },
   {
     "name": "LE SSERAFIM",
-    "type": "걸그룹",
     "aliases": []
   },
   {
     "name": "IU",
-    "type": "솔로",
     "aliases": []
   },
   {
     "name": "NCT 127",
-    "type": "보이그룹",
     "aliases": []
   },
   {
     "name": "EXO",
-    "type": "보이그룹",
     "aliases": []
   },
   {
     "name": "NMIXX",
-    "type": "걸그룹",
     "aliases": []
   },
   {
     "name": "SANTOS BRAVOS x &TEAM",
-    "type": null,
     "aliases": []
   },
   {
     "name": "The Wildcard Club",
-    "type": null,
     "aliases": []
   },
   {
     "name": "TXT",
-    "type": "보이그룹",
     "aliases": [
       "투모로우바이투게더"
     ]
   },
   {
     "name": "NAYEON",
-    "type": "솔로",
     "aliases": []
   },
   {
     "name": "YAOCHEN",
-    "type": null,
     "aliases": [
       "야오천"
     ]
   },
   {
     "name": "Huie",
-    "type": null,
     "aliases": [
       "휴이"
     ]
   },
   {
     "name": "WE GO-6",
-    "type": null,
     "aliases": []
   },
   {
     "name": "Hong Sung Yun",
-    "type": null,
     "aliases": [
       "홍성윤"
     ]
   },
   {
     "name": "Kassy",
-    "type": null,
     "aliases": [
       "케이시"
     ]
   },
   {
     "name": "sunwoojunga",
-    "type": null,
     "aliases": [
       "선우정아"
     ]
   },
   {
     "name": "Huh Gak",
-    "type": null,
     "aliases": [
       "허각"
     ]
   },
   {
     "name": "NTAKE",
-    "type": null,
     "aliases": []
   },
   {
     "name": "KORB",
-    "type": null,
     "aliases": [
       "코브"
     ]
   },
   {
     "name": "YOON JI HWAN",
-    "type": null,
     "aliases": [
       "순순희",
       "지환"
@@ -245,12 +200,10 @@
   },
   {
     "name": "KCM",
-    "type": null,
     "aliases": []
   },
   {
     "name": "Tophyun , Hwang inhyeock",
-    "type": null,
     "aliases": [
       "탑현",
       "황인혁"
@@ -258,743 +211,628 @@
   },
   {
     "name": "KATSEYE",
-    "type": "걸그룹",
     "aliases": [
       "캣츠아이"
     ]
   },
   {
     "name": "ATEEZ",
-    "type": "보이그룹",
     "aliases": [
       "에이티즈"
     ]
   },
   {
     "name": "CORTIS",
-    "type": "보이그룹",
     "aliases": [
       "코르티스"
     ]
   },
   {
     "name": "ALPHA DRIVE ONE",
-    "type": "보이그룹",
     "aliases": []
   },
   {
     "name": "LNGSHOT",
-    "type": "보이그룹",
     "aliases": []
   },
   {
     "name": "YENA",
-    "type": "솔로",
     "aliases": [
       "최예나"
     ]
   },
   {
     "name": "ENHYPEN",
-    "type": "보이그룹",
     "aliases": [
       "엔하이픈"
     ]
   },
   {
     "name": "ZEROBASEONE",
-    "type": "보이그룹",
     "aliases": [
       "제로베이스원"
     ]
   },
   {
     "name": "KISS OF LIFE",
-    "type": "걸그룹",
     "aliases": [
       "키스오브라이프"
     ]
   },
   {
     "name": "NEXZ",
-    "type": "보이그룹",
     "aliases": [
       "넥스지"
     ]
   },
   {
     "name": "AHOF",
-    "type": "보이그룹",
     "aliases": [
       "아홉"
     ]
   },
   {
     "name": "tripleS",
-    "type": "걸그룹",
     "aliases": [
       "트리플에스"
     ]
   },
   {
     "name": "Anyma & LISA",
-    "type": null,
     "aliases": []
   },
   {
     "name": "AND2BLE",
-    "type": null,
     "aliases": [
       "앤더블"
     ]
   },
   {
     "name": "MEOVV",
-    "type": "걸그룹",
     "aliases": [
       "미야오"
     ]
   },
   {
     "name": "HWASA",
-    "type": "솔로",
     "aliases": [
       "화사"
     ]
   },
   {
     "name": "TUIDE",
-    "type": "걸그룹",
     "aliases": [
       "튜이드"
     ]
   },
   {
     "name": "idntt",
-    "type": "보이그룹",
     "aliases": [
       "아이덴티티"
     ]
   },
   {
     "name": "KiiiKiii",
-    "type": "걸그룹",
     "aliases": [
       "키키"
     ]
   },
   {
     "name": "BOYNEXTDOOR",
-    "type": "보이그룹",
     "aliases": [
       "보이넥스트도어"
     ]
   },
   {
     "name": "I.O.I",
-    "type": "걸그룹",
     "aliases": [
       "아이오아이"
     ]
   },
   {
     "name": "AtHeart",
-    "type": "걸그룹",
     "aliases": [
       "앳하트"
     ]
   },
   {
     "name": "TUNEXX",
-    "type": "보이그룹",
     "aliases": []
   },
   {
     "name": "&TEAM",
-    "type": "보이그룹",
     "aliases": []
   },
   {
     "name": "TWS",
-    "type": "보이그룹",
     "aliases": [
       "투어스"
     ]
   },
   {
     "name": "Kep1er",
-    "type": "걸그룹",
     "aliases": [
       "케플러"
     ]
   },
   {
     "name": "AKMU",
-    "type": null,
     "aliases": []
   },
   {
     "name": "NiziU",
-    "type": "걸그룹",
     "aliases": [
       "니쥬"
     ]
   },
   {
     "name": "RESCENE",
-    "type": "걸그룹",
     "aliases": [
       "리센느"
     ]
   },
   {
     "name": "P1Harmony",
-    "type": "보이그룹",
     "aliases": [
       "피원하모니"
     ]
   },
   {
     "name": "RIIZE",
-    "type": "보이그룹",
     "aliases": [
       "라이즈"
     ]
   },
   {
     "name": "ZICO & Lilas",
-    "type": null,
     "aliases": [
       "지코"
     ]
   },
   {
     "name": "YANG YOSEOP",
-    "type": "솔로",
     "aliases": [
       "양요섭"
     ]
   },
   {
     "name": "YUNA",
-    "type": "솔로",
     "aliases": []
   },
   {
     "name": "OURBIRTHDAY",
-    "type": null,
     "aliases": []
   },
   {
     "name": "NCT WISH",
-    "type": "보이그룹",
     "aliases": [
       "엔시티 위시"
     ]
   },
   {
     "name": "Apink",
-    "type": "걸그룹",
     "aliases": [
       "에이핑크"
     ]
   },
   {
     "name": "V8",
-    "type": null,
     "aliases": []
   },
   {
     "name": "UNCHILD",
-    "type": null,
     "aliases": [
       "언차일드"
     ]
   },
   {
     "name": "EVAN",
-    "type": null,
     "aliases": [
       "에반"
     ]
   },
   {
     "name": "T.O.P",
-    "type": "솔로",
     "aliases": []
   },
   {
     "name": "KIIRAS",
-    "type": null,
     "aliases": [
       "키라스"
     ]
   },
   {
     "name": "DK X SEUNGKWAN",
-    "type": "보이그룹",
     "aliases": [
       "도겸X승관"
     ]
   },
   {
     "name": "ALL(H)OURS",
-    "type": "보이그룹",
     "aliases": [
       "올아워즈"
     ]
   },
   {
     "name": "KickFlip",
-    "type": "보이그룹",
     "aliases": [
       "킥플립"
     ]
   },
   {
     "name": "ONF",
-    "type": "보이그룹",
     "aliases": [
       "온앤오프"
     ]
   },
   {
     "name": "izna",
-    "type": "걸그룹",
     "aliases": []
   },
   {
     "name": "ifeye",
-    "type": "걸그룹",
     "aliases": [
       "이프아이"
     ]
   },
   {
     "name": "TNX",
-    "type": "보이그룹",
     "aliases": []
   },
   {
     "name": "cosmosy",
-    "type": null,
     "aliases": []
   },
   {
     "name": "MADEIN",
-    "type": "걸그룹",
     "aliases": []
   },
   {
     "name": "WOODZ",
-    "type": "솔로",
     "aliases": []
   },
   {
     "name": "Baby DONT Cry",
-    "type": "걸그룹",
     "aliases": []
   },
   {
     "name": "VAYONN",
-    "type": null,
     "aliases": [
       "베이온"
     ]
   },
   {
     "name": "ALLDAY PROJECT",
-    "type": null,
     "aliases": []
   },
   {
     "name": "fromis_9",
-    "type": "걸그룹",
     "aliases": [
       "프로미스나인"
     ]
   },
   {
     "name": "PLAVE",
-    "type": "보이그룹",
     "aliases": []
   },
   {
     "name": "TAEYANG",
-    "type": "솔로",
     "aliases": []
   },
   {
     "name": "dodree",
-    "type": null,
     "aliases": [
       "도드리"
     ]
   },
   {
     "name": "xikers",
-    "type": "보이그룹",
     "aliases": [
       "싸이커스"
     ]
   },
   {
     "name": "WHIB",
-    "type": "보이그룹",
     "aliases": [
       "휘브"
     ]
   },
   {
     "name": "NouerA",
-    "type": null,
     "aliases": [
       "누에라"
     ]
   },
   {
     "name": "SHINWONHO",
-    "type": null,
     "aliases": [
       "신원호"
     ]
   },
   {
     "name": "Keyveatz",
-    "type": null,
     "aliases": [
       "키비츠"
     ]
   },
   {
     "name": "Jay Park & LNGSHOT",
-    "type": null,
     "aliases": []
   },
   {
     "name": "FIFTY FIFTY",
-    "type": "걸그룹",
     "aliases": [
       "피프티피프티"
     ]
   },
   {
     "name": "X:IN",
-    "type": "걸그룹",
     "aliases": [
       "엑신"
     ]
   },
   {
     "name": "Picheolin",
-    "type": null,
     "aliases": [
       "피철인"
     ]
   },
   {
     "name": "YOON SAN-HA",
-    "type": "솔로",
     "aliases": [
       "윤산하"
     ]
   },
   {
     "name": "BIBI",
-    "type": "솔로",
     "aliases": [
       "비비"
     ]
   },
   {
     "name": "IDID",
-    "type": "보이그룹",
     "aliases": [
       "아이딧"
     ]
   },
   {
     "name": "WONPIL",
-    "type": "솔로",
     "aliases": [
       "원필"
     ]
   },
   {
     "name": "CNBLUE",
-    "type": "보이그룹",
     "aliases": [
       "씨엔블루"
     ]
   },
   {
     "name": "CATCH THE YOUNG",
-    "type": null,
     "aliases": []
   },
   {
     "name": "Xdinary Heroes",
-    "type": "보이그룹",
     "aliases": []
   },
   {
     "name": "STAYC",
-    "type": "걸그룹",
     "aliases": [
       "스테이씨"
     ]
   },
   {
     "name": "MISAMO",
-    "type": "걸그룹",
     "aliases": []
   },
   {
     "name": "KANGMIN",
-    "type": "솔로",
     "aliases": []
   },
   {
     "name": "EVNNE",
-    "type": "보이그룹",
     "aliases": [
       "이븐"
     ]
   },
   {
     "name": "H//PE Princess",
-    "type": "걸그룹",
     "aliases": [
       "하입프린세스"
     ]
   },
   {
     "name": "82MAJOR",
-    "type": "보이그룹",
     "aliases": [
       "82메이저"
     ]
   },
   {
     "name": "Moon Byul",
-    "type": "솔로",
     "aliases": [
       "문별"
     ]
   },
   {
     "name": "KEYVITUP",
-    "type": null,
     "aliases": [
       "키빗업"
     ]
   },
   {
     "name": "AMPERS&ONE",
-    "type": "보이그룹",
     "aliases": [
       "앰퍼샌드원"
     ]
   },
   {
     "name": "OWIS",
-    "type": null,
     "aliases": [
       "오위스"
     ]
   },
   {
     "name": "QWER",
-    "type": "걸그룹",
     "aliases": []
   },
   {
     "name": "XLOV",
-    "type": null,
     "aliases": [
       "엑스러브"
     ]
   },
   {
     "name": "FLARE U",
-    "type": null,
     "aliases": [
       "플레어 유"
     ]
   },
   {
     "name": "Queenz Eye",
-    "type": "걸그룹",
     "aliases": [
       "퀸즈아이"
     ]
   },
   {
     "name": "TAEYONG",
-    "type": "솔로",
     "aliases": [
       "태용"
     ]
   },
   {
     "name": "USPEER",
-    "type": null,
     "aliases": [
       "유스피어"
     ]
   },
   {
     "name": "HANRORO",
-    "type": "솔로",
     "aliases": [
       "한로로"
     ]
   },
   {
     "name": "AmbiO",
-    "type": null,
     "aliases": [
       "엠비오"
     ]
   },
   {
     "name": "YOUNITE",
-    "type": "보이그룹",
     "aliases": []
   },
   {
     "name": "EPEX",
-    "type": "보이그룹",
     "aliases": [
       "이펙스"
     ]
   },
   {
     "name": "CHUU",
-    "type": "솔로",
     "aliases": [
       "츄"
     ]
   },
   {
     "name": "H1-KEY",
-    "type": "걸그룹",
     "aliases": [
       "하이키"
     ]
   },
   {
     "name": "HEART OF WOMAN",
-    "type": null,
     "aliases": [
       "하트오브우먼"
     ]
   },
   {
     "name": "AxMxP",
-    "type": null,
     "aliases": [
       "에이엠피"
     ]
   },
   {
     "name": "AB6IX",
-    "type": "보이그룹",
     "aliases": [
       "에이비식스"
     ]
   },
   {
     "name": "WayV",
-    "type": "보이그룹",
     "aliases": [
       "威神V"
     ]
   },
   {
     "name": "ONEW",
-    "type": "솔로",
     "aliases": [
       "온유"
     ]
   },
   {
     "name": "JEONGHAN X JOSHUA",
-    "type": "보이그룹",
     "aliases": [
       "정한X조슈아"
     ]
   },
   {
     "name": "HWANG MIN HYUN",
-    "type": "솔로",
     "aliases": [
       "황민현"
     ]
   },
   {
     "name": "JUN",
-    "type": "솔로",
     "aliases": []
   },
   {
     "name": "DINO",
-    "type": "솔로",
     "aliases": []
   },
   {
     "name": "YEONJUN",
-    "type": "솔로",
     "aliases": [
       "연준"
     ]
   },
   {
     "name": "WONWOO",
-    "type": "솔로",
     "aliases": [
       "원우"
     ]
   },
   {
     "name": "THE 8",
-    "type": "솔로",
     "aliases": []
   },
   {
     "name": "HOSHI",
-    "type": "솔로",
     "aliases": [
       "호시"
     ]
   },
   {
     "name": "aoen",
-    "type": null,
     "aliases": []
   },
   {
     "name": "SANTOS BRAVOS",
-    "type": "보이그룹",
     "aliases": []
   },
   {
     "name": "CRAVITY",
-    "type": "보이그룹",
     "aliases": [
       "크래비티"
     ]
   },
   {
     "name": "MONSTA X",
-    "type": "보이그룹",
     "aliases": [
       "몬스타엑스"
     ]
   },
   {
     "name": "DAYOUNG X JAY PARK",
-    "type": null,
     "aliases": [
       "다영",
       "박재범"
@@ -1002,700 +840,596 @@
   },
   {
     "name": "KIHYUN",
-    "type": "솔로",
     "aliases": [
       "기현"
     ]
   },
   {
     "name": "SHOWNU X HYUNGWON 셔누X형원",
-    "type": "보이그룹",
     "aliases": []
   },
   {
     "name": "WJSN",
-    "type": "걸그룹",
     "aliases": [
       "우주소녀"
     ]
   },
   {
     "name": "JOOHONEY",
-    "type": "솔로",
     "aliases": [
       "주헌"
     ]
   },
   {
     "name": "GIRLSET",
-    "type": "걸그룹",
     "aliases": []
   },
   {
     "name": "CHAERYEONG",
-    "type": "솔로",
     "aliases": []
   },
   {
     "name": "JUN. K",
-    "type": "솔로",
     "aliases": [
       "준케이"
     ]
   },
   {
     "name": "Young K",
-    "type": "솔로",
     "aliases": []
   },
   {
     "name": "J.Y. Park",
-    "type": "솔로",
     "aliases": [
       "박진영"
     ]
   },
   {
     "name": "Solar",
-    "type": "솔로",
     "aliases": [
       "솔라"
     ]
   },
   {
     "name": "Solar x Accusefive",
-    "type": null,
     "aliases": []
   },
   {
     "name": "Chun Beom Seok",
-    "type": null,
     "aliases": [
       "천범석"
     ]
   },
   {
     "name": "TRAVELLER",
-    "type": null,
     "aliases": [
       "트래블러"
     ]
   },
   {
     "name": "Kevin Park, YABBI, Kajin",
-    "type": null,
     "aliases": [
       "야삐"
     ]
   },
   {
     "name": "Im Jiseong, Jeong Jiwoong",
-    "type": null,
     "aliases": [
       "임지성, 정지웅"
     ]
   },
   {
     "name": "JANG HAN BYUL",
-    "type": null,
     "aliases": [
       "장한별"
     ]
   },
   {
     "name": "JUKJAE",
-    "type": null,
     "aliases": [
       "적재"
     ]
   },
   {
     "name": "Jin Min Ho",
-    "type": null,
     "aliases": [
       "진민호"
     ]
   },
   {
     "name": "WON",
-    "type": null,
     "aliases": []
   },
   {
     "name": "iHwak",
-    "type": null,
     "aliases": [
       "조성확"
     ]
   },
   {
     "name": "HITGS",
-    "type": null,
     "aliases": [
       "힛지스"
     ]
   },
   {
     "name": "Dragon Pony",
-    "type": null,
     "aliases": [
       "드래곤포니"
     ]
   },
   {
     "name": "HAHA",
-    "type": "솔로",
     "aliases": [
       "하하"
     ]
   },
   {
     "name": "Jang Min Ho",
-    "type": null,
     "aliases": [
       "장민호"
     ]
   },
   {
     "name": "Yoon Seobin",
-    "type": null,
     "aliases": [
       "윤서빈"
     ]
   },
   {
     "name": "Hong seung min",
-    "type": null,
     "aliases": [
       "홍승민"
     ]
   },
   {
     "name": "E Hyuk, Lee Jiho",
-    "type": null,
     "aliases": [
       "이혁, 이지호"
     ]
   },
   {
     "name": "Park Jongmin",
-    "type": null,
     "aliases": [
       "박종민"
     ]
   },
   {
     "name": "You Chaehoon",
-    "type": null,
     "aliases": [
       "유채훈"
     ]
   },
   {
     "name": "O.WHEN",
-    "type": null,
     "aliases": [
       "오왠"
     ]
   },
   {
     "name": "김용빈, 손빈아, 천록담, 춘길, 최재명, 남승민, 추혁진",
-    "type": null,
     "aliases": []
   },
   {
     "name": "Film Sound",
-    "type": null,
     "aliases": [
       "필름사운드"
     ]
   },
   {
     "name": "Son Bin Ah",
-    "type": null,
     "aliases": [
       "손빈아"
     ]
   },
   {
     "name": "Kim ye jin",
-    "type": null,
     "aliases": [
       "김예진"
     ]
   },
   {
     "name": "Zimmer90",
-    "type": null,
     "aliases": []
   },
   {
     "name": "Kim Paul Youngwon, Kim YeJoon, Hwang HyunSung",
-    "type": null,
     "aliases": [
       "김영원, 김예준, 황현성"
     ]
   },
   {
     "name": "Banhana",
-    "type": null,
     "aliases": [
       "반하나"
     ]
   },
   {
     "name": "BOL4",
-    "type": null,
     "aliases": [
       "볼빨간사춘기"
     ]
   },
   {
     "name": "Lee Eun Sang",
-    "type": null,
     "aliases": [
       "이은상"
     ]
   },
   {
     "name": "Lim Young Woong",
-    "type": "솔로",
     "aliases": [
       "임영웅"
     ]
   },
   {
     "name": "21univ.",
-    "type": null,
     "aliases": [
       "21학번"
     ]
   },
   {
     "name": "Kang Beom Seok",
-    "type": null,
     "aliases": [
       "강범석"
     ]
   },
   {
     "name": "YS Block",
-    "type": null,
     "aliases": []
   },
   {
     "name": "lm Chang Jung",
-    "type": null,
     "aliases": [
       "임창정"
     ]
   },
   {
     "name": "Jin Hae Sung",
-    "type": null,
     "aliases": [
       "진해성"
     ]
   },
   {
     "name": "TEEN TOP",
-    "type": "보이그룹",
     "aliases": [
       "틴탑"
     ]
   },
   {
     "name": "HYOJUNG (OH MY GIRL)",
-    "type": "솔로",
     "aliases": []
   },
   {
     "name": "KIM YECHAN",
-    "type": null,
     "aliases": [
       "김예찬"
     ]
   },
   {
     "name": "Nam Woo Hyun",
-    "type": "솔로",
     "aliases": [
       "남우현"
     ]
   },
   {
     "name": "Ahfoné",
-    "type": null,
     "aliases": [
       "아포네"
     ]
   },
   {
     "name": "PARK WOO JIN",
-    "type": "솔로",
     "aliases": [
       "박우진"
     ]
   },
   {
     "name": "Jeon Yu Jin",
-    "type": null,
     "aliases": [
       "전유진"
     ]
   },
   {
     "name": "Rothy",
-    "type": null,
     "aliases": [
       "로시"
     ]
   },
   {
     "name": "유일",
-    "type": null,
     "aliases": []
   },
   {
     "name": "Yaru",
-    "type": null,
     "aliases": [
       "야루"
     ]
   },
   {
     "name": "Standing Egg",
-    "type": null,
     "aliases": [
       "스탠딩 에그"
     ]
   },
   {
     "name": "Lee Ohwook",
-    "type": null,
     "aliases": [
       "이오욱"
     ]
   },
   {
     "name": "YOUNG POSSE",
-    "type": null,
     "aliases": [
       "영파씨"
     ]
   },
   {
     "name": "Jeon tae young",
-    "type": null,
     "aliases": [
       "전태영"
     ]
   },
   {
     "name": "Woody, BORA",
-    "type": null,
     "aliases": [
       "우디, 보라"
     ]
   },
   {
     "name": "TESSAR",
-    "type": null,
     "aliases": [
       "테사르"
     ]
   },
   {
     "name": "WOODZ, Lee Seung Chul",
-    "type": null,
     "aliases": [
       "이승철"
     ]
   },
   {
     "name": "WEJISU",
-    "type": null,
     "aliases": [
       "위지수"
     ]
   },
   {
     "name": "Choi Eunbin",
-    "type": null,
     "aliases": [
       "최은빈"
     ]
   },
   {
     "name": "Joo Hyung Jin",
-    "type": null,
     "aliases": [
       "주형진"
     ]
   },
   {
     "name": "ONEUS",
-    "type": "보이그룹",
     "aliases": [
       "원어스"
     ]
   },
   {
     "name": "SOOSOJIN",
-    "type": null,
     "aliases": [
       "수소진"
     ]
   },
   {
     "name": "Kim Yong Bin",
-    "type": null,
     "aliases": [
       "김용빈"
     ]
   },
   {
     "name": "Brown Tigger Band",
-    "type": null,
     "aliases": [
       "브라운티거 밴드"
     ]
   },
   {
     "name": "RŌSIEN",
-    "type": null,
     "aliases": [
       "로진"
     ]
   },
   {
     "name": "Juho",
-    "type": null,
     "aliases": [
       "주호"
     ]
   },
   {
     "name": "Gavy NJ",
-    "type": null,
     "aliases": [
       "가비엔제이"
     ]
   },
   {
     "name": "Mighty Mouth",
-    "type": null,
     "aliases": [
       "마이티 마우스"
     ]
   },
   {
     "name": "Yun Hu",
-    "type": null,
     "aliases": [
       "윤후"
     ]
   },
   {
     "name": "YOUNGTAK",
-    "type": null,
     "aliases": [
       "영탁"
     ]
   },
   {
     "name": "MOON YEON JOO",
-    "type": null,
     "aliases": [
       "문연주"
     ]
   },
   {
     "name": "JUEUN",
-    "type": null,
     "aliases": [
       "주은"
     ]
   },
   {
     "name": "hrtz.wav",
-    "type": null,
     "aliases": [
       "하츠웨이브"
     ]
   },
   {
     "name": "DUETTO",
-    "type": null,
     "aliases": [
       "듀에토"
     ]
   },
   {
     "name": "KyoungSeo",
-    "type": null,
     "aliases": [
       "경서"
     ]
   },
   {
     "name": "Nam Gyu ri",
-    "type": null,
     "aliases": [
       "남규리"
     ]
   },
   {
     "name": "Jung Dong Ha",
-    "type": null,
     "aliases": [
       "정동하"
     ]
   },
   {
     "name": "GyeongseoYeji",
-    "type": null,
     "aliases": [
       "경서예지"
     ]
   },
   {
     "name": "BUMJIN",
-    "type": null,
     "aliases": [
       "범진"
     ]
   },
   {
     "name": "PARK EUN BIN",
-    "type": null,
     "aliases": [
       "박은빈"
     ]
   },
   {
     "name": "KWON EUNBI",
-    "type": "솔로",
     "aliases": [
       "권은비"
     ]
   },
   {
     "name": "ICHILLIN' J",
-    "type": null,
     "aliases": []
   },
   {
     "name": "WAVE CALL",
-    "type": null,
     "aliases": [
       "웨이브 콜"
     ]
   },
   {
     "name": "Kim Yeon Ji",
-    "type": null,
     "aliases": [
       "김연지"
     ]
   },
   {
     "name": "Maijin",
-    "type": null,
     "aliases": [
       "마이진"
     ]
   },
   {
     "name": "CHEON JI WON",
-    "type": null,
     "aliases": [
       "천지원"
     ]
   },
   {
     "name": "So Soo Bin",
-    "type": null,
     "aliases": [
       "소수빈"
     ]
   },
   {
     "name": "Moon chohee",
-    "type": null,
     "aliases": [
       "문초희"
     ]
   },
   {
     "name": "Choi Dae Sung",
-    "type": null,
     "aliases": [
       "최대성"
     ]
   },
   {
     "name": "song min kyung",
-    "type": null,
     "aliases": [
       "송민경"
     ]
   },
   {
     "name": "JAEHA",
-    "type": null,
     "aliases": [
       "재하"
     ]
   },
   {
     "name": "Ji Young Il",
-    "type": null,
     "aliases": [
       "지영일"
     ]
   },
   {
     "name": "Gong Hoon",
-    "type": null,
     "aliases": [
       "공훈"
     ]
   },
   {
     "name": "kimjungyeon",
-    "type": null,
     "aliases": [
       "김중연"
     ]
   },
   {
     "name": "Park Min Su",
-    "type": null,
     "aliases": [
       "박민수"
     ]
   },
   {
     "name": "SF9",
-    "type": "보이그룹",
     "aliases": []
   },
   {
     "name": "Youth is Now, Sam Core",
-    "type": null,
     "aliases": [
       "청바지"
     ]
   },
   {
     "name": "HANBIN (TEMPEST)",
-    "type": null,
     "aliases": []
   },
   {
     "name": "Kim Minseok",
-    "type": null,
     "aliases": [
       "김민석",
       "멜로망스"
@@ -1703,260 +1437,222 @@
   },
   {
     "name": "MIMI (OH MY GIRL)",
-    "type": "솔로",
     "aliases": []
   },
   {
     "name": "Tiger JK, yoonmirae",
-    "type": null,
     "aliases": [
       "윤미래"
     ]
   },
   {
     "name": "ONEWE",
-    "type": "보이그룹",
     "aliases": [
       "원위"
     ]
   },
   {
     "name": "HYNN",
-    "type": "솔로",
     "aliases": [
       "박혜원"
     ]
   },
   {
     "name": "Punch",
-    "type": null,
     "aliases": [
       "펀치"
     ]
   },
   {
     "name": "Na Sangdo",
-    "type": null,
     "aliases": [
       "나상도"
     ]
   },
   {
     "name": "Splayit",
-    "type": null,
     "aliases": [
       "에스플릿"
     ]
   },
   {
     "name": "siso, ALICE U",
-    "type": null,
     "aliases": [
       "시소, 앨리스유"
     ]
   },
   {
     "name": "M.C the MAX",
-    "type": null,
     "aliases": [
       "엠씨더맥스"
     ]
   },
   {
     "name": "JEONG EUNJI",
-    "type": "솔로",
     "aliases": [
       "정은지"
     ]
   },
   {
     "name": "URBAN ZAKAPA",
-    "type": null,
     "aliases": [
       "어반자카파"
     ]
   },
   {
     "name": "Enoch",
-    "type": null,
     "aliases": [
       "에녹"
     ]
   },
   {
     "name": "DANIEL CHOI, Kaho Takada",
-    "type": null,
     "aliases": [
       "최다니엘"
     ]
   },
   {
     "name": "YOON JAE CHAN",
-    "type": null,
     "aliases": [
       "윤재찬"
     ]
   },
   {
     "name": "Kyma",
-    "type": null,
     "aliases": [
       "키마"
     ]
   },
   {
     "name": "Park Da Hye",
-    "type": null,
     "aliases": [
       "박다혜"
     ]
   },
   {
     "name": "Choi Jin hee",
-    "type": null,
     "aliases": [
       "최진희"
     ]
   },
   {
     "name": "Ran",
-    "type": null,
     "aliases": [
       "란"
     ]
   },
   {
     "name": "V-Hawk",
-    "type": null,
     "aliases": [
       "브이호크"
     ]
   },
   {
     "name": "LEE CHAE YEON",
-    "type": "솔로",
     "aliases": [
       "이채연"
     ]
   },
   {
     "name": "mim",
-    "type": null,
     "aliases": [
       "밈"
     ]
   },
   {
     "name": "Lee Boram",
-    "type": null,
     "aliases": [
       "이보람"
     ]
   },
   {
     "name": "An Sol Hee",
-    "type": null,
     "aliases": [
       "안솔희"
     ]
   },
   {
     "name": "Soming",
-    "type": null,
     "aliases": [
       "소밍"
     ]
   },
   {
     "name": "Sangeun Lee",
-    "type": null,
     "aliases": [
       "이상은"
     ]
   },
   {
     "name": "Ramit",
-    "type": null,
     "aliases": [
       "라밋"
     ]
   },
   {
     "name": "Kim Min Wool",
-    "type": null,
     "aliases": [
       "김민울"
     ]
   },
   {
     "name": "Lydia",
-    "type": null,
     "aliases": [
       "리디아"
     ]
   },
   {
     "name": "The Bridge",
-    "type": null,
     "aliases": [
       "더 브릿지"
     ]
   },
   {
     "name": "LINEN",
-    "type": null,
     "aliases": [
       "린넨"
     ]
   },
   {
     "name": "Song Ga In",
-    "type": null,
     "aliases": [
       "송가인"
     ]
   },
   {
     "name": "BBGIRLS",
-    "type": "걸그룹",
     "aliases": [
       "브브걸"
     ]
   },
   {
     "name": "KARD",
-    "type": null,
     "aliases": [
       "카드"
     ]
   },
   {
     "name": "JEONG SEWOON",
-    "type": "솔로",
     "aliases": [
       "정세운"
     ]
   },
   {
     "name": "Peak & Pitch",
-    "type": null,
     "aliases": []
   },
   {
     "name": "ARTMS",
-    "type": "걸그룹",
     "aliases": []
   },
   {
     "name": "KIHOON (CATCH THE YOUNG)",
-    "type": null,
     "aliases": [
       "기훈"
     ]
   },
   {
     "name": "KOTA(Ahn Jin A)",
-    "type": null,
     "aliases": [
       "코타",
       "안진아"
@@ -1964,190 +1660,162 @@
   },
   {
     "name": "Chae Yoon",
-    "type": null,
     "aliases": [
       "채윤"
     ]
   },
   {
     "name": "CHOONGJU JI-C",
-    "type": null,
     "aliases": [
       "충주지씨"
     ]
   },
   {
     "name": "Lee Byeong Chan, Lee Ji Min",
-    "type": null,
     "aliases": [
       "이병찬, 이지민"
     ]
   },
   {
     "name": "idntt アイデンティティ",
-    "type": null,
     "aliases": []
   },
   {
     "name": "HUTA",
-    "type": null,
     "aliases": [
       "이민혁"
     ]
   },
   {
     "name": "SUNMI",
-    "type": "솔로",
     "aliases": [
       "선미"
     ]
   },
   {
     "name": "Choi Jae Myeong",
-    "type": null,
     "aliases": [
       "최재명"
     ]
   },
   {
     "name": "GOO CHANG MO",
-    "type": "솔로",
     "aliases": [
       "구창모"
     ]
   },
   {
     "name": "Nerd Connection",
-    "type": null,
     "aliases": [
       "너드커넥션"
     ]
   },
   {
     "name": "Hwang In Wook",
-    "type": null,
     "aliases": [
       "황인욱"
     ]
   },
   {
     "name": "Chu Hyuk Jin",
-    "type": null,
     "aliases": [
       "추혁진"
     ]
   },
   {
     "name": "Pagaehun",
-    "type": null,
     "aliases": [
       "박태훈"
     ]
   },
   {
     "name": "10CM",
-    "type": "솔로",
     "aliases": []
   },
   {
     "name": "vangdale",
-    "type": null,
     "aliases": []
   },
   {
     "name": "SUNG DAM",
-    "type": null,
     "aliases": [
       "성담"
     ]
   },
   {
     "name": "Lily",
-    "type": null,
     "aliases": [
       "릴리"
     ]
   },
   {
     "name": "Roof Top",
-    "type": null,
     "aliases": [
       "루프탑"
     ]
   },
   {
     "name": "pxarx kid",
-    "type": null,
     "aliases": [
       "펄키드"
     ]
   },
   {
     "name": "SURAN",
-    "type": "솔로",
     "aliases": [
       "수란"
     ]
   },
   {
     "name": "JISELLE",
-    "type": null,
     "aliases": [
       "지셀"
     ]
   },
   {
     "name": "MC MONG",
-    "type": null,
     "aliases": [
       "MC몽"
     ]
   },
   {
     "name": "CHANCELLOR",
-    "type": null,
     "aliases": [
       "챈슬러"
     ]
   },
   {
     "name": "Coogie",
-    "type": null,
     "aliases": [
       "쿠기"
     ]
   },
   {
     "name": "Hwanhee",
-    "type": null,
     "aliases": [
       "환희"
     ]
   },
   {
     "name": "Moon Sujin",
-    "type": null,
     "aliases": [
       "문수진"
     ]
   },
   {
     "name": "Shin Yong Jae (2F)",
-    "type": null,
     "aliases": [
       "신용재"
     ]
   },
   {
     "name": "Lim Chae Eon",
-    "type": null,
     "aliases": [
       "임채언"
     ]
   },
   {
     "name": "Jeon Woo Sung",
-    "type": null,
     "aliases": [
       "전우성",
       "노을"
@@ -2155,486 +1823,414 @@
   },
   {
     "name": "BAEK A YEON",
-    "type": "솔로",
     "aliases": [
       "백아연"
     ]
   },
   {
     "name": "YUKGAKSU",
-    "type": null,
     "aliases": [
       "육각수"
     ]
   },
   {
     "name": "Lee KyuRa",
-    "type": null,
     "aliases": [
       "이규라"
     ]
   },
   {
     "name": "Sung Si Kyung, Raisa",
-    "type": null,
     "aliases": [
       "성시경"
     ]
   },
   {
     "name": "HWANG CHI YEUL",
-    "type": "솔로",
     "aliases": [
       "황치열"
     ]
   },
   {
     "name": "Kim Chang Woon",
-    "type": null,
     "aliases": [
       "김창운"
     ]
   },
   {
     "name": "KISU",
-    "type": "솔로",
     "aliases": []
   },
   {
     "name": "YEONJEONG",
-    "type": null,
     "aliases": [
       "연정"
     ]
   },
   {
     "name": "SEEYA",
-    "type": null,
     "aliases": [
       "씨야"
     ]
   },
   {
     "name": "Secret",
-    "type": null,
     "aliases": [
       "시크릿"
     ]
   },
   {
     "name": "U Sung Eun",
-    "type": null,
     "aliases": [
       "유성은"
     ]
   },
   {
     "name": "A-plus",
-    "type": null,
     "aliases": [
       "아플러스"
     ]
   },
   {
     "name": "THE SCOUT",
-    "type": null,
     "aliases": [
       "더 스카우트"
     ]
   },
   {
     "name": "JUNNY",
-    "type": null,
     "aliases": [
       "주니"
     ]
   },
   {
     "name": "LUNA",
-    "type": null,
     "aliases": [
       "루나"
     ]
   },
   {
     "name": "KWON EUI BIN",
-    "type": null,
     "aliases": [
       "권의빈"
     ]
   },
   {
     "name": "Yeon Seo",
-    "type": null,
     "aliases": [
       "연서"
     ]
   },
   {
     "name": "Kim Hyun Joong",
-    "type": "솔로",
     "aliases": [
       "김현중"
     ]
   },
   {
     "name": "N.Flying",
-    "type": "보이그룹",
     "aliases": [
       "엔플라잉"
     ]
   },
   {
     "name": "Shin Hae Chul",
-    "type": null,
     "aliases": [
       "신해철"
     ]
   },
   {
     "name": "Wittgenstein",
-    "type": null,
     "aliases": []
   },
   {
     "name": "Jang Beom June",
-    "type": null,
     "aliases": [
       "장범준"
     ]
   },
   {
     "name": "Kim Dong Hyun",
-    "type": null,
     "aliases": [
       "김동현"
     ]
   },
   {
     "name": "Yun Seong",
-    "type": null,
     "aliases": [
       "윤성"
     ]
   },
   {
     "name": "J.seph",
-    "type": null,
     "aliases": []
   },
   {
     "name": "Jung Seung Hwan",
-    "type": null,
     "aliases": [
       "정승환"
     ]
   },
   {
     "name": "THE SSYNDROME",
-    "type": null,
     "aliases": [
       "더씬드롬"
     ]
   },
   {
     "name": "Park Hyun Kyu",
-    "type": null,
     "aliases": [
       "박현규"
     ]
   },
   {
     "name": "Wooseok Byeon",
-    "type": null,
     "aliases": [
       "변우석"
     ]
   },
   {
     "name": "ChaDongHyeop",
-    "type": null,
     "aliases": [
       "차동협"
     ]
   },
   {
     "name": "Im Joongwon of sonlmor",
-    "type": null,
     "aliases": [
       "임중원 of 손을모아"
     ]
   },
   {
     "name": "SAM KIM",
-    "type": "솔로",
     "aliases": [
       "샘킴"
     ]
   },
   {
     "name": "HANHAE, Moon Se Yoon",
-    "type": null,
     "aliases": [
       "한해, 문세윤"
     ]
   },
   {
     "name": "YUHZ",
-    "type": null,
     "aliases": [
       "유어즈"
     ]
   },
   {
     "name": "Mad Clown",
-    "type": null,
     "aliases": [
       "매드클라운"
     ]
   },
   {
     "name": "BARUN",
-    "type": null,
     "aliases": [
       "바룬"
     ]
   },
   {
     "name": "I",
-    "type": null,
     "aliases": [
       "아이"
     ]
   },
   {
     "name": "Yang Da Il",
-    "type": null,
     "aliases": [
       "양다일"
     ]
   },
   {
     "name": "J_ust",
-    "type": null,
     "aliases": [
       "그_냥"
     ]
   },
   {
     "name": "HYUNKI",
-    "type": null,
     "aliases": [
       "현기"
     ]
   },
   {
     "name": "Ryu Jiwoo",
-    "type": null,
     "aliases": [
       "유지우"
     ]
   },
   {
     "name": "Marv, PAAK",
-    "type": null,
     "aliases": []
   },
   {
     "name": "SORAN",
-    "type": null,
     "aliases": [
       "소란"
     ]
   },
   {
     "name": "DDOA Friends",
-    "type": null,
     "aliases": [
       "또아프렌즈"
     ]
   },
   {
     "name": "Inner Garden",
-    "type": null,
     "aliases": [
       "이너 가든"
     ]
   },
   {
     "name": "Yoo Hae Joon",
-    "type": null,
     "aliases": [
       "유해준"
     ]
   },
   {
     "name": "LEE JIHOON",
-    "type": null,
     "aliases": [
       "이지훈"
     ]
   },
   {
     "name": "29.1Lab",
-    "type": null,
     "aliases": []
   },
   {
     "name": "sohlhee",
-    "type": null,
     "aliases": [
       "솔희"
     ]
   },
   {
     "name": "BKWAN",
-    "type": null,
     "aliases": [
       "비콴"
     ]
   },
   {
     "name": "Zanmang Loopy, Hechi",
-    "type": null,
     "aliases": [
       "잔망루피, 해치"
     ]
   },
   {
     "name": "Sojung",
-    "type": null,
     "aliases": [
       "이소정"
     ]
   },
   {
     "name": "BAE JIN RYEOL (with A.ERA)",
-    "type": null,
     "aliases": [
       "배진렬"
     ]
   },
   {
     "name": "Haera",
-    "type": null,
     "aliases": [
       "해라"
     ]
   },
   {
     "name": "SOMIN",
-    "type": "솔로",
     "aliases": [
       "전소민"
     ]
   },
   {
     "name": "UND",
-    "type": null,
     "aliases": []
   },
   {
     "name": "Jeong Hyo Bean",
-    "type": null,
     "aliases": [
       "정효빈"
     ]
   },
   {
     "name": "ClaD",
-    "type": null,
     "aliases": [
       "클래디"
     ]
   },
   {
     "name": "EZUZ",
-    "type": null,
     "aliases": [
       "이짜나언짜나"
     ]
   },
   {
     "name": "CINNA",
-    "type": null,
     "aliases": [
       "시나"
     ]
   },
   {
     "name": "Nilo",
-    "type": null,
     "aliases": [
       "닐로"
     ]
   },
   {
     "name": "FIVE O ONE",
-    "type": null,
     "aliases": []
   },
   {
     "name": "MUSM",
-    "type": null,
     "aliases": []
   },
   {
     "name": "HAEUN (4Men), YOSEP YUN",
-    "type": null,
     "aliases": []
   },
   {
     "name": "Ra. D",
-    "type": null,
     "aliases": [
       "라디"
     ]
   },
   {
     "name": "KIM PUREUM",
-    "type": null,
     "aliases": [
       "김푸름"
     ]
   },
   {
     "name": "LATENCY",
-    "type": null,
     "aliases": [
       "레이턴시"
     ]
   },
   {
     "name": "Kim Suyoung",
-    "type": null,
     "aliases": [
       "김수영"
     ]
   },
   {
     "name": "SOOBIN",
-    "type": null,
     "aliases": [
       "수빈"
     ]
   },
   {
     "name": "Doosie and Ohboonie",
-    "type": null,
     "aliases": [
       "두시와 오분이"
     ]
   },
   {
     "name": "Lucia",
-    "type": null,
     "aliases": [
       "심규선"
     ]
   },
   {
     "name": "HAVY",
-    "type": null,
     "aliases": [
       "하비",
       "최성용"
@@ -2642,143 +2238,122 @@
   },
   {
     "name": "DINDIN, CHO HYUN YOUNG",
-    "type": null,
     "aliases": [
       "딘딘, 조현영"
     ]
   },
   {
     "name": "SOLE",
-    "type": null,
     "aliases": [
       "쏠"
     ]
   },
   {
     "name": "Blue Smile",
-    "type": null,
     "aliases": [
       "블루 스마일"
     ]
   },
   {
     "name": "YOUNHA",
-    "type": "솔로",
     "aliases": [
       "윤하"
     ]
   },
   {
     "name": "SKINZ",
-    "type": null,
     "aliases": [
       "스킨즈"
     ]
   },
   {
     "name": "Song ziu",
-    "type": null,
     "aliases": [
       "송지우"
     ]
   },
   {
     "name": "SUCTION",
-    "type": null,
     "aliases": [
       "석션"
     ]
   },
   {
     "name": "Kim Sung Kyu",
-    "type": "솔로",
     "aliases": [
       "김성규"
     ]
   },
   {
     "name": "Son Siwoo",
-    "type": null,
     "aliases": [
       "손시우"
     ]
   },
   {
     "name": "LEE WOO, PARK JE UP",
-    "type": null,
     "aliases": [
       "이우, 박제업"
     ]
   },
   {
     "name": "Lee Juck, Jung Jaeil",
-    "type": null,
     "aliases": [
       "이적, 정재일"
     ]
   },
   {
     "name": "LEESEOKHOON",
-    "type": null,
     "aliases": [
       "이석훈"
     ]
   },
   {
     "name": "Parc Jae Jung, SULLYOON (NMIXX)",
-    "type": null,
     "aliases": []
   },
   {
     "name": "KOREA CRACKER",
-    "type": null,
     "aliases": [
       "크래커"
     ]
   },
   {
     "name": "BLITZERS",
-    "type": "보이그룹",
     "aliases": [
       "블리처스"
     ]
   },
   {
     "name": "Uncrude",
-    "type": null,
     "aliases": []
   },
   {
     "name": "Purynn",
-    "type": null,
     "aliases": [
       "푸린"
     ]
   },
   {
     "name": "AMUTTA BAND",
-    "type": null,
     "aliases": [
       "아묻따밴드"
     ]
   },
   {
     "name": "JIWOO",
-    "type": null,
     "aliases": [
       "전지우"
     ]
   },
   {
     "name": "Onestar",
-    "type": null,
     "aliases": [
       "임한별"
     ]
   },
   {
     "name": "SUNGTAE(POSTMEN)",
-    "type": null,
     "aliases": [
       "성태",
       "포스트맨"
@@ -2786,1423 +2361,1240 @@
   },
   {
     "name": "Song I Han",
-    "type": null,
     "aliases": [
       "송이한"
     ]
   },
   {
     "name": "JACE COLE",
-    "type": null,
     "aliases": []
   },
   {
     "name": "SYA",
-    "type": null,
     "aliases": [
       "샤"
     ]
   },
   {
     "name": "Lee Young Hyun",
-    "type": null,
     "aliases": [
       "이영현"
     ]
   },
   {
     "name": "Yoo Hwe Seung (N.Flying)",
-    "type": "솔로",
     "aliases": [
       "유회승"
     ]
   },
   {
     "name": "LA POEM",
-    "type": null,
     "aliases": [
       "라포엠"
     ]
   },
   {
     "name": "ROCOBERRY",
-    "type": null,
     "aliases": [
       "로코베리"
     ]
   },
   {
     "name": "Hebi",
-    "type": null,
     "aliases": []
   },
   {
     "name": "ChRocktikal",
-    "type": null,
     "aliases": [
       "크록티칼"
     ]
   },
   {
     "name": "IN SEONG",
-    "type": null,
     "aliases": [
       "인성"
     ]
   },
   {
     "name": "BBAHN",
-    "type": null,
     "aliases": [
       "비비안"
     ]
   },
   {
     "name": "Placebo Junkies",
-    "type": null,
     "aliases": []
   },
   {
     "name": "Seo Ji Won",
-    "type": null,
     "aliases": [
       "서지원"
     ]
   },
   {
     "name": "Ahn Heesu",
-    "type": null,
     "aliases": [
       "안희수"
     ]
   },
   {
     "name": "NCT DREAM",
-    "type": "보이그룹",
     "aliases": [
       "엔시티 드림"
     ]
   },
   {
     "name": "Red Velvet - IRENE & SEULGI",
-    "type": "걸그룹",
     "aliases": []
   },
   {
     "name": "MAX CHANGMIN",
-    "type": "솔로",
     "aliases": [
       "최강창민"
     ]
   },
   {
     "name": "KENZIE X NCT WISH",
-    "type": null,
     "aliases": []
   },
   {
     "name": "YESUNG",
-    "type": "솔로",
     "aliases": [
       "예성"
     ]
   },
   {
     "name": "CHANYEOL",
-    "type": "솔로",
     "aliases": [
       "찬열"
     ]
   },
   {
     "name": "XngHan&Xoul",
-    "type": "보이그룹",
     "aliases": [
       "승한앤소울"
     ]
   },
   {
     "name": "MINHO",
-    "type": "솔로",
     "aliases": [
       "민호"
     ]
   },
   {
     "name": "U-KNOW",
-    "type": "솔로",
     "aliases": [
       "유노윤호"
     ]
   },
   {
     "name": "SUPER JUNIOR-83z 슈퍼주니어-83z",
-    "type": "보이그룹",
     "aliases": []
   },
   {
     "name": "JAEHYUN",
-    "type": "솔로",
     "aliases": [
       "재현"
     ]
   },
   {
     "name": "RYEOWOOK",
-    "type": "솔로",
     "aliases": [
       "려욱"
     ]
   },
   {
     "name": "SHINee",
-    "type": "보이그룹",
     "aliases": [
       "샤이니"
     ]
   },
   {
     "name": "HYO",
-    "type": "솔로",
     "aliases": [
       "효연"
     ]
   },
   {
     "name": "Min Jiwoon",
-    "type": null,
     "aliases": [
       "민지운"
     ]
   },
   {
     "name": "IRENE",
-    "type": "솔로",
     "aliases": [
       "아이린"
     ]
   },
   {
     "name": "MINNIE",
-    "type": "솔로",
     "aliases": []
   },
   {
     "name": "YUQI",
-    "type": "솔로",
     "aliases": []
   },
   {
     "name": "SOYEON",
-    "type": "솔로",
     "aliases": [
       "소연"
     ]
   },
   {
     "name": "MIYEON",
-    "type": "솔로",
     "aliases": []
   },
   {
     "name": "EMP (ZEROBASEONE)",
-    "type": "보이그룹",
     "aliases": []
   },
   {
     "name": "Anyma, Joji",
-    "type": null,
     "aliases": []
   },
   {
     "name": "CL",
-    "type": "솔로",
     "aliases": []
   },
   {
     "name": "PUBG x ALLDAY PROJECT",
-    "type": null,
     "aliases": []
   },
   {
     "name": "ALLDAY PROJECT, TARZZAN",
-    "type": null,
     "aliases": []
   },
   {
     "name": "Roy Kim",
-    "type": "솔로",
     "aliases": [
       "로이킴"
     ]
   },
   {
     "name": "Miller",
-    "type": null,
     "aliases": [
       "밀러"
     ]
   },
   {
     "name": "ilight",
-    "type": null,
     "aliases": [
       "일라잇"
     ]
   },
   {
     "name": "LELE",
-    "type": null,
     "aliases": []
   },
   {
     "name": "yooeunsuk",
-    "type": null,
     "aliases": [
       "유은석"
     ]
   },
   {
     "name": "TYVE",
-    "type": null,
     "aliases": []
   },
   {
     "name": "Isaac Hong",
-    "type": null,
     "aliases": [
       "홍이삭"
     ]
   },
   {
     "name": "MINAMI",
-    "type": null,
     "aliases": [
       "미나미"
     ]
   },
   {
     "name": "Na Go Eun, LUCKSMITH",
-    "type": null,
     "aliases": [
       "나고은"
     ]
   },
   {
     "name": "SOIN",
-    "type": null,
     "aliases": [
       "서인"
     ]
   },
   {
     "name": "KIM JI WOONG",
-    "type": "솔로",
     "aliases": [
       "김지웅"
     ]
   },
   {
     "name": "ICHILLIN′",
-    "type": null,
     "aliases": [
       "아이칠린"
     ]
   },
   {
     "name": "A2O SOUL",
-    "type": null,
     "aliases": []
   },
   {
     "name": "WENDY",
-    "type": "솔로",
     "aliases": [
       "웬디"
     ]
   },
   {
     "name": "YOUS",
-    "type": null,
     "aliases": [
       "유스"
     ]
   },
   {
     "name": "ADAP",
-    "type": null,
     "aliases": [
       "에이댑"
     ]
   },
   {
     "name": "I.N",
-    "type": "솔로",
     "aliases": [
       "아이엔"
     ]
   },
   {
     "name": "KOLAVO",
-    "type": null,
     "aliases": []
   },
   {
     "name": "OnlyOneOf",
-    "type": "보이그룹",
     "aliases": [
       "온리원오브"
     ]
   },
   {
     "name": "No Brain, Pengsoo",
-    "type": null,
     "aliases": [
       "노브레인, 펭수"
     ]
   },
   {
     "name": "ONZU",
-    "type": null,
     "aliases": [
       "온주"
     ]
   },
   {
     "name": "KIM FEEL",
-    "type": null,
     "aliases": [
       "김필"
     ]
   },
   {
     "name": "Feeldog, Wilcox",
-    "type": null,
     "aliases": [
       "필독, 윌콕스"
     ]
   },
   {
     "name": "gongwon",
-    "type": null,
     "aliases": [
       "공원"
     ]
   },
   {
     "name": "Miraedo",
-    "type": null,
     "aliases": [
       "미래도"
     ]
   },
   {
     "name": "Lee So Ra",
-    "type": null,
     "aliases": [
       "이소라"
     ]
   },
   {
     "name": "CODA BRIDGE",
-    "type": null,
     "aliases": [
       "코다 브릿지"
     ]
   },
   {
     "name": "Yoon Hyun Sang",
-    "type": null,
     "aliases": [
       "윤현상"
     ]
   },
   {
     "name": "JEMMA",
-    "type": null,
     "aliases": [
       "젬마"
     ]
   },
   {
     "name": "kimjinwon",
-    "type": null,
     "aliases": [
       "김진원"
     ]
   },
   {
     "name": "Kid Milli, TRADE L",
-    "type": null,
     "aliases": []
   },
   {
     "name": "YOUNGSEO",
-    "type": null,
     "aliases": []
   },
   {
     "name": "Retropolitan",
-    "type": null,
     "aliases": [
       "레트로폴리탄"
     ]
   },
   {
     "name": "Wooks",
-    "type": null,
     "aliases": []
   },
   {
     "name": "Sanghyun Nah",
-    "type": null,
     "aliases": [
       "나상현"
     ]
   },
   {
     "name": "KIM TAE RAE",
-    "type": "솔로",
     "aliases": [
       "김태래"
     ]
   },
   {
     "name": "gonjang",
-    "type": null,
     "aliases": []
   },
   {
     "name": "muuo:23",
-    "type": null,
     "aliases": []
   },
   {
     "name": "A2O LITE",
-    "type": null,
     "aliases": []
   },
   {
     "name": "Trampoline of Joy",
-    "type": null,
     "aliases": [
       "환희의 트램폴린"
     ]
   },
   {
     "name": "KIM JAE HWAN",
-    "type": "솔로",
     "aliases": [
       "김재환"
     ]
   },
   {
     "name": "HAENA",
-    "type": null,
     "aliases": [
       "해나"
     ]
   },
   {
     "name": "LUCY",
-    "type": null,
     "aliases": []
   },
   {
     "name": "SUHO",
-    "type": "솔로",
     "aliases": [
       "수호"
     ]
   },
   {
     "name": "WetBoy, Jo Hyun Ah",
-    "type": null,
     "aliases": [
       "웻보이, 조현아"
     ]
   },
   {
     "name": "Blackcherry Club",
-    "type": null,
     "aliases": [
       "블랙체리클럽"
     ]
   },
   {
     "name": "Shin Ye Young",
-    "type": null,
     "aliases": [
       "신예영"
     ]
   },
   {
     "name": "Choi Sung Eun",
-    "type": null,
     "aliases": [
       "최성은"
     ]
   },
   {
     "name": "!Friendz",
-    "type": null,
     "aliases": []
   },
   {
     "name": "GIA",
-    "type": null,
     "aliases": [
       "지아"
     ]
   },
   {
     "name": "chorim",
-    "type": null,
     "aliases": [
       "초림"
     ]
   },
   {
     "name": "hyeminsong, SWINGS",
-    "type": null,
     "aliases": [
       "hyeminsong, 스윙스"
     ]
   },
   {
     "name": "Kimmuse",
-    "type": null,
     "aliases": [
       "김뮤즈"
     ]
   },
   {
     "name": "Ruru",
-    "type": null,
     "aliases": [
       "루루"
     ]
   },
   {
     "name": "1VERSE",
-    "type": null,
     "aliases": []
   },
   {
     "name": "CHOI SUNG YUN (Y)",
-    "type": null,
     "aliases": [
       "최성윤"
     ]
   },
   {
     "name": "Rain",
-    "type": "솔로",
     "aliases": [
       "비"
     ]
   },
   {
     "name": "CHUNGYOON",
-    "type": null,
     "aliases": [
       "정윤"
     ]
   },
   {
     "name": "D.N.X",
-    "type": null,
     "aliases": []
   },
   {
     "name": "yawn",
-    "type": null,
     "aliases": []
   },
   {
     "name": "Sukwon Yoon",
-    "type": null,
     "aliases": [
       "윤석원"
     ]
   },
   {
     "name": "ELLY X JUNGHWA (EXID), LUCKSMITH",
-    "type": null,
     "aliases": []
   },
   {
     "name": "Meego",
-    "type": null,
     "aliases": []
   },
   {
     "name": "ROSESIA, Alina-Sari, Addy TPC",
-    "type": null,
     "aliases": [
       "로즈시아"
     ]
   },
   {
     "name": "g0nny",
-    "type": null,
     "aliases": [
       "거니"
     ]
   },
   {
     "name": "No Brain",
-    "type": null,
     "aliases": [
       "노브레인"
     ]
   },
   {
     "name": "ODD YOUTH",
-    "type": null,
     "aliases": [
       "오드유스"
     ]
   },
   {
     "name": "hizui",
-    "type": null,
     "aliases": [
       "히즈이"
     ]
   },
   {
     "name": "Woona",
-    "type": null,
     "aliases": [
       "우나"
     ]
   },
   {
     "name": "Han Jae Hee",
-    "type": null,
     "aliases": [
       "한재희"
     ]
   },
   {
     "name": "OuiOui",
-    "type": null,
     "aliases": [
       "위위"
     ]
   },
   {
     "name": "bluebluebird",
-    "type": null,
     "aliases": []
   },
   {
     "name": "Wonstein",
-    "type": null,
     "aliases": [
       "원슈타인"
     ]
   },
   {
     "name": "LEEHI",
-    "type": "솔로",
     "aliases": [
       "이하이"
     ]
   },
   {
     "name": "LEE GEURIM",
-    "type": null,
     "aliases": [
       "이그림"
     ]
   },
   {
     "name": "HUI",
-    "type": null,
     "aliases": [
       "후이"
     ]
   },
   {
     "name": "miwOo",
-    "type": null,
     "aliases": [
       "미우"
     ]
   },
   {
     "name": "Jae Yeon",
-    "type": null,
     "aliases": [
       "재연"
     ]
   },
   {
     "name": "Choi Baek Ho",
-    "type": null,
     "aliases": [
       "최백호"
     ]
   },
   {
     "name": "Ki:XÉ",
-    "type": null,
     "aliases": [
       "키제"
     ]
   },
   {
     "name": "JEONGDAWOON & BOYS",
-    "type": null,
     "aliases": [
       "정다쌤과 아이들"
     ]
   },
   {
     "name": "OH YOOJIN",
-    "type": null,
     "aliases": [
       "오유진"
     ]
   },
   {
     "name": "NAKWON",
-    "type": null,
     "aliases": [
       "낙원"
     ]
   },
   {
     "name": "LIZ",
-    "type": "솔로",
     "aliases": [
       "리즈"
     ]
   },
   {
     "name": "EB",
-    "type": null,
     "aliases": [
       "이비"
     ]
   },
   {
     "name": "HAN HYE RI",
-    "type": null,
     "aliases": [
       "한혜리"
     ]
   },
   {
     "name": "FRankly",
-    "type": null,
     "aliases": [
       "프랭클리"
     ]
   },
   {
     "name": "Hangsuk & Boogiemonster",
-    "type": null,
     "aliases": [
       "최항석과 부기몬스터"
     ]
   },
   {
     "name": "JANG HANEUM",
-    "type": null,
     "aliases": [
       "장한음"
     ]
   },
   {
     "name": "MAC",
-    "type": null,
     "aliases": [
       "엠에이씨"
     ]
   },
   {
     "name": "MayBee",
-    "type": null,
     "aliases": [
       "메이비"
     ]
   },
   {
     "name": "CROWN J",
-    "type": null,
     "aliases": [
       "크라운제이"
     ]
   },
   {
     "name": "6band",
-    "type": null,
     "aliases": [
       "육중완밴드"
     ]
   },
   {
     "name": "Kim Bo Kyung",
-    "type": null,
     "aliases": [
       "김보경"
     ]
   },
   {
     "name": "Hat:q",
-    "type": null,
     "aliases": [
       "하티크"
     ]
   },
   {
     "name": "Band Nah",
-    "type": null,
     "aliases": [
       "나상현씨밴드"
     ]
   },
   {
     "name": "ZIWOO",
-    "type": null,
     "aliases": []
   },
   {
     "name": "Bernard Park",
-    "type": null,
     "aliases": [
       "버나드 박"
     ]
   },
   {
     "name": "YEOJIN",
-    "type": "솔로",
     "aliases": [
       "여진"
     ]
   },
   {
     "name": "Thunder",
-    "type": null,
     "aliases": [
       "천둥"
     ]
   },
   {
     "name": "Green Flame Boys",
-    "type": null,
     "aliases": [
       "초록불꽃소년단"
     ]
   },
   {
     "name": "KAINA",
-    "type": null,
     "aliases": []
   },
   {
     "name": "AWON",
-    "type": null,
     "aliases": [
       "아원"
     ]
   },
   {
     "name": "Wanna One",
-    "type": "보이그룹",
     "aliases": [
       "워너원"
     ]
   },
   {
     "name": "AN YUJIN",
-    "type": "솔로",
     "aliases": [
       "안유진"
     ]
   },
   {
     "name": "Lacostar",
-    "type": null,
     "aliases": [
       "라코스타"
     ]
   },
   {
     "name": "Wilcox",
-    "type": null,
     "aliases": [
       "윌콕스"
     ]
   },
   {
     "name": "LIT",
-    "type": null,
     "aliases": []
   },
   {
     "name": "Tonari",
-    "type": null,
     "aliases": [
       "토나리"
     ]
   },
   {
     "name": "Dailog",
-    "type": null,
     "aliases": [
       "데일로그"
     ]
   },
   {
     "name": "BIG Naughty",
-    "type": "솔로",
     "aliases": [
       "서동현"
     ]
   },
   {
     "name": "Gabee",
-    "type": null,
     "aliases": [
       "가비"
     ]
   },
   {
     "name": "NOH SAYEON",
-    "type": null,
     "aliases": [
       "노사연"
     ]
   },
   {
     "name": "Kangnam",
-    "type": null,
     "aliases": [
       "강남"
     ]
   },
   {
     "name": "LIT, WillsBife",
-    "type": null,
     "aliases": []
   },
   {
     "name": "HARO",
-    "type": null,
     "aliases": [
       "하로"
     ]
   },
   {
     "name": "MiMi",
-    "type": null,
     "aliases": [
       "미미"
     ]
   },
   {
     "name": "ANTON",
-    "type": null,
     "aliases": [
       "앤톤"
     ]
   },
   {
     "name": "DáFF",
-    "type": null,
     "aliases": []
   },
   {
     "name": "he_eul, Yeonwoo",
-    "type": null,
     "aliases": [
       "그을, 연우"
     ]
   },
   {
     "name": "NiceKatchy",
-    "type": null,
     "aliases": []
   },
   {
     "name": "Lim Jeong Hee",
-    "type": null,
     "aliases": [
       "임정희"
     ]
   },
   {
     "name": "HAN",
-    "type": "솔로",
     "aliases": [
       "한"
     ]
   },
   {
     "name": "Whee In",
-    "type": "솔로",
     "aliases": [
       "휘인"
     ]
   },
   {
     "name": "SUMMER CAKE",
-    "type": null,
     "aliases": [
       "썸머케익"
     ]
   },
   {
     "name": "BE BOYS",
-    "type": null,
     "aliases": []
   },
   {
     "name": "Choi Ingyeong",
-    "type": null,
     "aliases": [
       "최인경"
     ]
   },
   {
     "name": "MNGJ",
-    "type": null,
     "aliases": [
       "만년과장"
     ]
   },
   {
     "name": "KANGSEUNGSIK",
-    "type": null,
     "aliases": [
       "강승식"
     ]
   },
   {
     "name": "Ha Hyun Sang",
-    "type": null,
     "aliases": [
       "하현상"
     ]
   },
   {
     "name": "SMUZ",
-    "type": null,
     "aliases": [
       "스뮤즈"
     ]
   },
   {
     "name": "TAEYONG, HAECHAN",
-    "type": "보이그룹",
     "aliases": [
       "태용, 해찬"
     ]
   },
   {
     "name": "ChatsBerry",
-    "type": null,
     "aliases": [
       "체츠베리"
     ]
   },
   {
     "name": "Super Joy Club",
-    "type": null,
     "aliases": []
   },
   {
     "name": "NARIN",
-    "type": null,
     "aliases": [
       "나린"
     ]
   },
   {
     "name": "SYXY+SMUZ",
-    "type": null,
     "aliases": []
   },
   {
     "name": "KANG HEE SOO",
-    "type": null,
     "aliases": [
       "강희수"
     ]
   },
   {
     "name": "Jungsuk",
-    "type": null,
     "aliases": [
       "정석"
     ]
   },
   {
     "name": "SEOK MATTHEW, KIM TAE RAE, PARK GUN WOOK",
-    "type": "보이그룹",
     "aliases": [
       "석매튜, 김태래, 박건욱"
     ]
   },
   {
     "name": "Kim Taeri",
-    "type": null,
     "aliases": [
       "김태리"
     ]
   },
   {
     "name": "KUBIN",
-    "type": null,
     "aliases": [
       "쿠빈"
     ]
   },
   {
     "name": "bob e bread, billjo",
-    "type": null,
     "aliases": []
   },
   {
     "name": "Yoo Seung Beom",
-    "type": null,
     "aliases": [
       "유승범"
     ]
   },
   {
     "name": "WÉREMA",
-    "type": null,
     "aliases": [
       "웨레마"
     ]
   },
   {
     "name": "Back Yeseul",
-    "type": null,
     "aliases": [
       "백예슬"
     ]
   },
   {
     "name": "Neidi",
-    "type": null,
     "aliases": [
       "네이디"
     ]
   },
   {
     "name": "LEE DAEYEOL",
-    "type": null,
     "aliases": [
       "이대열"
     ]
   },
   {
     "name": "JOBEOMJIN",
-    "type": null,
     "aliases": [
       "조범진"
     ]
   },
   {
     "name": "Kwon Jin Ah",
-    "type": null,
     "aliases": [
       "권진아"
     ]
   },
   {
     "name": "Paul Blanco",
-    "type": null,
     "aliases": []
   },
   {
     "name": "SUNGMIN",
-    "type": null,
     "aliases": [
       "성민"
     ]
   },
   {
     "name": "nerdina",
-    "type": null,
     "aliases": [
       "널디나"
     ]
   },
   {
     "name": "yawn, min",
-    "type": null,
     "aliases": []
   },
   {
     "name": "D.O",
-    "type": "솔로",
     "aliases": [
       "이현도"
     ]
   },
   {
     "name": "SUNG HAN BIN",
-    "type": "솔로",
     "aliases": [
       "성한빈"
     ]
   },
   {
     "name": "Bammaru",
-    "type": null,
     "aliases": [
       "밤마루"
     ]
   },
   {
     "name": "Jung In, Jo Jung Chi, Ra.D",
-    "type": null,
     "aliases": [
       "정인, 조정치, 라디"
     ]
   },
   {
     "name": "SOOYEON",
-    "type": null,
     "aliases": [
       "이수연"
     ]
   },
   {
     "name": "Capstone Endore",
-    "type": null,
     "aliases": [
       "캡스톤 엔도어"
     ]
   },
   {
     "name": "RiVe",
-    "type": null,
     "aliases": []
   },
   {
     "name": "LIM",
-    "type": null,
     "aliases": []
   },
   {
     "name": "JIMIN",
-    "type": null,
     "aliases": [
       "지민"
     ]
   },
   {
     "name": "Nollflower",
-    "type": null,
     "aliases": [
       "놀플라워"
     ]
   },
   {
     "name": "MOONLIGHT",
-    "type": null,
     "aliases": [
       "문라이트"
     ]
   },
   {
     "name": "Kim Su Hyun",
-    "type": null,
     "aliases": [
       "수현"
     ]
   },
   {
     "name": "Promotion of Friendship",
-    "type": null,
     "aliases": [
       "친목도모"
     ]
   },
   {
     "name": "XIAOTING",
-    "type": "솔로",
     "aliases": [
       "샤오팅"
     ]
   },
   {
     "name": "MASHIRO",
-    "type": "솔로",
     "aliases": []
   },
   {
     "name": "KIM JAE JOONG",
-    "type": "솔로",
     "aliases": [
       "김재중"
     ]
   },
   {
     "name": "LEECHANGSUB",
-    "type": "솔로",
     "aliases": [
       "이창섭"
     ]
   },
   {
     "name": "MJ",
-    "type": null,
     "aliases": [
       "엠제이"
     ]
   },
   {
     "name": "LUN8",
-    "type": "보이그룹",
     "aliases": [
       "루네이트"
     ]
   },
   {
     "name": "CHOI YOOJUNG",
-    "type": "솔로",
     "aliases": [
       "최유정"
     ]
   },
   {
     "name": "VERIVERY",
-    "type": "보이그룹",
     "aliases": []
   },
   {
     "name": "범키",
-    "type": null,
     "aliases": []
   },
   {
     "name": "1%",
-    "type": null,
     "aliases": [
       "원퍼센트"
     ]
   },
   {
     "name": "DK (DECEMBER)",
-    "type": null,
     "aliases": [
       "디셈버"
     ]
   },
   {
     "name": "DK (SEVENTEEN)",
-    "type": "솔로",
     "aliases": [
       "도겸"
+    ]
+  },
+  {
+    "name": "WONDER ATTACK",
+    "aliases": []
+  },
+  {
+    "name": "Lee Ye ji",
+    "aliases": [
+      "이예지"
+    ]
+  },
+  {
+    "name": "Yim Siwan",
+    "aliases": [
+      "임시완"
+    ]
+  },
+  {
+    "name": "ISEGYE IDOL",
+    "aliases": [
+      "이세계아이돌"
+    ]
+  },
+  {
+    "name": "LEE MU JIN",
+    "aliases": [
+      "이무진"
+    ]
+  },
+  {
+    "name": "NELL",
+    "aliases": [
+      "넬"
     ]
   }
 ]
