@@ -25,7 +25,6 @@ function source(snapshots: Snapshot[], registry: RegistryEntry[]): ChartSource {
   const dates = snapshots.map((s) => s.date).toSorted()
   return {
     registry,
-    artists: [],
     snapshots: new Map(snapshots.map((s) => [s.date, s])),
     firstDate: dates[0],
     latestDate: dates.at(-1)!,

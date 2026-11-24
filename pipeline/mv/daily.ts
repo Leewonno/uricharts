@@ -182,8 +182,7 @@ export async function runDaily({
   await writeIssue()
   if (registry && digestOut && kstWeekday(now) === MONDAY) {
     try {
-      const artists = await readJson(paths.artists, artistsSchema, [])
-      const digest = weeklyDigest(today, addDays(today, -7), registry, artists)
+      const digest = weeklyDigest(today, addDays(today, -7), registry)
       if (digest) await writeFile(digestOut, digest)
     } catch (error) {
       log.warn(`주간 요약을 만들지 못했습니다: ${error instanceof Error ? error.message : String(error)}`)

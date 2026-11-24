@@ -1,6 +1,6 @@
 import { isMidnightRecord } from '../../../../pipeline/mv/collect'
 import { addDays, kstDate } from '../../../../pipeline/mv/dates'
-import type { Artist, RegistryEntry, Snapshot } from '../../../../pipeline/mv/schema'
+import type { RegistryEntry, Snapshot } from '../../../../pipeline/mv/schema'
 import type { Mv, MvSnapshot, Period, PeriodInfo } from '../types'
 import { PERIOD_NAMES } from './periods'
 
@@ -18,7 +18,6 @@ import { PERIOD_NAMES } from './periods'
 
 export interface ChartSource {
   readonly registry: readonly RegistryEntry[]
-  readonly artists: readonly Artist[]
   /** 날짜 → 기록. chartSnapshotDates()의 날짜 중 있는 것만 들어 있으면 된다 */
   readonly snapshots: ReadonlyMap<string, Snapshot>
   /** 가장 오래된 기록 날짜 (언제부터 볼 수 있는지 안내용) */
@@ -113,7 +112,6 @@ export function buildChartData(src: ChartSource): MvSnapshot {
     week: ranksIn(windows.week.prev),
     month: ranksIn(windows.month.prev),
   }
-  const typeOf = new Map(src.artists.map((a) => [a.name, a.type]))
   const periodViews = (p: keyof typeof windows, e: RegistryEntry) =>
     hasWindow(windows[p].cur) ? viewsIn(windows[p].cur, e, { requireStart: true }) : null
 
@@ -121,7 +119,6 @@ export function buildChartData(src: ChartSource): MvSnapshot {
     yt: e.yt,
     title: e.title,
     artist: e.artist,
-    type: typeOf.get(e.artist) ?? null,
     released: e.released,
     total: latest.views[e.yt],
     day: periodViews('day', e),

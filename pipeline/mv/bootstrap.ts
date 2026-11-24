@@ -32,11 +32,7 @@ export async function bootstrapFromSample(
     ...(channelOf.has(m.yt) ? { channelId: channelOf.get(m.yt) } : {}),
   }))
 
-  const artists: Artist[] = [...new Map(SAMPLE_MVS.map((m) => [m.artist, m.type])).entries()].map(([name, type]) => ({
-    name,
-    type,
-    aliases: [],
-  }))
+  const artists: Artist[] = [...new Set(SAMPLE_MVS.map((m) => m.artist))].map((name) => ({ name, aliases: [] }))
 
   const channelIds = [...new Set(channelOf.values())]
   const info = channelIds.length ? await client.channels(channelIds, ['snippet']) : []

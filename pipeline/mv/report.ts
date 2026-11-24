@@ -1,5 +1,5 @@
-import type { DiscoverResult } from './discover'
-import type { Artist, RegistryEntry } from './schema'
+import { PLAYLIST_REASON_PREFIX, type DiscoverResult, type UnsureItem } from './discover'
+import type { RegistryEntry } from './schema'
 
 /**
  * GitHub 이슈 본문. 매일 실행 결과 중 사람이 봐야 할 것이 있을 때만 만든다.
@@ -13,14 +13,17 @@ const REASON_LABEL: Readonly<Record<string, string>> = {
   'too-long': '영상이 15분보다 김',
   'unknown-duration': '영상 길이를 알 수 없음',
   'alt-version': '다른 버전 MV (원곡과 따로 셀지 정해 주세요)',
+  [`${PLAYLIST_REASON_PREFIX}no-mv-marker`]: '제목에 MV 표시 없음',
+  [`${PLAYLIST_REASON_PREFIX}not-mv-content`]: 'MV가 아닌 표시가 있음 (티저·라이브·자막 등)',
+  [`${PLAYLIST_REASON_PREFIX}too-short`]: '90초보다 짧음',
+  [`${PLAYLIST_REASON_PREFIX}fan-made`]: '팬 영상 표시가 있음',
 }
 
 const DATA_FILE = (file: string) => `data 브랜치의 \`mv/${file}\``
 
 export function dailyIssue(date: string, result: DiscoverResult, failures: readonly string[]): string | null {
-  const unclassified = result.newArtists.filter((a) => a.type === null)
   const warnings = [...failures, ...result.warnings]
-  if (!unclassified.length && !result.unsure.length && !warnings.length) return null
+  if (!result.unsure.length && !warnings.length) return null
 
   const sections = [`## MV 자동 수집 ${date}`]
 
@@ -28,36 +31,21 @@ export function dailyIssue(date: string, result: DiscoverResult, failures: reado
     sections.push(`### 실패·경고 (${warnings.length})`, warnings.map((w) => `- ${md(w)}`).join('\n'))
   }
 
-  if (unclassified.length) {
-    sections.push(
-      `### 그룹/솔로 구분이 필요한 아티스트 (${unclassified.length})`,
-      `${DATA_FILE('artists.json')}에서 아래 아티스트의 \`"type": null\`을 \`"걸그룹"\`, \`"보이그룹"\`, \`"솔로"\` 중 하나로 바꿔 주세요. 이름이 이상하게 뽑혔으면 \`name\`과 \`registry.json\`의 \`artist\`를 같이 고쳐 주세요.`,
-      unclassified
-        .map((a) => {
-          const songs = result.added.filter((e) => e.artist === a.name)
-          return `- **${md(a.name)}**: ${songs.map((s) => `${md(s.title)} (${youtube(s.yt)})`).join(', ')}`
-        })
-        .join('\n'),
-    )
-  }
+  const fromPlaylist = result.unsure.filter((u) => u.reason.startsWith(PLAYLIST_REASON_PREFIX))
+  const unsure = result.unsure.filter((u) => !u.reason.startsWith(PLAYLIST_REASON_PREFIX))
+  const example = (yt: string) =>
+    codeBlock({ yt, title: '곡명', artist: '아티스트', released: date, addedAt: date, source: 'manual' })
 
-  if (result.unsure.length) {
+  if (unsure.length) {
     const newChannels = uniqueBy(
-      result.unsure.filter((u) => u.reason === 'new-channel'),
+      unsure.filter((u) => u.reason === 'new-channel'),
       (u) => u.channelId,
     )
     sections.push(
-      `### 확인이 필요한 영상 (${result.unsure.length})`,
+      `### 확인이 필요한 영상 (${unsure.length})`,
       `공식 MV가 맞으면 ${DATA_FILE('registry.json')}에 추가해 주세요. 아니면 그냥 두면 됩니다 (다시 묻지 않아요).`,
-      [
-        '| 영상 | 채널 (구독자) | 이유 |',
-        '| --- | --- | --- |',
-        ...result.unsure.map(
-          (u) =>
-            `| ${md(u.youtubeTitle)}<br>${youtube(u.yt)} | ${md(u.channelTitle)} (${formatSubs(u.subscribers)}) | ${REASON_LABEL[u.reason] ?? u.reason} |`,
-        ),
-      ].join('\n'),
-      codeBlock({ yt: result.unsure[0].yt, title: '곡명', artist: '아티스트', released: date, addedAt: date, source: 'manual' }),
+      unsureTable(unsure),
+      example(unsure[0].yt),
     )
     if (newChannels.length) {
       sections.push(
@@ -69,6 +57,15 @@ export function dailyIssue(date: string, result: DiscoverResult, failures: reado
     }
   }
 
+  if (fromPlaylist.length) {
+    sections.push(
+      `### 최신 음악 재생목록: MV로 보이지 않는 영상 (${fromPlaylist.length})`,
+      `유튜브 "최신 음악" 재생목록에 올랐지만 제목으로는 MV가 아닌 것 같아요. 공식 MV가 맞으면 ${DATA_FILE('registry.json')}에 추가해 주세요. 음원(- Topic)·클립·라이브 영상이면 그냥 두면 됩니다 (다시 묻지 않아요).`,
+      unsureTable(fromPlaylist),
+      ...(unsure.length ? [] : [example(fromPlaylist[0].yt)]),
+    )
+  }
+
   if (result.added.length) {
     sections.push(`### 오늘 자동 추가한 곡 (${result.added.length})`, addedTable(result.added))
   }
@@ -76,29 +73,30 @@ export function dailyIssue(date: string, result: DiscoverResult, failures: reado
   return sections.join('\n\n') + '\n'
 }
 
-/** 주간 요약: 지난 7일 자동 추가한 곡과 아직 분류하지 않은 아티스트 */
-export function weeklyDigest(
-  date: string,
-  since: string,
-  registry: readonly RegistryEntry[],
-  artists: readonly Artist[],
-): string | null {
+/** 주간 요약: 지난 7일 자동 추가한 곡 */
+export function weeklyDigest(date: string, since: string, registry: readonly RegistryEntry[]): string | null {
   const added = registry.filter((r) => r.source === 'auto' && r.addedAt >= since)
-  const unclassified = artists.filter((a) => a.type === null)
-  if (!added.length && !unclassified.length) return null
+  if (!added.length) return null
 
-  const sections = [
-    `## MV 자동 수집 주간 요약 (${since} ~ ${date})`,
-    `틀리게 들어간 곡이 있으면 ${DATA_FILE('registry.json')}에서 곡명·아티스트를 고치거나 \`"hidden": true\`를 넣어 차트에서 빼 주세요.`,
-  ]
-  if (added.length) sections.push(`### 자동 추가한 곡 (${added.length})`, addedTable(added))
-  if (unclassified.length) {
-    sections.push(
-      `### 아직 그룹/솔로 구분이 없는 아티스트 (${unclassified.length})`,
-      `${DATA_FILE('artists.json')}에서 \`type\`을 채워 주세요: ${unclassified.map((a) => md(a.name)).join(', ')}`,
-    )
-  }
-  return sections.join('\n\n') + '\n'
+  return (
+    [
+      `## MV 자동 수집 주간 요약 (${since} ~ ${date})`,
+      `틀리게 들어간 곡이 있으면 ${DATA_FILE('registry.json')}에서 곡명·아티스트를 고치거나 \`"hidden": true\`를 넣어 차트에서 빼 주세요.`,
+      `### 자동 추가한 곡 (${added.length})`,
+      addedTable(added),
+    ].join('\n\n') + '\n'
+  )
+}
+
+function unsureTable(items: readonly UnsureItem[]): string {
+  return [
+    '| 영상 | 채널 (구독자) | 이유 |',
+    '| --- | --- | --- |',
+    ...items.map(
+      (u) =>
+        `| ${md(u.youtubeTitle)}<br>${youtube(u.yt)} | ${md(u.channelTitle)} (${formatSubs(u.subscribers)}) | ${REASON_LABEL[u.reason] ?? md(u.reason)} |`,
+    ),
+  ].join('\n')
 }
 
 function addedTable(entries: readonly RegistryEntry[]): string {

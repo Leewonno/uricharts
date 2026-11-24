@@ -56,6 +56,24 @@ describe('createYoutubeClient', () => {
     expect(fetch).toHaveBeenCalledTimes(2)
   })
 
+  it('재생목록은 새 영상이 나오지 않는 페이지에서 멈춘다 (유튜브 뮤직 재생목록은 다음 페이지가 같은 영상을 되풀이한다)', async () => {
+    const item = (videoId: string) => ({ contentDetails: { videoId, videoPublishedAt: '2026-11-20T09:00:00Z' } })
+    const pages: Record<string, unknown> = {
+      first: { items: [item('a'), item('b')], nextPageToken: 'p2' },
+      p2: { items: [item('a'), item('b'), item('c')], nextPageToken: 'p3' },
+      p3: { items: [item('a'), item('b')], nextPageToken: 'p2' },
+    }
+    const fetch = fakeFetch((url) => json(pages[url.searchParams.get('pageToken') ?? 'first']))
+    const client = createYoutubeClient({ apiKey: KEY, fetch })
+
+    const videos = await client.playlistVideos('RDCLAK5uy_latest')
+
+    expect(new URL(String(fetch.mock.calls[0][0])).searchParams.get('playlistId')).toBe('RDCLAK5uy_latest')
+    expect(videos.map((v) => v.videoId)).toEqual(['a', 'b', 'c'])
+    expect(videos[0].publishedAt).toBe('2026-11-20T09:00:00Z')
+    expect(fetch).toHaveBeenCalledTimes(3)
+  })
+
   it('검색은 100유닛으로 센다', async () => {
     const fetch = fakeFetch(() => json({ items: [{ id: { videoId: 'a' } }, { id: { channelId: 'x' } }] }))
     const client = createYoutubeClient({ apiKey: KEY, fetch })

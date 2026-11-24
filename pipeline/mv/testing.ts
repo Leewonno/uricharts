@@ -7,8 +7,11 @@ export function fakeClient({
   search = [],
   videos = [],
   channelStats = [],
+  playlists = {},
 }: {
   uploads?: Record<string, { videoId: string; publishedAt?: string }[]>
+  /** 재생목록 ID → 담긴 영상. 없는 재생목록은 빈 목록 */
+  playlists?: Record<string, { videoId: string; publishedAt?: string }[]>
   popular?: string[]
   search?: string[]
   videos?: YtVideo[]
@@ -33,6 +36,9 @@ export function fakeClient({
     async recentUploads(channelId, since) {
       if (!(channelId in uploads)) throw new Error('playlistNotFound')
       return uploads[channelId].filter((u) => !u.publishedAt || Date.parse(u.publishedAt) >= since.getTime())
+    },
+    async playlistVideos(playlistId) {
+      return playlists[playlistId] ?? []
     },
     async mostPopularMusic() {
       return popular

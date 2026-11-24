@@ -1,5 +1,3 @@
-export type MvType = '걸그룹' | '보이그룹' | '솔로'
-
 export type Period = 'day' | 'week' | 'month' | 'year'
 
 export interface Mv {
@@ -7,8 +5,6 @@ export interface Mv {
   readonly yt: string
   readonly title: string
   readonly artist: string
-  /** 아직 그룹/솔로 구분 전이면 null */
-  readonly type: MvType | null
   /** 공개일 YYYY-MM-DD */
   readonly released: string
   /** 누적 조회수 */

@@ -8,15 +8,13 @@ import { z } from 'zod'
 
 const isoDate = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'YYYY-MM-DD 형식이어야 합니다')
 
-export const mvTypeSchema = z.enum(['걸그룹', '보이그룹', '솔로'])
-
 /** 차트에 올리는 곡 하나 (mv/registry.json) */
 export const registryEntrySchema = z.strictObject({
   /** 유튜브 영상 ID */
   yt: z.string().min(1),
   /** 화면에 보일 곡명 (유튜브 영상 제목에서 정리한 값) */
   title: z.string().min(1),
-  /** artists.json의 name과 같은 값. 그룹/솔로 구분은 거기서 가져온다 */
+  /** artists.json의 name과 같은 값 */
   artist: z.string().min(1),
   /** 공개일 (KST) */
   released: isoDate,
@@ -32,12 +30,14 @@ export type RegistryEntry = z.infer<typeof registryEntrySchema>
 export const registrySchema = z.array(registryEntrySchema)
 
 /** 아티스트 (mv/artists.json). 제목에서 뽑은 이름을 여기 이름·별칭과 맞춰 본다 */
-export const artistSchema = z.strictObject({
-  name: z.string().min(1),
-  /** null이면 아직 분류 전. 사람이 채워 넣는다 */
-  type: mvTypeSchema.nullable(),
-  aliases: z.array(z.string()).default([]),
-})
+export const artistSchema = z
+  .strictObject({
+    name: z.string().min(1),
+    aliases: z.array(z.string()).default([]),
+    /** 예전에 저장하던 그룹/솔로 구분. 이제 쓰지 않아 읽을 때 버린다 (다음에 저장할 때 파일에서 빠진다) */
+    type: z.unknown().optional(),
+  })
+  .transform(({ name, aliases }) => ({ name, aliases }))
 export type Artist = z.infer<typeof artistSchema>
 export const artistsSchema = z.array(artistSchema)
 

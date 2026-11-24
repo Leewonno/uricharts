@@ -38,7 +38,7 @@ const readSnapshot = async (date: string) => JSON.parse(await readFile(paths.sna
 
 async function seedFiles({ registry = [entry('a'), entry('b')] }: { registry?: RegistryEntry[] } = {}) {
   await writeJson(paths.registry, registry)
-  await writeJson(paths.artists, [{ name: 'ILLIT', type: '걸그룹', aliases: [] }])
+  await writeJson(paths.artists, [{ name: 'ILLIT', aliases: [] }])
   await writeJson(paths.channels, [{ id: HYBE, name: 'HYBE LABELS', addedAt: '2026-11-20', source: 'seed' }])
 }
 
@@ -56,7 +56,7 @@ describe('runDaily', () => {
   })
 
   it('mv 폴더가 있으면 파일이 없어져도 샘플로 덮어쓰지 않는다', async () => {
-    await writeJson(paths.artists, [{ name: '사람이 채운 값', type: '솔로', aliases: [] }])
+    await writeJson(paths.artists, [{ name: '사람이 채운 값', aliases: [] }])
 
     const { failures } = await runDaily({ client: fakeClient({}), dataDir: dir, now: MIDNIGHT, search: false, log: silent })
 
@@ -66,7 +66,7 @@ describe('runDaily', () => {
 
   it('사람이 다른 파일을 잘못 고쳐도 그날 조회수 기록은 남긴다', async () => {
     await seedFiles()
-    await writeFile(paths.artists, '[{ "name": "X", "type": "그룹", }]') // 쉼표 오류
+    await writeFile(paths.artists, '[{ "name": "X", }]') // 쉼표 오류
 
     const { failures } = await runDaily({
       client: fakeClient({ videos: [views('a', 10), views('b', 20)] }),
@@ -79,6 +79,22 @@ describe('runDaily', () => {
     expect((await readSnapshot('2026-11-23')).views).toEqual({ a: 10, b: 20 })
     expect(failures).toHaveLength(1)
     expect(failures[0]).toContain('artists.json JSON 문법이 잘못됐습니다')
+  })
+
+  it('artists.json에 예전에 저장한 그룹/솔로 구분(type)이 있어도 읽고, 다시 저장할 때 뺀다', async () => {
+    await seedFiles()
+    await writeJson(paths.artists, [
+      { name: 'ILLIT', type: '걸그룹', aliases: [] },
+      { name: 'NEW', type: null, aliases: [] },
+    ])
+
+    const { failures } = await runDaily({ client: fakeClient({}), dataDir: dir, now: AFTERNOON, search: false, log: silent })
+
+    expect(failures).toEqual([])
+    expect(JSON.parse(await readFile(paths.artists, 'utf8'))).toEqual([
+      { name: 'ILLIT', aliases: [] },
+      { name: 'NEW', aliases: [] },
+    ])
   })
 
   it('registry.json이 깨지면 가장 최근 기록의 영상 목록으로 기록한다', async () => {

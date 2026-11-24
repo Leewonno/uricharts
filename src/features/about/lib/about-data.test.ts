@@ -24,7 +24,6 @@ function bookOf(snapshots: Snapshot[], registry: RegistryEntry[]) {
   const dates = snapshots.map((s) => s.date).toSorted()
   const src: ChartSource = {
     registry,
-    artists: [],
     snapshots: new Map(snapshots.map((s) => [s.date, s])),
     firstDate: dates[0],
     latestDate: dates.at(-1)!,

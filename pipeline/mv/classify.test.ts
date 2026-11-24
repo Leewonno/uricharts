@@ -43,6 +43,8 @@ describe('parseMvTitle', () => {
     ["JO1｜'Love seeker' MV", 'JO1', 'Love seeker'],
     // 괄호 안의 괄호 (실제 1theK 제목)
     ['[MV] YOON JI HWAN(순순희(지환)) _ Still, I Love You(그래도 사랑합니다)', 'YOON JI HWAN', 'Still, I Love You'],
+    // 구분자로 쓴 소문자 l (실제 도경수 채널 제목)
+    ["도경수(D.O.) l 'Darling' MV", 'D.O.', 'Darling'],
   ])('%s', (title, artist, song) => {
     expect(parseMvTitle(title)).toMatchObject({ artist, song })
   })

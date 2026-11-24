@@ -50,8 +50,14 @@ const searchItemSchema = z.object({ id: z.object({ videoId: z.string().optional(
 const listOf = <T extends z.ZodType>(item: T) =>
   z.object({ items: z.array(item).default([]), nextPageToken: z.string().optional() })
 
-/** 채널 업로드 목록을 이 페이지 수(×50개)까지만 넘긴다. 숏츠를 많이 올리는 유통사 채널도 며칠치는 덮는다 */
-const MAX_UPLOAD_PAGES = 4
+/** 재생목록을 이 페이지 수(×50개)까지만 넘긴다. 숏츠를 많이 올리는 유통사 채널도 며칠치는 덮는다 */
+const MAX_PLAYLIST_PAGES = 4
+
+export interface PlaylistVideo {
+  readonly videoId: string
+  /** 영상 공개 시각. 비공개 예정 영상 등은 없다 */
+  readonly publishedAt?: string
+}
 
 export class YoutubeApiError extends Error {
   constructor(
@@ -71,7 +77,9 @@ export interface YoutubeClient {
   videos(ids: readonly string[], parts: readonly string[]): Promise<YtVideo[]>
   channels(ids: readonly string[], parts: readonly string[]): Promise<YtChannel[]>
   /** 채널에 이 시각 이후 올라온 영상 (최신순) */
-  recentUploads(channelId: string, since: Date): Promise<{ videoId: string; publishedAt?: string }[]>
+  recentUploads(channelId: string, since: Date): Promise<PlaylistVideo[]>
+  /** 재생목록에 담긴 영상 (담긴 순서) */
+  playlistVideos(playlistId: string): Promise<PlaylistVideo[]>
   /** 지역별 인기 음악 영상 ID */
   mostPopularMusic(regionCode: string): Promise<string[]>
   /** 이 시각 이후 올라온 MV 검색 결과 ID (100유닛) */
@@ -147,6 +155,21 @@ export function createYoutubeClient({
     return pages.flatMap((p) => p.items)
   }
 
+  /** 재생목록을 한 페이지씩 읽는다. 다음 페이지를 읽을지는 받는 쪽이 정한다 (멈추면 더 요청하지 않는다) */
+  async function* playlistPages(playlistId: string): AsyncGenerator<PlaylistVideo[]> {
+    let pageToken: string | undefined
+    for (let page = 0; page < MAX_PLAYLIST_PAGES; page++) {
+      const res = await call(
+        'playlistItems',
+        { part: 'contentDetails', playlistId, maxResults: '50', ...(pageToken ? { pageToken } : {}) },
+        listOf(playlistItemSchema),
+      )
+      yield res.items.map((i) => ({ videoId: i.contentDetails.videoId, publishedAt: i.contentDetails.videoPublishedAt }))
+      if (!res.nextPageToken) return
+      pageToken = res.nextPageToken
+    }
+  }
+
   return {
     get unitsUsed() {
       return unitsUsed
@@ -158,26 +181,25 @@ export function createYoutubeClient({
 
     async recentUploads(channelId, since) {
       // 채널의 "업로드" 재생목록 ID는 채널 ID의 UC를 UU로 바꾼 것이다
-      const playlistId = `UU${channelId.slice(2)}`
-      const found: { videoId: string; publishedAt?: string }[] = []
-      let pageToken: string | undefined
-      for (let page = 0; page < MAX_UPLOAD_PAGES; page++) {
-        const res = await call(
-          'playlistItems',
-          { part: 'contentDetails', playlistId, maxResults: '50', ...(pageToken ? { pageToken } : {}) },
-          listOf(playlistItemSchema),
-        )
-        const items = res.items.map((i) => ({
-          videoId: i.contentDetails.videoId,
-          publishedAt: i.contentDetails.videoPublishedAt,
-        }))
+      const found: PlaylistVideo[] = []
+      for await (const items of playlistPages(`UU${channelId.slice(2)}`)) {
         // 비공개 예정 영상 등은 공개 시각이 없다. 기간 안으로 보고 일단 후보에 넣는다
         const recent = items.filter((i) => !i.publishedAt || Date.parse(i.publishedAt) >= since.getTime())
         found.push(...recent)
-        if (recent.length < items.length || !res.nextPageToken) break
-        pageToken = res.nextPageToken
+        if (recent.length < items.length) break
       }
       return found
+    },
+
+    async playlistVideos(playlistId) {
+      // 유튜브 뮤직이 만든 재생목록(RDCLAK…)은 다음 페이지가 같은 영상을 되풀이한다. 새 영상이 없는 페이지에서 멈춘다
+      const found = new Map<string, PlaylistVideo>()
+      for await (const items of playlistPages(playlistId)) {
+        const fresh = items.filter((i) => !found.has(i.videoId))
+        if (!fresh.length) break
+        fresh.forEach((i) => found.set(i.videoId, i))
+      }
+      return [...found.values()]
     },
 
     async mostPopularMusic(regionCode) {

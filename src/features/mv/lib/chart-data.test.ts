@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import type { Artist, RegistryEntry, Snapshot } from '../../../../pipeline/mv/schema'
+import type { RegistryEntry, Snapshot } from '../../../../pipeline/mv/schema'
 import { buildChartData, chartSnapshotDates, type ChartSource } from './chart-data'
 
 const entry = (yt: string, released: string, extra: Partial<RegistryEntry> = {}): RegistryEntry => ({
@@ -20,13 +20,10 @@ const midnight = (date: string, views: Record<string, number>): Snapshot => ({
   missing: [],
 })
 
-const artists: Artist[] = [{ name: 'ILLIT', type: '걸그룹', aliases: [] }]
-
 function source(snapshots: Snapshot[], registry: RegistryEntry[], extra: Partial<ChartSource> = {}): ChartSource {
   const dates = snapshots.map((s) => s.date).toSorted()
   return {
     registry,
-    artists,
     snapshots: new Map(snapshots.map((s) => [s.date, s])),
     firstDate: dates[0],
     latestDate: dates.at(-1)!,
@@ -47,10 +44,10 @@ describe('buildChartData', () => {
     const data = buildChartData(source([today], [...registry, entry('gone', '2026-02-02', { hidden: true })]))
 
     expect(data.asOf).toBe('2026-11-22')
-    // 숨긴 곡, 조회수를 못 받은 곡은 뺀다. 그룹/솔로 구분 전 아티스트는 type이 null
-    expect(data.mvs.map((m) => [m.yt, m.type, m.total])).toEqual([
-      ['new', '걸그룹', 500],
-      ['old', null, 9000],
+    // 숨긴 곡, 조회수를 못 받은 곡은 뺀다
+    expect(data.mvs.map((m) => [m.yt, m.total])).toEqual([
+      ['new', 500],
+      ['old', 9000],
     ])
     // 올해 공개곡은 올해 조회수 = 누적. 그 전 공개곡은 1월 1일 기록이 없어 알 수 없다
     expect(data.mvs.map((m) => [m.yt, m.yearViews, m.day, m.week, m.month])).toEqual([

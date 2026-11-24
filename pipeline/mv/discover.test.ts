@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { collectSnapshot } from './collect'
 import { addDays, kstDate, kstHour, kstIso } from './dates'
-import { discoverNewMvs, findArtist } from './discover'
+import { discoverNewMvs, findArtist, songNames } from './discover'
 import type { Artist, Channel, RegistryEntry } from './schema'
 import { fakeClient } from './testing'
 import type { YtChannel, YtVideo } from './youtube-api'
@@ -13,7 +13,7 @@ const FAN = 'UCfanfanfanfanfanfanfanf'
 const NEW_LABEL = 'UCnewlabelnewlabelnewlab'
 
 const channels: Channel[] = [{ id: HYBE, name: 'HYBE LABELS', addedAt: '2026-11-22', source: 'seed' }]
-const artists: Artist[] = [{ name: 'ILLIT', type: '걸그룹', aliases: ['아일릿'] }]
+const artists: Artist[] = [{ name: 'ILLIT', aliases: ['아일릿'] }]
 const registry: RegistryEntry[] = [
   { yt: 'old', title: 'Magnetic', artist: 'ILLIT', released: '2024-03-25', addedAt: '2026-11-22', source: 'seed' },
 ]
@@ -71,7 +71,7 @@ describe('discoverNewMvs', () => {
     expect(result.newArtists).toEqual([])
   })
 
-  it('구독자 10만 명 미만이거나 구독자 수를 숨긴 채널은 묻지도 않고 뺀다', async () => {
+  it('구독자 10만 명 미만이거나 구독자 수를 숨긴 채널은 묻지도 않고 빼되, 나중에 재생목록에 오를 수 있으니 판단 기록은 남기지 않는다', async () => {
     const client = fakeClient({
       popular: ['small', 'hidden'],
       videos: [
@@ -85,7 +85,7 @@ describe('discoverNewMvs', () => {
 
     expect(result.added).toEqual([])
     expect(result.unsure).toEqual([])
-    expect(Object.keys(result.seen)).toEqual(['small', 'hidden'])
+    expect(result.seen).toEqual({})
   })
 
   it('지켜보는 채널은 구독자 수와 상관없이 본다 (VEVO 채널은 구독자가 수천 명으로 나온다)', async () => {
@@ -155,7 +155,7 @@ describe('discoverNewMvs', () => {
     ])
   })
 
-  it('지켜보는 채널에서 처음 보는 아티스트는 추가하고, 그룹/솔로 구분은 비워 둔다', async () => {
+  it('지켜보는 채널에서 처음 보는 아티스트는 아티스트 목록에 추가한다', async () => {
     const client = fakeClient({
       uploads: { [HYBE]: [{ videoId: 'rookie' }] },
       videos: [video('rookie', "NEWGRP (뉴그룹) 'Debut' Official MV", HYBE)],
@@ -165,7 +165,7 @@ describe('discoverNewMvs', () => {
     const result = await discoverNewMvs({ ...base, client })
 
     expect(result.added.map((a) => [a.title, a.artist])).toEqual([['Debut', 'NEWGRP']])
-    expect(result.newArtists).toEqual([{ name: 'NEWGRP', type: null, aliases: ['뉴그룹'] }])
+    expect(result.newArtists).toEqual([{ name: 'NEWGRP', aliases: ['뉴그룹'] }])
   })
 
   it('이미 목록에 있는 곡을 다른 채널이 올리면 묻는다 (조회수가 나뉜다)', async () => {
@@ -277,6 +277,101 @@ describe('discoverNewMvs', () => {
     expect(result.searched).toBe(true)
   })
 
+  describe('유튜브 최신 음악 재생목록', () => {
+    const LATEST = 'RDCLAK5uy_latest'
+    const opts = { playlistIds: [LATEST] }
+    const listed = (...ids: string[]) => ({ [LATEST]: ids.map((videoId) => ({ videoId, publishedAt: '2026-11-22T09:00:00Z' })) })
+
+    it('MV 표시가 있으면 처음 보는 채널이어도, 구독자가 적어도 바로 추가한다', async () => {
+      const client = fakeClient({
+        playlists: listed('pl1'),
+        videos: [video('pl1', "UNCHILD 언차일드 '팅팅 (TiNG TiNG)' MV", NEW_LABEL)],
+        channelStats: [stats(NEW_LABEL, 20_000)],
+      })
+
+      const result = await discoverNewMvs({ ...base, client, options: opts })
+
+      expect(result.added.map((a) => [a.yt, a.artist, a.title, a.channelId])).toEqual([
+        ['pl1', 'UNCHILD', '팅팅 (TiNG TiNG)', NEW_LABEL],
+      ])
+      expect(result.unsure).toEqual([])
+    })
+
+    it('MV 표시가 없거나 규칙상 MV가 아닌 영상은 빼지 않고 한 번 묻는다', async () => {
+      const client = fakeClient({
+        playlists: listed('topic', 'sub', 'short'),
+        videos: [
+          video('topic', 'Sakuranbo', NEW_LABEL),
+          video('sub', "[SUB] 다이나믹 듀오(Dynamicduo) - '하라는 랩' Official Video", NEW_LABEL),
+          video('short', "ILLIT (아일릿) 'It's Me' MV", NEW_LABEL, { contentDetails: { duration: 'PT45S' } }),
+        ],
+        channelStats: [stats(NEW_LABEL, null)],
+      })
+
+      const result = await discoverNewMvs({ ...base, client, options: opts })
+
+      expect(result.added).toEqual([])
+      expect(result.unsure.map((u) => [u.yt, u.reason])).toEqual([
+        ['topic', 'playlist-no-mv-marker'],
+        ['sub', 'playlist-not-mv-content'],
+        ['short', 'playlist-too-short'],
+      ])
+      expect(Object.keys(result.seen)).toEqual(['topic', 'sub', 'short'])
+    })
+
+    it('재생목록에서 온 MV도 이미 있는 곡이면 묻는다', async () => {
+      const client = fakeClient({
+        playlists: listed('dup'),
+        videos: [video('dup', "ILLIT (아일릿) 'Magnetic' MV", NEW_LABEL)],
+        channelStats: [stats(NEW_LABEL, 1_000)],
+      })
+
+      const result = await discoverNewMvs({ ...base, client, options: opts })
+
+      expect(result.unsure.map((u) => u.reason)).toEqual(['duplicate'])
+    })
+
+    it('유통사와 아티스트 채널이 곡명 표기를 다르게 올린 같은 MV도 묻는다 (영문 곡명이 괄호 안에 있을 때)', async () => {
+      const client = fakeClient({
+        uploads: { [HYBE]: [{ videoId: 'label' }] },
+        playlists: listed('own'),
+        videos: [
+          video('label', '[MV] ILLIT(아일릿) _ Mountain, Life(산, 삶)', HYBE),
+          video('own', "아일릿 | '산, 삶(Mountain, Life)' Official MV", NEW_LABEL),
+        ],
+        channelStats: [stats(HYBE, 76_000_000), stats(NEW_LABEL, 50_000)],
+      })
+
+      const result = await discoverNewMvs({ ...base, client, options: opts })
+
+      expect(result.added.map((a) => [a.yt, a.title])).toEqual([['label', 'Mountain, Life']])
+      expect(result.unsure.map((u) => [u.yt, u.reason])).toEqual([['own', 'duplicate']])
+    })
+
+    it('판단 기록이 지워지는 30일보다 오래된 영상은 보지 않는다 (같은 영상을 다시 묻지 않게)', async () => {
+      const client = fakeClient({
+        playlists: { [LATEST]: [{ videoId: 'stale', publishedAt: '2026-10-20T09:00:00Z' }] },
+      })
+
+      await discoverNewMvs({ ...base, client, options: opts })
+
+      expect(client.videoRequests).toEqual([])
+    })
+
+    it('재생목록을 못 읽어도 나머지는 계속하고 경고를 남긴다', async () => {
+      const client = {
+        ...fakeClient({ uploads: { [HYBE]: [] } }),
+        playlistVideos: async () => {
+          throw new Error('playlistNotFound')
+        },
+      }
+
+      const result = await discoverNewMvs({ ...base, client, options: opts })
+
+      expect(result.warnings).toEqual([`재생목록 ${LATEST}: playlistNotFound`])
+    })
+  })
+
   it('판단 기록은 30일이 지나면 지운다', async () => {
     const client = fakeClient({})
     const result = await discoverNewMvs({ ...base, seen: { a: '2026-10-23', b: '2026-10-24' }, client })
@@ -284,11 +379,25 @@ describe('discoverNewMvs', () => {
   })
 })
 
+describe('songNames', () => {
+  it('한글·영문 곡명을 같이 적었을 때만 괄호 안팎을 따로 본다', () => {
+    expect(songNames('산, 삶(Mountain, Life)')).toEqual(['산삶mountainlife', '산삶', 'mountainlife'])
+    expect(songNames('Mountain, Life')).toEqual(['mountainlife'])
+    // 리믹스·피처링·괄호가 든 곡명은 나누지 않는다
+    expect(songNames('RUDE! (yunji Remix)')).toEqual(['rudeyunjiremix'])
+    expect(songNames('먼치킨 (Feat. 그냥노창, Jvcki Wai)')).toEqual(['먼치킨feat그냥노창jvckiwai'])
+    expect(songNames('FRI(END)S')).toEqual(['friends'])
+    expect(songNames('RUDE! (윤지 Remix)')).toEqual(['rude윤지remix'])
+    expect(songNames('Song (Feat. 아이유)')).toEqual(['songfeat아이유'])
+    expect(songNames('산 (2024)')).toEqual(['산2024'])
+  })
+})
+
 describe('findArtist', () => {
   it('대소문자·공백·기호와 별칭을 무시하고 찾는다', () => {
     const list: Artist[] = [
-      { name: 'ROSÉ & Bruno Mars', type: '솔로', aliases: [] },
-      { name: 'ILLIT', type: '걸그룹', aliases: ['아일릿'] },
+      { name: 'ROSÉ & Bruno Mars', aliases: [] },
+      { name: 'ILLIT', aliases: ['아일릿'] },
     ]
     expect(findArtist(list, 'rosé & bruno mars')?.name).toBe('ROSÉ & Bruno Mars')
     expect(findArtist(list, '(아일릿)')?.name).toBe('ILLIT')
