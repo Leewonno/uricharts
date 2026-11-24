@@ -3,7 +3,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { SAMPLE_MVS } from '../../src/features/mv/data/sample'
-import { nextSearchSince, runDaily, type Logger } from './daily'
+import { nextSearchSince, recordableIds, runDaily, type Logger } from './daily'
 import { mvPaths, writeJson } from './store'
 import { fakeClient } from './testing'
 import type { RegistryEntry } from './schema'
@@ -43,7 +43,7 @@ async function seedFiles({ registry = [entry('a'), entry('b')] }: { registry?: R
 }
 
 describe('runDaily', () => {
-  it('처음 실행이면 샘플 100곡으로 목록을 만들고 바로 기록한다', async () => {
+  it('처음 실행이면 샘플 100곡으로 목록을 만들고 바로 기록한다 (기록은 올해 공개곡만)', async () => {
     const client = fakeClient({ videos: [views(SAMPLE_MVS[0].yt, 100)] })
 
     const { failures, snapshot } = await runDaily({ client, dataDir: dir, now: MIDNIGHT, search: false, log: silent })
@@ -52,7 +52,8 @@ describe('runDaily', () => {
     const registry = JSON.parse(await readFile(paths.registry, 'utf8'))
     expect(registry).toHaveLength(SAMPLE_MVS.length)
     expect(snapshot?.views).toEqual({ [SAMPLE_MVS[0].yt]: 100 })
-    expect(snapshot?.missing).toHaveLength(SAMPLE_MVS.length - 1)
+    const thisYear = SAMPLE_MVS.filter((m) => m.released.startsWith('2026'))
+    expect(snapshot?.missing).toHaveLength(thisYear.length - 1)
   })
 
   it('mv 폴더가 있으면 파일이 없어져도 샘플로 덮어쓰지 않는다', async () => {
@@ -238,6 +239,18 @@ describe('runDaily', () => {
     expect(JSON.parse(await readFile(paths.registry, 'utf8')).map((r: RegistryEntry) => r.yt)).toEqual(['a', 'b', 'n1'])
   })
 
+  it('새해 1월 2일 기록부터는 지난해 공개곡을 기록하지 않는다', async () => {
+    await seedFiles({ registry: [{ ...entry('a'), released: '2026-03-03' }, { ...entry('n'), released: '2027-01-01' }] })
+    const client = fakeClient({ videos: [views('a', 10), views('n', 7)] })
+
+    // 2027-01-02 00:05 KST
+    await runDaily({ client, dataDir: dir, now: new Date('2027-01-01T15:05:00Z'), search: false, log: silent })
+
+    const snapshot = await readSnapshot('2027-01-02')
+    expect(snapshot.views).toEqual({ n: 7 })
+    expect(snapshot.missing).toEqual([])
+  })
+
   it('검색은 하루 한 번만 하고, 마지막 검색 시각을 남긴다', async () => {
     await seedFiles()
     const client = fakeClient({ uploads: { [HYBE]: [] } })
@@ -256,6 +269,19 @@ describe('runDaily', () => {
     await runDaily({ client: fakeClient({ uploads: { [HYBE]: [] } }), dataDir: dir, now: MIDNIGHT, search: false, digestOut, log: silent })
 
     expect(await readFile(digestOut, 'utf8')).toContain('### 자동 추가한 곡 (1)')
+  })
+})
+
+describe('recordableIds', () => {
+  it('기록 날짜 전날이 속한 해에 공개된 곡만 기록한다 (1월 1일 0시 기록까지 지난해 곡)', () => {
+    const reg = [
+      { ...entry('y25'), released: '2025-06-01' },
+      { ...entry('y26'), released: '2026-12-31' },
+      { ...entry('y27'), released: '2027-01-01' },
+    ]
+    expect(recordableIds(reg, '2026-12-31')).toEqual(['y26'])
+    expect(recordableIds(reg, '2027-01-01')).toEqual(['y26'])
+    expect(recordableIds(reg, '2027-01-02')).toEqual(['y27'])
   })
 })
 
