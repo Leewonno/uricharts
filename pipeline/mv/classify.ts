@@ -109,13 +109,18 @@ export function parseDuration(iso: string): number | null {
   return Number(d) * 86400 + Number(h) * 3600 + Number(min) * 60 + Number(s)
 }
 
-const QUOTE_PAIRS: Readonly<Record<string, string>> = {
-  "'": "'",
-  '"': '"',
-  '‘': '’',
-  '“': '”',
-  '「': '」',
-  '『': '』',
+/**
+ * 여는 따옴표마다 닫을 수 있는 따옴표.
+ * 짝이 안 맞게 쓴 제목도 있다: ILLIT '체포하겠어 (You’re Under Arrest)’ / WHIB ‘CHERRY PIE' / aoen ‛HAJIMARI COLOR’
+ */
+const QUOTE_PAIRS: Readonly<Record<string, readonly string[]>> = {
+  "'": ["'", '’'],
+  '‘': ['’', "'"],
+  '‛': ['’', "'"],
+  '"': ['"', '”'],
+  '“': ['”', '"'],
+  '「': ['」'],
+  '『': ['』'],
 }
 /** 일본식 괄호 따옴표는 앞 글자와 붙어 있어도 따옴표다 (TWICE『Wake Me Up』) */
 const BRACKET_QUOTES = new Set(['「', '『'])
@@ -129,6 +134,8 @@ const HANGUL_PAREN = /\s*\([^()]*[가-힣][^()]*\)[가-힣]*/g
 const HANGUL_THEN_LATIN = /^([가-힣][가-힣\s]*?)\s*\(([^()]*[a-z][^()]*)\)$/i
 /** 아티스트 뒤에 붙는 발매 정보. "NiziU 2nd Single『CLAP CLAP』" */
 const RELEASE_INFO = /\s*(japan(ese)?\s+)?\d+(st|nd|rd|th)\s+(digital\s+|mini\s+|full\s+)?(single|album|ep)\b.*$/i
+const BARE_UNDERSCORE = /\s*_\s*/
+const BRACKETED_SONG = /\[([^\]]+)\]/
 const MARKER_BRACKET_TAIL = /\s*[([【]([^)\]】]*)[)\]】]\s*$/
 const MARKER_WORDS = /m\/?v|video|official|뮤직|뮤비/i
 const MARKER_TAIL = /\s*(official\s+)?(music\s+)?(m\/?v|video|뮤직\s?비디오|뮤비)\s*$/i
@@ -143,28 +150,51 @@ export function parseMvTitle(title: string): ParsedTitle {
   const sep = SEPARATORS.map((s) => ({ s, i: body.indexOf(s) }))
     .filter(({ i }) => i > 0)
     .toSorted((a, b) => a.i - b.i)[0]
-  if (!sep) return { artist: null, aliases: [], song: null }
+  if (sep) return { ...cleanArtist(body.slice(0, sep.i)), song: cleanSong(body.slice(sep.i + sep.s.length)) }
 
-  return { ...cleanArtist(body.slice(0, sep.i)), song: cleanSong(body.slice(sep.i + sep.s.length)) }
+  // 공백 없이 붙인 밑줄. "[MV] QWER_ CEREMONY", "Kim Sung Kyu(김성규) _Over It"
+  // 이름에 밑줄이 든 아티스트도 있어서 다른 구분자가 없을 때만 쓴다
+  const underscore = BARE_UNDERSCORE.exec(body)
+  if (underscore && underscore.index > 0) {
+    return {
+      ...cleanArtist(body.slice(0, underscore.index)),
+      song: cleanSong(body.slice(underscore.index + underscore[0].length)),
+    }
+  }
+
+  // 대괄호로 감싼 곡명. "SHINWONHO 신원호 [ Super Star ] MV"
+  const bracketed = BRACKETED_SONG.exec(body)
+  if (bracketed && bracketed.index > 0 && !MARKER_WORDS.test(bracketed[1])) {
+    return { ...cleanArtist(body.slice(0, bracketed.index)), song: bracketed[1].trim() || null }
+  }
+
+  return { artist: null, aliases: [], song: null }
 }
 
 /**
  * 따옴표로 감싼 곡명을 찾는다.
  * - 여는 따옴표는 맨 앞이나 글자·숫자가 아닌 문자 뒤에 있어야 한다 (Girls' Generation의 '는 아니다)
- * - 같은 문자로 닫는 따옴표('…', "…")는 뒤에 글자·숫자가 오지 않는 첫 번째 것을 쓴다.
+ * - 닫는 따옴표 ' "는 뒤에 글자·숫자가 오지 않는 첫 번째 것을 쓴다.
  *   'It's Me'의 It's는 건너뛰고, 'Shut Down' M/V (BLACKPINK's …)에서는 Down 뒤에서 닫는다.
+ * - 닫는 따옴표 ’는 양옆이 글자인 것(You’re)을 건너뛴다.
  */
 function findQuoted(title: string): { start: number; text: string } | null {
   for (let i = 0; i < title.length; i++) {
     const open = title[i]
-    const close = QUOTE_PAIRS[open]
-    if (!close) continue
+    const closers = QUOTE_PAIRS[open]
+    if (!closers) continue
     if (!BRACKET_QUOTES.has(open) && i > 0 && LETTER_OR_DIGIT.test(title[i - 1])) continue
 
     for (let j = i + 2; j < title.length; j++) {
-      if (title[j] !== close) continue
+      const close = title[j]
+      if (!closers.includes(close)) continue
+      const prev = title[j - 1]
       const next = title[j + 1]
-      if (close === open && next !== undefined && LETTER_OR_DIGIT.test(next)) continue
+      const nextIsWord = next !== undefined && LETTER_OR_DIGIT.test(next)
+      // ' " 뒤에 글자가 이어지면 아포스트로피다 (It's)
+      if ((close === "'" || close === '"') && nextIsWord) continue
+      // ’ 양옆이 글자면 아포스트로피다 (You’re). 'Song’MV처럼 닫는 따옴표 뒤에 바로 글자가 오는 제목도 있어 앞 글자까지 본다
+      if (close === '’' && nextIsWord && LETTER_OR_DIGIT.test(prev)) continue
       return { start: i, text: title.slice(i + 1, j) }
     }
   }

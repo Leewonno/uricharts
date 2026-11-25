@@ -45,6 +45,23 @@ describe('parseMvTitle', () => {
     ['[MV] YOON JI HWAN(순순희(지환)) _ Still, I Love You(그래도 사랑합니다)', 'YOON JI HWAN', 'Still, I Love You'],
     // 구분자로 쓴 소문자 l (실제 도경수 채널 제목)
     ["도경수(D.O.) l 'Darling' MV", 'D.O.', 'Darling'],
+    // 여는 따옴표와 닫는 따옴표의 짝이 안 맞는 제목 (실제 HYBE·tripleS·WHIB 제목)
+    ["ILLIT (아일릿) '체포하겠어 (You’re Under Arrest)’ Official MV", 'ILLIT', '체포하겠어 (You’re Under Arrest)'],
+    ["tripleS(트리플에스) 'Andless’ Official MV", 'tripleS', 'Andless'],
+    ['aoen ‛HAJIMARI COLOR’ Official MV', 'aoen', 'HAJIMARI COLOR'],
+    ["WHIB(휘브) ‘CHERRY PIE' MV", 'WHIB', 'CHERRY PIE'],
+    ['NiziU(니쥬) “Make you happy" M/V', 'NiziU', 'Make you happy'],
+    // 밑줄 앞뒤에 공백이 없는 1theK 제목
+    ['[MV] QWER_ CEREMONY', 'QWER', 'CEREMONY'],
+    ['[MV] KIIRAS (키라스)_TA TA', 'KIIRAS', 'TA TA'],
+    ['[Official Video] Kim Sung Kyu(김성규) _Over It', 'Kim Sung Kyu', 'Over It'],
+    ['온앤오프 (ONF)_사랑하게 될 거야 (We Must Love)(MV)', 'ONF', '사랑하게 될 거야 (We Must Love)'],
+    // 다른 구분자가 있으면 이름 안의 밑줄로 나누지 않는다
+    ['[MV] RED_VELVET - Psycho', 'RED_VELVET', 'Psycho'],
+    // 곡명을 대괄호로 감싼 제목 (실제 신원호 채널 제목)
+    ['SHINWONHO 신원호 [ Super Star ] MV', 'SHINWONHO', 'Super Star'],
+    // 대괄호 안이 MV 표시면 곡명이 아니다
+    ['JENNIE - like JENNIE [Official Video]', 'JENNIE', 'like JENNIE'],
   ])('%s', (title, artist, song) => {
     expect(parseMvTitle(title)).toMatchObject({ artist, song })
   })
