@@ -17,8 +17,8 @@ export function Qna({ id, question, children }: { id: string; question: string; 
       >
         {question}
       </h2>
-      <div className="grid grid-cols-[40px_minmax(0,1fr)] items-start gap-3 max-[560px]:grid-cols-1">
-        <span aria-hidden="true" className="flex size-10 items-end justify-center gap-[3px] rounded-xl bg-strong pb-2.5 max-[560px]:hidden">
+      <div className="grid grid-cols-[40px_minmax(0,1fr)] items-start gap-3 max-sm:grid-cols-1">
+        <span aria-hidden="true" className="flex size-10 items-end justify-center gap-[3px] rounded-xl bg-strong pb-2.5 max-sm:hidden">
           {AVATAR_BARS.map((height) => (
             <b key={height} className={`w-[5px] rounded-xs bg-cyan-300 ${height}`} />
           ))}

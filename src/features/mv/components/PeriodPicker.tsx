@@ -102,7 +102,7 @@ export function PeriodPicker({ period, slots, current, disabled }: Props) {
   )
 }
 
-const LABEL = 'block rounded-lg px-1 text-xl leading-tight font-semibold tracking-[-0.02em] max-md:text-lg'
+const LABEL = 'block rounded-lg px-1 text-xl leading-tight font-semibold tracking-[-0.02em] max-sm:text-lg'
 const CARD = 'rounded-3xl bg-surface shadow-lg shadow-cyan-900/10'
 
 /** ‹ › 이전/다음 기간. 갈 곳이 없으면 흐리게만 둔다 */

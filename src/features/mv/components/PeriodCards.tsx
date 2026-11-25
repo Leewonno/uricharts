@@ -20,7 +20,7 @@ export function PeriodCards({ periods }: { periods: readonly PeriodInfo[] }) {
   return (
     <section aria-labelledby="period-charts" className="mx-auto max-w-[1280px] px-[clamp(16px,4vw,48px)] pb-14">
       <SectionHeading id="period-charts" title="기간별 차트" />
-      <ul className="grid grid-cols-2 gap-4 md:grid-cols-4">
+      <ul className="grid grid-cols-2 gap-4 sm:grid-cols-4">
         {periods.map((p) => {
           const Icon = PERIOD_ICONS[p.key]
           return (

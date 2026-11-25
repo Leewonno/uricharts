@@ -10,8 +10,8 @@ import { ChangeBadge, RowGo, rowLabel } from './RowParts'
  * - 연간: 순위 · 노래 · 공개일 · 조회수 · 보러가기 (직전 해와 비교하지 않아 변동 칸이 없다)
  */
 export const CHART_COLUMNS = {
-  change: 'md:grid-cols-[64px_1fr_150px_150px_72px_100px]',
-  released: 'md:grid-cols-[64px_1fr_110px_170px_100px]',
+  change: 'sm:grid-cols-[64px_1fr_150px_150px_72px_100px]',
+  released: 'sm:grid-cols-[64px_1fr_110px_170px_100px]',
 } as const
 
 /** 조회수 옆에 붙는 칸: 변동(일간·주간·월간) 또는 공개일(연간) */
@@ -33,7 +33,7 @@ export function ChartRow({ mv, maxViews, extra }: Props) {
       onClick={() => openPlayer(mv)}
       aria-haspopup="dialog"
       aria-label={rowLabel(mv)}
-      className={`group relative grid w-full cursor-pointer text-left grid-cols-[40px_1fr_auto_auto] items-center gap-3 overflow-hidden rounded-[14px] px-5 py-3.5 transition-colors duration-200 bg-surface hover:bg-fill-soft focus-visible:bg-fill-soft md:gap-4 ${CHART_COLUMNS[extra]}`}
+      className={`group relative grid w-full cursor-pointer text-left grid-cols-[40px_1fr_auto_auto] items-center gap-3 overflow-hidden rounded-[14px] px-5 py-3.5 transition-colors duration-200 bg-surface hover:bg-fill-soft focus-visible:bg-fill-soft sm:gap-4 ${CHART_COLUMNS[extra]}`}
     >
       <div
         aria-hidden="true"
@@ -42,21 +42,21 @@ export function ChartRow({ mv, maxViews, extra }: Props) {
       />
       <div className="relative text-[26px] leading-none font-semibold tabular-nums max-sm:text-xl">{mv.rank}</div>
       <div className="relative flex min-w-0 items-center gap-3.5">
-        <MvThumbnail videoId={mv.yt} sizes="96px" className="w-16 rounded-lg bg-fill-soft max-sm:hidden md:w-24" />
+        <MvThumbnail videoId={mv.yt} sizes="96px" className="w-24 rounded-lg bg-fill-soft max-sm:hidden" />
         <div className="min-w-0">
           <div className="truncate text-[17px] font-bold">{mv.title}</div>
           <div className="truncate text-sm text-muted">{mv.artist}</div>
         </div>
       </div>
       {extra === 'released' && (
-        <div className="relative text-center text-sm font-normal tracking-[-0.04em] text-muted tabular-nums max-md:hidden">{formatDateDot(mv.released)}</div>
+        <div className="relative text-center text-sm font-normal tracking-[-0.04em] text-muted tabular-nums max-sm:hidden">{formatDateDot(mv.released)}</div>
       )}
       {extra === 'change' && (
-        <div className="relative text-right text-base font-semibold tracking-[-0.04em] text-muted tabular-nums max-md:hidden">{formatNumber(mv.total)}</div>
+        <div className="relative text-right text-base font-semibold tracking-[-0.04em] text-muted tabular-nums max-sm:hidden">{formatNumber(mv.total)}</div>
       )}
       <div className="relative text-right text-xl font-semibold tracking-[-0.04em] tabular-nums max-sm:text-[15px]">{formatNumber(mv.views)}</div>
       {extra === 'change' && (
-        <div className="relative text-center text-sm font-bold max-md:hidden">
+        <div className="relative text-center text-sm font-bold max-sm:hidden">
           <ChangeBadge change={mv.change} />
         </div>
       )}
