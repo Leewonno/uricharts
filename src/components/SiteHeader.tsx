@@ -50,7 +50,7 @@ export function SiteHeader() {
   }, [current])
 
   return (
-    <header className="scroll-shadow sticky top-0 z-30 flex items-center justify-between gap-3 bg-page/80 px-[clamp(16px,4vw,48px)] py-5 backdrop-blur-md max-sm:gap-2">
+    <header className="scroll-shadow sticky top-0 z-30 flex items-center justify-between gap-3 bg-page/80 px-[clamp(16px,4vw,48px)] py-5 backdrop-blur-md max-sm:gap-2 max-sm:py-2">
       <Link href="/" aria-label="우리의차트 홈" className="group flex shrink-0 items-center gap-2.5 text-[22px] font-extrabold tracking-[-0.04em] max-sm:gap-2 max-sm:text-lg">
         {/* 로고 타일: 진한 cyan 둥근 사각형 안에 흰 막대. 마우스를 올리면 막대가 이퀄라이저처럼 출렁인다 */}
         <i
@@ -85,7 +85,7 @@ export function SiteHeader() {
             key={href}
             href={href}
             aria-current={index === current ? 'page' : undefined}
-            className="relative flex items-center gap-1.5 rounded-full py-1.5 pr-2.5 pl-2.5 text-[13px] font-bold whitespace-nowrap text-muted transition-colors duration-250 hover:text-ink aria-[current=page]:bg-accent aria-[current=page]:text-white group-data-ready/nav:aria-[current=page]:bg-transparent sm:py-[7px] sm:pr-4 sm:pl-3 sm:text-[15px]"
+            className="relative flex items-center gap-1.5 rounded-full py-1.5 pr-2.5 pl-2.5 text-xs font-bold whitespace-nowrap text-muted transition-colors duration-250 hover:text-ink aria-[current=page]:bg-accent aria-[current=page]:text-white group-data-ready/nav:aria-[current=page]:bg-transparent sm:py-[7px] sm:pr-4 sm:pl-3 sm:text-[15px]"
           >
             <Icon size={17} strokeWidth={2.4} aria-hidden="true" className="hidden shrink-0 sm:block" />
             {label}

@@ -14,8 +14,8 @@ export function MiniRankList({ items }: { items: readonly AboutMv[] }) {
           <span className="text-center text-lg font-semibold tabular-nums">{i + 1}</span>
           <MvThumbnail videoId={mv.yt} sizes="72px" className="w-[72px] rounded-md bg-fill max-sm:w-14" />
           <span className="min-w-0">
-            <span className="block truncate text-[14.5px] font-bold text-strong">{mv.title}</span>
-            <span className="block truncate text-[12.5px] text-muted">{mv.artist}</span>
+            <span className="block truncate text-sm font-bold text-strong">{mv.title}</span>
+            <span className="block truncate text-xs text-muted">{mv.artist}</span>
           </span>
           <span className="text-[15px] font-semibold tabular-nums max-sm:col-start-3 max-sm:text-[13px]" title={`${formatNumber(mv.views)}회`}>
             {formatShort(mv.views)}

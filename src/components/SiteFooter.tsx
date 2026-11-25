@@ -6,7 +6,7 @@ const FOOTER_LINKS = [{ href: '/contact', label: '문의' }] as const
 
 // 헤더 메뉴와 같은 알약 묶음. 어두운 판 위라 바탕은 반투명 흰색으로 깐다
 const linkClass =
-  'block rounded-full px-4 py-[7px] text-[15px] font-bold text-cyan-100 transition-colors duration-250 hover:bg-white/10 hover:text-white'
+  'block rounded-full px-4 py-[7px] text-[15px] font-bold text-cyan-100 transition-colors duration-250 hover:bg-white/10 hover:text-white max-sm:py-1.5 max-sm:text-[13px]'
 
 /**
  * 모든 페이지 아래를 닫는 깊은 청록 판 ("엔딩 크레딧").
@@ -15,11 +15,11 @@ const linkClass =
  */
 export function SiteFooter({ asOf }: { asOf: string }) {
   return (
-    <footer className="relative mx-[clamp(8px,1.5vw,16px)] mt-auto overflow-hidden rounded-t-[32px] bg-strong px-[clamp(16px,4vw,48px)] pt-14 text-cyan-100">
+    <footer className="relative mx-[clamp(8px,1.5vw,16px)] mt-auto overflow-hidden rounded-t-[32px] bg-strong px-[clamp(16px,4vw,48px)] pt-14 text-cyan-100 max-sm:px-6">
       <div className="mx-auto flex max-w-[1184px] flex-wrap justify-between gap-10">
         <div className="max-w-[420px]">
           <p className="text-[clamp(24px,3vw,32px)] leading-[1.3] font-extrabold tracking-[-0.04em] text-white">
-            오늘의 데이터를
+            우리의 오늘을
             <br />
             <em className="text-cyan-300 not-italic">기록으로 남깁니다</em>
           </p>
@@ -36,7 +36,7 @@ export function SiteFooter({ asOf }: { asOf: string }) {
           </ul>
         </nav>
       </div>
-      <p className="mx-auto mt-4 max-w-[1184px] text-[12.5px] text-cyan-200/60">
+      <p className="mx-auto mt-4 max-w-[1184px] text-xs text-cyan-200/60">
         © {asOf.slice(0, 4)} 우리의차트 URICHARTS
       </p>
       <span

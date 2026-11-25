@@ -33,12 +33,12 @@ export function PeriodCards({ periods }: { periods: readonly PeriodInfo[] }) {
                   aria-hidden="true"
                   className="absolute inset-0 -z-10 bg-flow opacity-0 transition-opacity duration-350 ease-out group-hover:animate-flow group-hover:opacity-100 motion-reduce:group-hover:animate-none"
                 />
-                <h3 className="flex items-center gap-2 text-[28px] font-bold tracking-[-0.03em]">
-                  <Icon size={26} strokeWidth={2.4} aria-hidden="true" className="shrink-0 text-accent transition-colors duration-200 group-hover:text-ink" />
+                <h3 className="flex items-center gap-2 text-2xl font-bold tracking-[-0.03em] max-sm:text-xl">
+                  <Icon size={26} strokeWidth={2.4} aria-hidden="true" className="shrink-0 text-accent transition-colors duration-200 group-hover:text-ink max-sm:size-5" />
                   {p.name}
                 </h3>
-                <p className="text-[15px] font-semibold text-muted group-hover:text-ink">{p.available ? p.label : '집계 중'}</p>
-                <ChevronRight size={22} strokeWidth={3} aria-hidden="true" className="absolute top-1/2 right-5 -translate-y-1/2 text-accent transition-colors duration-200 group-hover:text-ink" />
+                <p className="text-[15px] font-semibold text-muted group-hover:text-ink max-sm:text-sm">{p.available ? p.label : '집계 중'}</p>
+                <ChevronRight size={22} strokeWidth={3} aria-hidden="true" className="absolute top-1/2 right-5 -translate-y-1/2 text-accent transition-colors duration-200 group-hover:text-ink max-sm:size-4.5" />
               </Link>
             </li>
           )

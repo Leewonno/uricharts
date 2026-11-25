@@ -19,7 +19,7 @@ export function SegmentedButtons<K extends string>({
           type="button"
           aria-pressed={option.key === value}
           onClick={() => onChange(option.key)}
-          className="cursor-pointer rounded-full px-4 py-2 text-[14.5px] font-bold text-muted transition-colors duration-250 hover:text-ink aria-pressed:bg-fill aria-pressed:text-strong"
+          className="cursor-pointer rounded-full px-4 py-2 text-sm font-bold text-muted transition-colors duration-250 hover:text-ink aria-pressed:bg-fill aria-pressed:text-strong"
         >
           {option.label}
         </button>
