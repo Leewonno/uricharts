@@ -54,10 +54,10 @@ export function YearSelect({ years }: { years: readonly YearOption[] }) {
         aria-controls={listId}
         aria-label={`${current.year}년, 다른 연도 고르기`}
         onClick={() => setOpen((v) => !v)}
-        className="flex h-full cursor-pointer items-center gap-2 rounded-full bg-strong pr-4 pl-6 text-lg font-bold text-cyan-50 tabular-nums transition-colors hover:bg-ink max-sm:pl-5 max-sm:text-base"
+        className="flex h-full cursor-pointer items-center gap-2 rounded-full bg-strong py-3.5 pr-4 pl-6 text-lg whitespace-nowrap font-bold text-cyan-50 tabular-nums transition-colors hover:bg-ink max-sm:gap-1.5 max-sm:py-2.5 max-sm:pr-3.5 max-sm:pl-4 max-sm:text-[13px] max-sm:leading-5"
       >
         {current.year}년
-        <ChevronDown size={16} strokeWidth={3} aria-hidden="true" className={`transition-transform ${open ? 'rotate-180' : ''}`} />
+        <ChevronDown size={16} strokeWidth={3} aria-hidden="true" className={`transition-transform max-sm:size-3 ${open ? 'rotate-180' : ''}`} />
       </button>
       {open && (
         <ul

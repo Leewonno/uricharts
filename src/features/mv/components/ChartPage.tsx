@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { YoutubeFill } from 'akar-icons'
+import { PageContainer } from '@/components/PageContainer'
 import type { ChartNav } from '../lib/chart-nav'
 import type { ChartView } from '../types'
 import { ChartBoard } from './ChartBoard'
@@ -14,14 +15,14 @@ export const CHART_METADATA: Metadata = { title: CHART_TITLE }
 /** 기간 차트 페이지 본문 (가장 최근 차트와 기간별 차트가 같이 쓴다) */
 export function ChartPage({ view, nav }: { view: ChartView; nav: ChartNav }) {
   return (
-    <main className="mx-auto w-full max-w-[1280px] px-[clamp(16px,4vw,48px)] pt-4 pb-16">
-      <h1 className="mt-3 mb-6 text-[clamp(28px,3.5vw,40px)] leading-[1.1] font-bold tracking-[-0.04em] text-strong">
-        <YoutubeFill aria-hidden="true" className="mr-[0.25em] inline-block size-[1.15em] align-[-0.24em]" />
-        {CHART_TITLE}
-      </h1>
-      <MvPlayerProvider>
+    <MvPlayerProvider>
+      <PageContainer className="gap-6 pt-7 pb-16">
+        <h1 className="text-[clamp(28px,3.5vw,40px)] leading-[1.1] font-bold tracking-[-0.04em] text-strong max-sm:text-xl">
+          <YoutubeFill aria-hidden="true" className="mr-[0.25em] inline-block size-[1.15em] align-[-0.24em]" />
+          {CHART_TITLE}
+        </h1>
         <ChartBoard view={view} nav={nav} />
-      </MvPlayerProvider>
-    </main>
+      </PageContainer>
+    </MvPlayerProvider>
   )
 }
