@@ -39,7 +39,7 @@ export function ChartBoard({ view, nav }: Props) {
               href={tab.href}
               scroll={false}
               aria-current={tab.current ? 'page' : undefined}
-              className="rounded-full px-[26px] py-2 text-lg font-bold text-muted aria-[current=page]:bg-fill aria-[current=page]:text-ink max-md:px-[18px] max-md:text-base"
+              className="rounded-full px-[26px] py-2 text-lg font-bold text-muted aria-[current=page]:bg-fill aria-[current=page]:text-ink max-sm:px-[18px] max-sm:text-base"
             >
               {PERIOD_NAMES[tab.period]}
             </Link>
@@ -70,7 +70,7 @@ export function ChartBoard({ view, nav }: Props) {
 function ChartTable({ rows, maxViews, extra }: { rows: readonly ChartEntry[]; maxViews: number; extra: ChartExtra }) {
   return (
     <>
-      <div aria-hidden="true" className={`grid gap-4 px-5 pb-2 text-[13px] font-semibold text-muted max-md:hidden ${CHART_COLUMNS[extra]}`}>
+      <div aria-hidden="true" className={`grid gap-4 px-5 pb-2 text-[13px] font-semibold text-muted max-sm:hidden ${CHART_COLUMNS[extra]}`}>
         <span>순위</span>
         <span>노래</span>
         {extra === 'released' && <span className="text-center">공개일</span>}

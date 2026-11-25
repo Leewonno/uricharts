@@ -102,7 +102,7 @@ export function PillDropdown<T extends string>({ label, value, options, onChange
         onClick={() => (open ? setOpen(false) : openList())}
         onKeyDown={onKeyDown}
         onBlur={() => setOpen(false)}
-        className="flex cursor-pointer items-center gap-3 rounded-full bg-surface pr-5 pl-6 text-lg font-bold text-ink transition-colors duration-200 hover:bg-fill-soft focus-visible:bg-fill-soft focus-visible:outline-none aria-expanded:bg-fill-soft max-md:pr-4 max-md:pl-5 max-md:text-base"
+        className="flex cursor-pointer items-center gap-3 rounded-full bg-surface pr-5 pl-6 text-lg font-bold text-ink transition-colors duration-200 hover:bg-fill-soft focus-visible:bg-fill-soft focus-visible:outline-none aria-expanded:bg-fill-soft max-sm:pr-4 max-sm:pl-5 max-sm:text-base"
       >
         {options[selectedIndex]?.label}
         <ChevronDown size={15} strokeWidth={3.2} aria-hidden="true" className={`shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
@@ -128,7 +128,7 @@ export function PillDropdown<T extends string>({ label, value, options, onChange
                 aria-selected={selected}
                 onClick={() => choose(index)}
                 onMouseMove={() => setActive(index)}
-                className={`cursor-pointer rounded-full px-5 py-2 text-lg font-bold whitespace-nowrap max-md:px-4 max-md:text-base ${tone}`}
+                className={`cursor-pointer rounded-full px-5 py-2 text-lg font-bold whitespace-nowrap max-sm:px-4 max-sm:text-base ${tone}`}
               >
                 {option.label}
               </li>

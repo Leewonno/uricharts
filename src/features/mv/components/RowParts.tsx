@@ -61,7 +61,7 @@ const TRAIL_DELAYS = ['0s', '0.22s', '0.44s']
 export function RowGo() {
   return (
     <div aria-hidden="true" className="relative flex items-center justify-end gap-1">
-      <span className={`relative h-5 w-[52px] overflow-hidden max-md:hidden no-hover:hidden motion-reduce:hidden text-accent`}>
+      <span className={`relative h-5 w-[52px] overflow-hidden max-sm:hidden no-hover:hidden motion-reduce:hidden text-accent`}>
         {TRAIL_DELAYS.map((delay) => (
           <ChevronRight
             key={delay}

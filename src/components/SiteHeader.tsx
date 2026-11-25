@@ -11,9 +11,9 @@ const NAV = [{ href: '/mv/chart/day', match: '/mv', label: 'K-POP MV 조회수',
 
 /** 로고 막대 3개의 높이(모바일은 작게)와 출렁이는 시차 */
 const LOGO_BARS = [
-  { size: 'h-[11px] max-[420px]:h-2', delay: '0s' },
-  { size: 'h-5 max-[420px]:h-4', delay: '0.15s' },
-  { size: 'h-[15px] max-[420px]:h-3', delay: '0.3s' },
+  { size: 'h-[11px] max-sm:h-2', delay: '0s' },
+  { size: 'h-5 max-sm:h-4', delay: '0.15s' },
+  { size: 'h-[15px] max-sm:h-3', delay: '0.3s' },
 ]
 
 export function SiteHeader() {
@@ -50,24 +50,24 @@ export function SiteHeader() {
   }, [current])
 
   return (
-    <header className="scroll-shadow sticky top-0 z-30 flex items-center justify-between gap-3 bg-page/80 px-[clamp(16px,4vw,48px)] py-5 backdrop-blur-md max-[420px]:gap-2">
-      <Link href="/" aria-label="우리의차트 홈" className="group flex shrink-0 items-center gap-2.5 text-[22px] font-extrabold tracking-[-0.04em] max-[420px]:gap-2 max-[420px]:text-lg max-[380px]:text-[17px]">
+    <header className="scroll-shadow sticky top-0 z-30 flex items-center justify-between gap-3 bg-page/80 px-[clamp(16px,4vw,48px)] py-5 backdrop-blur-md max-sm:gap-2">
+      <Link href="/" aria-label="우리의차트 홈" className="group flex shrink-0 items-center gap-2.5 text-[22px] font-extrabold tracking-[-0.04em] max-sm:gap-2 max-sm:text-lg">
         {/* 로고 타일: 진한 cyan 둥근 사각형 안에 흰 막대. 마우스를 올리면 막대가 이퀄라이저처럼 출렁인다 */}
         <i
           aria-hidden="true"
-          className="flex size-9.5 shrink-0 items-end justify-center gap-0.75 rounded-[11px] bg-accent pb-2.25 max-[420px]:size-7.5 max-[420px]:gap-0.5 max-[420px]:rounded-[9px] max-[420px]:pb-1.75"
+          className="flex size-9.5 shrink-0 items-end justify-center gap-0.75 rounded-[11px] bg-accent pb-2.25 max-sm:size-7.5 max-sm:gap-0.5 max-sm:rounded-[9px] max-sm:pb-1.75"
         >
           {LOGO_BARS.map((bar) => (
             <b
               key={bar.delay}
-              className={`w-1.25 origin-bottom rounded-xs bg-white group-hover:animate-equalizer motion-reduce:group-hover:animate-none max-[420px]:w-1 ${bar.size}`}
+              className={`w-1.25 origin-bottom rounded-xs bg-white group-hover:animate-equalizer motion-reduce:group-hover:animate-none max-sm:w-1 ${bar.size}`}
               style={{ animationDelay: bar.delay }}
             />
           ))}
         </i>
         <span className="flex flex-col leading-[1.1]">
           우리의차트
-          <small className="mt-[3px] text-[10.5px] font-bold tracking-normal text-muted max-[420px]:text-[8.5px]">URICHARTS</small>
+          <small className="mt-[3px] text-[10.5px] font-bold tracking-normal text-muted max-sm:text-[8.5px]">URICHARTS</small>
         </span>
       </Link>
       <nav
@@ -85,9 +85,9 @@ export function SiteHeader() {
             key={href}
             href={href}
             aria-current={index === current ? 'page' : undefined}
-            className="relative flex items-center gap-1.5 rounded-full py-1.5 pr-2 pl-2 text-[12.5px] font-bold whitespace-nowrap text-muted transition-colors duration-250 hover:text-ink aria-[current=page]:bg-accent aria-[current=page]:text-white group-data-ready/nav:aria-[current=page]:bg-transparent min-[381px]:pr-2.5 min-[381px]:pl-2.5 min-[381px]:text-[13px] min-[421px]:pr-3 min-[421px]:text-sm min-[640px]:py-[7px] min-[640px]:pr-4 min-[640px]:pl-3 min-[640px]:text-[15px]"
+            className="relative flex items-center gap-1.5 rounded-full py-1.5 pr-2.5 pl-2.5 text-[13px] font-bold whitespace-nowrap text-muted transition-colors duration-250 hover:text-ink aria-[current=page]:bg-accent aria-[current=page]:text-white group-data-ready/nav:aria-[current=page]:bg-transparent sm:py-[7px] sm:pr-4 sm:pl-3 sm:text-[15px]"
           >
-            <Icon size={17} strokeWidth={2.4} aria-hidden="true" className="hidden shrink-0 min-[421px]:block" />
+            <Icon size={17} strokeWidth={2.4} aria-hidden="true" className="hidden shrink-0 sm:block" />
             {label}
           </Link>
         ))}

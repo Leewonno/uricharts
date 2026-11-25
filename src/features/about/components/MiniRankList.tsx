@@ -9,15 +9,15 @@ export function MiniRankList({ items }: { items: readonly AboutMv[] }) {
       {items.map((mv, i) => (
         <li
           key={mv.yt}
-          className="grid grid-cols-[28px_72px_minmax(0,1fr)_auto] items-center gap-3 rounded-xl bg-linear-to-r from-fill-soft to-page to-70% py-2 pr-3.5 pl-2 max-[560px]:grid-cols-[22px_56px_minmax(0,1fr)]"
+          className="grid grid-cols-[28px_72px_minmax(0,1fr)_auto] items-center gap-3 rounded-xl bg-linear-to-r from-fill-soft to-page to-70% py-2 pr-3.5 pl-2 max-sm:grid-cols-[22px_56px_minmax(0,1fr)]"
         >
           <span className="text-center text-lg font-semibold tabular-nums">{i + 1}</span>
-          <MvThumbnail videoId={mv.yt} sizes="72px" className="w-[72px] rounded-md bg-fill max-[560px]:w-14" />
+          <MvThumbnail videoId={mv.yt} sizes="72px" className="w-[72px] rounded-md bg-fill max-sm:w-14" />
           <span className="min-w-0">
             <span className="block truncate text-[14.5px] font-bold text-strong">{mv.title}</span>
             <span className="block truncate text-[12.5px] text-muted">{mv.artist}</span>
           </span>
-          <span className="text-[15px] font-semibold tabular-nums max-[560px]:col-start-3 max-[560px]:text-[13px]" title={`${formatNumber(mv.views)}회`}>
+          <span className="text-[15px] font-semibold tabular-nums max-sm:col-start-3 max-sm:text-[13px]" title={`${formatNumber(mv.views)}회`}>
             {formatShort(mv.views)}
           </span>
         </li>
