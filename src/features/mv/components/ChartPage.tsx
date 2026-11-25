@@ -17,7 +17,7 @@ export function ChartPage({ view, nav }: { view: ChartView; nav: ChartNav }) {
   return (
     <MvPlayerProvider>
       <PageContainer className="gap-6 pt-7 pb-16">
-        <h1 className="text-[clamp(28px,3.5vw,40px)] leading-[1.1] font-bold tracking-[-0.04em] text-strong max-sm:text-xl">
+        <h1 className="text-[40px] leading-[1.1] font-bold tracking-[-0.04em] text-strong max-sm:text-xl">
           <YoutubeFill aria-hidden="true" className="mr-[0.25em] inline-block size-[1.15em] align-[-0.24em]" />
           {CHART_TITLE}
         </h1>

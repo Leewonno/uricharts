@@ -1,6 +1,5 @@
 import Link from 'next/link'
 
-// 문의 페이지는 아직 없다.
 // 소개(/about)는 페이지는 있지만 공개 전이라 링크를 뺐다. 공개할 때 { href: '/about', label: '소개' }를 앞에 다시 넣는다.
 const FOOTER_LINKS = [{ href: '/contact', label: '문의' }] as const
 
@@ -15,10 +14,10 @@ const linkClass =
  */
 export function SiteFooter({ asOf }: { asOf: string }) {
   return (
-    <footer className="relative mx-[clamp(8px,1.5vw,16px)] mt-auto overflow-hidden rounded-t-[32px] bg-strong px-[clamp(16px,4vw,48px)] pt-14 text-cyan-100 max-sm:mx-0 max-sm:px-6 max-sm:pt-10">
+    <footer className="relative mx-4 mt-auto overflow-hidden rounded-t-[32px] bg-strong px-12 pt-14 text-cyan-100 max-sm:mx-0 max-sm:px-6 max-sm:pt-10">
       <div className="mx-auto flex max-w-[1184px] flex-wrap justify-between gap-10">
         <div className="max-w-[420px]">
-          <p className="text-[clamp(24px,3vw,32px)] leading-[1.3] font-extrabold tracking-[-0.04em] text-white">
+          <p className="text-[32px] leading-[1.3] font-extrabold tracking-[-0.04em] text-white max-sm:text-2xl">
             우리의 오늘을
             <br />
             <em className="text-cyan-300 not-italic">기록으로 남깁니다</em>
@@ -41,7 +40,7 @@ export function SiteFooter({ asOf }: { asOf: string }) {
       </p>
       <span
         aria-hidden="true"
-        className="mt-7 block translate-y-[12%] bg-linear-to-b from-cyan-700 to-cyan-900 to-85% bg-clip-text text-center text-[clamp(64px,15.5vw,228px)] leading-[0.78] font-black tracking-[-0.05em] whitespace-nowrap text-transparent select-none"
+        className="mt-7 block translate-y-[12%] bg-linear-to-b from-cyan-700 to-cyan-900 to-85% bg-clip-text text-center text-[198px] max-sm:text-[clamp(64px,15.5vw,228px)] leading-[0.78] font-black tracking-[-0.05em] whitespace-nowrap text-transparent select-none"
       >
         URICHARTS
       </span>
