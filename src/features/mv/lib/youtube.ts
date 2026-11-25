@@ -13,3 +13,30 @@ export const thumbUrl = (videoId: string) => `https://i.ytimg.com/vi/${videoId}/
  */
 export const embedUrl = (videoId: string, { autoplay = true }: { autoplay?: boolean } = {}) =>
   `https://www.youtube.com/embed/${encodeURIComponent(videoId)}?${autoplay ? 'autoplay=1&' : ''}rel=0`
+
+const VIDEO_ID = /^[\w-]{11}$/
+const YOUTUBE_HOSTS = new Set(['youtube.com', 'www.youtube.com', 'm.youtube.com', 'music.youtube.com'])
+
+/**
+ * 사람이 붙여 넣은 유튜브 주소에서 영상 ID(11자)를 꺼낸다. 유튜브 영상 주소가 아니면 null.
+ * watch?v=, youtu.be/, shorts/, embed/ 모양을 받고, https://를 빼먹고 붙여 넣어도 읽는다.
+ */
+export function parseYoutubeId(input: string): string | null {
+  const text = input.trim()
+  if (!text) return null
+  let url: URL
+  try {
+    url = new URL(/^https?:\/\//.test(text) ? text : `https://${text}`)
+  } catch {
+    return null
+  }
+
+  const [first = '', second = ''] = url.pathname.split('/').filter(Boolean)
+  let id: string | null = null
+  if (url.hostname === 'youtu.be') id = first
+  else if (YOUTUBE_HOSTS.has(url.hostname)) {
+    if (first === 'watch') id = url.searchParams.get('v')
+    else if (first === 'shorts' || first === 'embed') id = second
+  }
+  return id && VIDEO_ID.test(id) ? id : null
+}

@@ -58,7 +58,7 @@ export default async function AboutPage() {
   return (
     <PageContainer width="narrow" className="gap-14 pt-[clamp(48px,9vh,96px)] pb-28">
       <section className="w-full">
-        <h1 className="text-[clamp(34px,5vw,56px)] leading-[1.15] font-extrabold tracking-[-0.05em] text-strong">
+        <h1 className="text-[56px] leading-[1.15] font-extrabold tracking-[-0.05em] text-strong max-sm:text-[34px]">
           우리의차트가 처음이라면,
           <br />
           이것부터 물어보세요

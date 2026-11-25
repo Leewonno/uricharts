@@ -1,8 +1,9 @@
 import type { ReactNode } from 'react'
 
-/** 본문 폭: wide는 홈·차트 (푸터 본문과 같은 폭), narrow는 소개처럼 읽는 글 */
+/** 본문 폭: wide는 홈·차트 (푸터 본문과 같은 폭), medium은 문의처럼 카드를 두 줄로 놓는 화면, narrow는 소개처럼 읽는 글 */
 const WIDTHS = {
   wide: 'max-w-[1184px]',
+  medium: 'max-w-[960px]',
   narrow: 'max-w-[720px]',
 } as const
 
@@ -19,7 +20,7 @@ interface Props {
  */
 export function PageContainer({ children, width = 'wide', className = '' }: Props) {
   return (
-    <main className="w-full px-[clamp(16px,4vw,48px)]">
+    <main className="w-full px-12 max-sm:px-4">
       <div className={`mx-auto flex w-full flex-col ${WIDTHS[width]} ${className}`}>{children}</div>
     </main>
   )

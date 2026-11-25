@@ -17,7 +17,8 @@ export default async function RootLayout({ children }: LayoutProps<'/'>) {
 
   return (
     <html lang="ko">
-      <body className="flex min-h-screen flex-col font-sans antialiased">
+      {/* PC(640px 이상)는 화면 폭을 1280px(본문 1184px + 좌우 여백 48px)로 고정한다. 창이 더 좁으면 줄어들지 않고 가로 스크롤이 생긴다 */}
+      <body className="flex min-h-screen flex-col font-sans antialiased sm:min-w-[1280px]">
         {/* 헤더는 레이아웃에 둬서 페이지를 옮겨도 유지된다 (메뉴 선택 표시가 미끄러지며 이동) */}
         <SiteHeader />
         {children}
