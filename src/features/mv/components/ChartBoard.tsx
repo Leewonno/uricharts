@@ -29,17 +29,17 @@ export function ChartBoard({ view, nav }: Props) {
   const maxViews = Math.max(rows[0]?.views ?? 0, 1)
 
   return (
-    <>
+    <div className="w-full">
       <div className="mb-6 flex flex-wrap items-stretch gap-2">
         <YearSelect years={nav.years} />
-        <nav aria-label="기간" className="inline-flex gap-1 rounded-full bg-surface p-1.5">
+        <nav aria-label="기간" className="inline-flex gap-1 rounded-full bg-surface p-1.5 max-sm:p-1">
           {nav.tabs.map((tab) => (
             <Link
               key={tab.period}
               href={tab.href}
               scroll={false}
               aria-current={tab.current ? 'page' : undefined}
-              className="rounded-full px-[26px] py-2 text-lg font-bold text-muted aria-[current=page]:bg-fill aria-[current=page]:text-ink max-sm:px-[18px] max-sm:text-base"
+              className="rounded-full px-[26px] py-2 text-lg font-bold text-muted aria-[current=page]:bg-fill aria-[current=page]:text-ink max-sm:px-4 max-sm:py-1.5 max-sm:text-[13px] max-sm:leading-5"
             >
               {PERIOD_NAMES[tab.period]}
             </Link>
@@ -63,7 +63,7 @@ export function ChartBoard({ view, nav }: Props) {
       ) : (
         <ChartTable rows={rows} maxViews={maxViews} extra={period === 'year' ? 'released' : 'change'} />
       )}
-    </>
+    </div>
   )
 }
 

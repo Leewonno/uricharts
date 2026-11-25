@@ -6,7 +6,7 @@ import type { RankedMv } from '../types'
 /** 올해의 MV: 올해 공개된 MV 중 누적 조회수 1위. 홈에서 바로 볼 수 있게 플레이어를 넣는다 */
 export function YearTopMv({ mv, year }: { mv: RankedMv; year: string }) {
   return (
-    <section aria-labelledby="year-top-mv" className="mx-auto max-w-[1280px] px-[clamp(16px,4vw,48px)] pt-6 pb-14">
+    <section aria-labelledby="year-top-mv" className="w-full">
       <SectionHeading id="year-top-mv" title="올해의 MV" description={`${year}년 공개곡 중 누적 조회수 1위`} />
       {/* 제목 왼쪽, 아티스트·누적 조회수 오른쪽. 좁은 화면에서는 아래로 내려간다 */}
       <div className="mt-1 mb-5 flex flex-wrap items-end justify-between gap-x-10 gap-y-4">

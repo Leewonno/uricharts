@@ -15,7 +15,7 @@ const linkClass =
  */
 export function SiteFooter({ asOf }: { asOf: string }) {
   return (
-    <footer className="relative mx-[clamp(8px,1.5vw,16px)] mt-auto overflow-hidden rounded-t-[32px] bg-strong px-[clamp(16px,4vw,48px)] pt-14 text-cyan-100 max-sm:px-6">
+    <footer className="relative mx-[clamp(8px,1.5vw,16px)] mt-auto overflow-hidden rounded-t-[32px] bg-strong px-[clamp(16px,4vw,48px)] pt-14 text-cyan-100 max-sm:mx-0 max-sm:px-6 max-sm:pt-10">
       <div className="mx-auto flex max-w-[1184px] flex-wrap justify-between gap-10">
         <div className="max-w-[420px]">
           <p className="text-[clamp(24px,3vw,32px)] leading-[1.3] font-extrabold tracking-[-0.04em] text-white">

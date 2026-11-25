@@ -102,13 +102,13 @@ export function PeriodPicker({ period, slots, current, disabled }: Props) {
   )
 }
 
-const LABEL = 'block rounded-lg px-1 text-xl leading-tight font-semibold tracking-[-0.02em] max-sm:text-lg'
+const LABEL = 'block rounded-lg px-1 text-xl leading-tight font-semibold tracking-[-0.02em] max-sm:text-base'
 const CARD = 'rounded-3xl bg-surface shadow-lg shadow-cyan-900/10'
 
 /** ‹ › 이전/다음 기간. 갈 곳이 없으면 흐리게만 둔다 */
 function StepLink({ href, label, dir }: { href: string | undefined; label: string; dir: 'prev' | 'next' }) {
   const Icon = dir === 'prev' ? ChevronLeft : ChevronRight
-  const icon = <Icon size={18} strokeWidth={2.6} aria-hidden="true" />
+  const icon = <Icon size={18} strokeWidth={2.6} aria-hidden="true" className="max-sm:size-3.5" />
   if (!href) {
     return (
       <span aria-hidden="true" className="grid size-8 place-items-center text-muted/25">
@@ -186,25 +186,25 @@ function DayCalendar({ slots, current, onPick }: { slots: readonly NavSlot[]; cu
         aria-disabled={!enabled}
         onClick={() => enabled && setMonth(target)}
         aria-label={dir < 0 ? '이전 달' : '다음 달'}
-        className="grid size-9 cursor-pointer place-items-center rounded-full text-ink hover:bg-fill-soft aria-disabled:cursor-default aria-disabled:text-muted/30 aria-disabled:hover:bg-transparent"
+        className="grid size-9 cursor-pointer place-items-center rounded-full text-ink hover:bg-fill-soft aria-disabled:cursor-default aria-disabled:text-muted/30 aria-disabled:hover:bg-transparent max-sm:size-7"
       >
-        <Icon size={16} strokeWidth={3.2} aria-hidden="true" />
+        <Icon size={16} strokeWidth={3.2} aria-hidden="true" className="max-sm:size-3.5" />
       </button>
     )
   }
 
   return (
-    <div className={`${CARD} w-[316px] p-4`}>
+    <div className={`${CARD} w-[316px] p-4 max-sm:w-[250px] max-sm:p-3`}>
       <div className="mb-2 flex items-center justify-between">
         {arrow(-1)}
-        <span className="text-[17px] font-bold text-strong">
+        <span className="text-[17px] font-bold text-strong max-sm:text-[15px]">
           {y}년 {m}월
         </span>
         {arrow(1)}
       </div>
       <div className="grid grid-cols-7 justify-items-center gap-y-0.5">
         {WEEKDAYS.map((w, i) => (
-          <span key={w} className={`grid h-7 place-items-center text-xs font-semibold ${i === 0 ? 'text-pink-600' : 'text-muted'}`}>
+          <span key={w} className={`grid h-7 place-items-center text-xs font-semibold max-sm:h-6 max-sm:text-[11px] ${i === 0 ? 'text-pink-600' : 'text-muted'}`}>
             {w}
           </span>
         ))}
@@ -214,7 +214,7 @@ function DayCalendar({ slots, current, onPick }: { slots: readonly NavSlot[]; cu
         {Array.from({ length: days }, (_, i) => {
           const date = `${month}-${String(i + 1).padStart(2, '0')}`
           const sunday = (firstWeekday + i) % 7 === 0
-          const cell = 'grid size-10 place-items-center rounded-full text-[15px] font-semibold tabular-nums'
+          const cell = 'grid size-10 place-items-center rounded-full text-[15px] font-semibold tabular-nums max-sm:size-8 max-sm:text-[13px]'
           if (!hrefOf.has(date)) {
             return (
               <span key={date} className={`${cell} text-muted/30`}>

@@ -10,7 +10,7 @@ const AVATAR_BARS = ['h-2.5', 'h-[18px]', 'h-3.5']
  */
 export function Qna({ id, question, children }: { id: string; question: string; children: ReactNode }) {
   return (
-    <section aria-labelledby={`${id}-q`} id={id} className="grid scroll-mt-28 gap-3">
+    <section aria-labelledby={`${id}-q`} id={id} className="grid w-full scroll-mt-28 gap-3">
       <h2
         id={`${id}-q`}
         className="max-w-[80%] justify-self-end rounded-3xl rounded-br-md bg-accent px-5 py-3.5 text-[clamp(18px,2vw,21px)] font-bold tracking-[-0.02em] text-white"

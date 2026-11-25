@@ -73,9 +73,9 @@ export function RowGo() {
         ))}
       </span>
       <span
-        className={`grid size-9 shrink-0 -translate-x-3.5 scale-85 place-items-center rounded-full opacity-0 transition-[opacity,translate,scale] duration-200 ease-[cubic-bezier(.2,.9,.3,1.3)] group-hover:translate-x-0 group-hover:scale-100 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:scale-100 group-focus-visible:opacity-100 no-hover:size-8 no-hover:translate-x-0 no-hover:scale-100 no-hover:opacity-100 motion-reduce:transition-none bg-fill text-ink`}
+        className={`grid size-9 shrink-0 -translate-x-3.5 scale-85 place-items-center rounded-full opacity-0 transition-[opacity,translate,scale] duration-200 ease-[cubic-bezier(.2,.9,.3,1.3)] group-hover:translate-x-0 group-hover:scale-100 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:scale-100 group-focus-visible:opacity-100 no-hover:size-8 no-hover:translate-x-0 no-hover:scale-100 no-hover:opacity-100 motion-reduce:transition-none bg-fill text-ink max-sm:size-7 max-sm:no-hover:size-7`}
       >
-        <ChevronRight size={18} strokeWidth={3.2} className="ml-px" />
+        <ChevronRight size={18} strokeWidth={3.2} className="ml-px max-sm:size-3.5" />
       </span>
     </div>
   )

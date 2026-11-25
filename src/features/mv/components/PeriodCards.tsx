@@ -18,7 +18,7 @@ const PERIOD_ICONS: Record<Period, typeof Sun> = {
  */
 export function PeriodCards({ periods }: { periods: readonly PeriodInfo[] }) {
   return (
-    <section aria-labelledby="period-charts" className="mx-auto max-w-[1280px] px-[clamp(16px,4vw,48px)] pb-14">
+    <section aria-labelledby="period-charts" className="w-full">
       <SectionHeading id="period-charts" title="기간별 차트" />
       <ul className="grid grid-cols-2 gap-4 sm:grid-cols-4">
         {periods.map((p) => {
@@ -33,8 +33,8 @@ export function PeriodCards({ periods }: { periods: readonly PeriodInfo[] }) {
                   aria-hidden="true"
                   className="absolute inset-0 -z-10 bg-flow opacity-0 transition-opacity duration-350 ease-out group-hover:animate-flow group-hover:opacity-100 motion-reduce:group-hover:animate-none"
                 />
-                <h3 className="flex items-center gap-2 text-2xl font-bold tracking-[-0.03em] max-sm:text-xl">
-                  <Icon size={26} strokeWidth={2.4} aria-hidden="true" className="shrink-0 text-accent transition-colors duration-200 group-hover:text-ink max-sm:size-5" />
+                <h3 className="flex items-center gap-2 text-2xl font-bold tracking-[-0.03em] max-sm:text-lg">
+                  <Icon size={26} strokeWidth={2.4} aria-hidden="true" className="shrink-0 text-accent transition-colors duration-200 group-hover:text-ink max-sm:size-4.5" />
                   {p.name}
                 </h3>
                 <p className="text-[15px] font-semibold text-muted group-hover:text-ink max-sm:text-sm">{p.available ? p.label : '집계 중'}</p>

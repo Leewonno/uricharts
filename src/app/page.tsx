@@ -1,3 +1,4 @@
+import { PageContainer } from '@/components/PageContainer'
 import { MvPlayerProvider } from '@/features/mv/components/MvPlayer'
 import { PeriodCards } from '@/features/mv/components/PeriodCards'
 import { YearTopList } from '@/features/mv/components/YearTopList'
@@ -23,12 +24,12 @@ export default async function HomePage() {
       {/* 바탕 그라데이션 원: 화면 아래 가운데에 고정 */}
       <div aria-hidden="true" className="bg-glow pointer-events-none fixed top-full left-1/2 -z-10 size-[600px] -translate-1/2 rounded-full" />
       <MvPlayerProvider>
-        <main>
+        <PageContainer className="gap-14 pt-6 pb-14">
           <h1 className="sr-only">우리의차트 · K-pop 뮤직비디오 유튜브 조회수 차트</h1>
           {yearTop && <YearTopMv mv={yearTop} year={year} />}
           <YearTopList items={yearTopList} count={TOP_COUNT} year={year} period={periods.year} />
           <PeriodCards periods={PERIOD_ORDER.map((key) => periods[key])} />
-        </main>
+        </PageContainer>
       </MvPlayerProvider>
     </>
   )

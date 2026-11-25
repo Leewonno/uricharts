@@ -15,7 +15,7 @@ export function SectionHeading({ id, title, description, more }: Props) {
   return (
     <div className="mb-4 flex items-baseline justify-between">
       <div className="flex flex-wrap items-baseline gap-3">
-        <h2 id={id} className="text-3xl font-bold tracking-[-0.03em] text-strong max-sm:text-2xl">{title}</h2>
+        <h2 id={id} className="text-3xl font-bold tracking-[-0.03em] text-strong max-sm:text-xl">{title}</h2>
         {description && <span className="text-[15px] font-medium tracking-[-0.02em] text-muted max-sm:text-xs">{description}</span>}
       </div>
       {more && (

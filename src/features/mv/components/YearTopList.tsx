@@ -19,7 +19,7 @@ interface Props {
 export function YearTopList({ items, count, year, period }: Props) {
   const maxViews = Math.max(items[0]?.views ?? 0, 1)
   return (
-    <section aria-labelledby="year-top" className="mx-auto max-w-[1280px] px-[clamp(16px,4vw,48px)] pb-14">
+    <section aria-labelledby="year-top" className="w-full">
       <SectionHeading
         id="year-top"
         title={`연간 조회수 TOP ${count}`}
