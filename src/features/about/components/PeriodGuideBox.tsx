@@ -35,7 +35,7 @@ export function PeriodGuideBox({ periods, asOf }: { periods: readonly PeriodGuid
           style={{ width: `${current.span}%` }}
         />
       </div>
-      <p aria-hidden="true" className="mt-1.5 flex justify-between text-[12.5px] text-muted">
+      <p aria-hidden="true" className="mt-1.5 flex justify-between text-xs text-muted">
         <span>1월 1일</span>
         <span>{`${Number(asOf.slice(5, 7))}월 ${Number(asOf.slice(8, 10))}일`}</span>
       </p>

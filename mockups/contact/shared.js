@@ -79,7 +79,7 @@ function mountChrome() {
     footer.outerHTML = `
       <footer class="site-footer">
         <div class="inner">
-          <p class="slogan">오늘의 데이터를<br /><em>기록으로 남깁니다</em></p>
+          <p class="slogan">우리의 오늘을<br /><em>기록으로 남깁니다</em></p>
           <ul><li><a href="#" aria-current="page">문의</a></li></ul>
         </div>
         <p class="copy">© ${CONTACT.year} 우리의차트 URICHARTS</p>

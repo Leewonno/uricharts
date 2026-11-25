@@ -40,7 +40,7 @@ export function ChartRow({ mv, maxViews, extra }: Props) {
         className="absolute inset-y-0 left-0 bg-linear-to-r from-fill/50 to-transparent"
         style={{ width: `${(mv.views / maxViews) * 100}%` }}
       />
-      <div className="relative text-[26px] leading-none font-semibold tabular-nums max-sm:text-xl">{mv.rank}</div>
+      <div className="relative text-2xl leading-none font-semibold tabular-nums max-sm:text-xl">{mv.rank}</div>
       <div className="relative flex min-w-0 items-center gap-3.5">
         <MvThumbnail videoId={mv.yt} sizes="96px" className="w-24 rounded-lg bg-fill-soft max-sm:hidden" />
         <div className="min-w-0">

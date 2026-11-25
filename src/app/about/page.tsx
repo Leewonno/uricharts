@@ -65,7 +65,7 @@ export default async function AboutPage() {
         <p className="mt-4 text-lg text-muted">자주 듣는 질문 여섯 개에 차근차근 답해 드릴게요.</p>
         <nav aria-label="질문 바로 가기" className="mt-7 flex flex-wrap gap-2">
           {QUESTIONS.map(({ id, short }) => (
-            <a key={id} href={`#${id}`} className="rounded-full bg-surface px-4 py-[9px] text-[14.5px] font-bold transition-colors duration-200 hover:bg-fill">
+            <a key={id} href={`#${id}`} className="rounded-full bg-surface px-4 py-[9px] text-sm font-bold transition-colors duration-200 hover:bg-fill">
               {short}
             </a>
           ))}
@@ -122,7 +122,7 @@ export default async function AboutPage() {
               {data.firstWeek.map((day) => {
                 const style = DAY_STYLES[day.state]
                 return (
-                  <li key={day.date} className={`grid justify-items-center gap-1.5 rounded-xl px-0.5 py-2.5 text-[12.5px] font-bold ${style.cell}`}>
+                  <li key={day.date} className={`grid justify-items-center gap-1.5 rounded-xl px-0.5 py-2.5 text-xs font-bold ${style.cell}`}>
                     <i aria-hidden="true" className={`size-2.5 rounded-full ${style.dot}`} />
                     {day.label}
                     <span className="sr-only">{style.label}</span>
@@ -130,7 +130,7 @@ export default async function AboutPage() {
                 )
               })}
             </ol>
-            <p aria-hidden="true" className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-[12.5px] text-muted">
+            <p aria-hidden="true" className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted">
               {(hasMissed ? (['recorded', 'missed', 'upcoming'] as const) : (['recorded', 'upcoming'] as const)).map((state) => (
                 <span key={state} className="inline-flex items-center gap-1.5">
                   <i className={`size-2.5 rounded-full ${DAY_STYLES[state].dot}`} />
