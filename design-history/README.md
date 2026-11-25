@@ -5,6 +5,28 @@ PR을 만들 때마다 base 브랜치(변경 전)와 PR 브랜치(변경 후)의
 
 ---
 
+## 09 · 2026-11-25 · 모바일 글자 크기 줄이기, 글자 크기 정리, 푸터 문구 변경 (develop → main)
+
+**바뀐 점**
+- 푸터 문구: "오늘의 데이터를 / 기록으로 남깁니다" → "우리의 오늘을 / 기록으로 남깁니다" (시안 `mockups/about`, `mockups/contact`도 같이)
+- 640px 미만(모바일)에서 한 단계 작게: 헤더 위아래 여백(20px → 8px) · 메뉴 글자 13 → 12px, 섹션 제목 28 → 24px · 설명 15 → 12px · 더보기 14px, 올해의 MV 곡명 48 → 32px · 아티스트/누적 조회수 32 → 20px, 기간 카드 제목 28 → 20px · 아이콘 · 화살표, 순위 행(순위 칸 40 → 32px, 순위 18px, 곡명 16px, 아티스트 12px, 조회수 14px), 푸터 좌우 여백 24px · 링크 13px
+- 임의 글자 크기를 Tailwind 단계로 정리 (PC에도 1~2px 차이): 섹션 제목 28 → 30px, 올해의 MV 아티스트/누적 조회수 32 → 30px, 기간 카드 제목 28 → 24px, 차트 표 순위 26 → 24px, 소개 페이지 14.5 → 14px · 12.5 → 12px, 푸터 저작권 12.5 → 12px
+
+| | 변경 전 (main) | 변경 후 |
+|---|---|---|
+| 홈 | ![](09-20261125-develop/before/home.png) | ![](09-20261125-develop/after/home.png) |
+| 차트 (일간) | ![](09-20261125-develop/before/chart.png) | ![](09-20261125-develop/after/chart.png) |
+| 차트 (연간) | ![](09-20261125-develop/before/chart-year.png) | ![](09-20261125-develop/after/chart-year.png) |
+| 소개 | ![](09-20261125-develop/before/about.png) | ![](09-20261125-develop/after/about.png) |
+| 홈 430px | ![](09-20261125-develop/before/home-430.png) | ![](09-20261125-develop/after/home-430.png) |
+| 차트 (일간) 430px | ![](09-20261125-develop/before/chart-430.png) | ![](09-20261125-develop/after/chart-430.png) |
+| 차트 (연간) 430px | ![](09-20261125-develop/before/chart-year-430.png) | ![](09-20261125-develop/after/chart-year-430.png) |
+| 소개 430px | ![](09-20261125-develop/before/about-430.png) | ![](09-20261125-develop/after/about-430.png) |
+
+> 430px는 Chrome headless 창 최소 너비 때문에 playwright로 찍었다 (430×2400, 모션 감소). 변경 후 PC 홈 플레이어가 검게 찍힌 것은 headless 캡처 탓이다 (04 참고).
+
+---
+
 ## 08 · 2026-11-25 · 반응형 기준을 640px 하나로 통일 (develop → main)
 
 **바뀐 점**
