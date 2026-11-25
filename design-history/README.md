@@ -5,6 +5,29 @@ PR을 만들 때마다 base 브랜치(변경 전)와 PR 브랜치(변경 후)의
 
 ---
 
+## 08 · 2026-11-25 · 반응형 기준을 640px 하나로 통일 (develop → main)
+
+**바뀐 점**
+- 브레이크포인트를 Tailwind `sm`(640px) 하나로 통일. 640px 미만은 모바일, 이상은 PC (`md` 768px과 380·420·560px 임의 값은 없앰)
+- 헤더: 640px 미만은 한 가지 모양(작은 로고, 메뉴 13px · 아이콘 없음). 380px 이하에서 더 줄이던 단계와 421~639px에서 메뉴 아이콘을 보이던 단계는 없어짐
+- 소개 페이지: Q&A 아이콘 숨김 · 미니 순위 목록이 모바일 배치로 바뀌는 기준 560px → 640px
+- 차트 · 홈: 768px 기준이던 것(표 칸 구성 · 머리행 · 누적/변동 칸, 기간 카드 4열, 순위 행, 탭 · 드롭다운 크기)이 640px부터 PC 모양
+- 640~900px 정도에서 차트 표가 넘친다 (노래 칸이 0이 되어 곡명이 안 보이고, 썸네일과 누적 숫자가 겹침). 원래 768px에서도 있던 문제로, 따로 고칠 예정
+- 1360px(데스크톱) 화면은 바뀐 게 없어 430px · 700px로 찍었다
+
+| | 변경 전 (main) | 변경 후 |
+|---|---|---|
+| 홈 430px | ![](08-20261125-develop/before/home-430.png) | ![](08-20261125-develop/after/home-430.png) |
+| 차트 (일간) 430px | ![](08-20261125-develop/before/chart-430.png) | ![](08-20261125-develop/after/chart-430.png) |
+| 차트 (연간) 430px | ![](08-20261125-develop/before/chart-year-430.png) | ![](08-20261125-develop/after/chart-year-430.png) |
+| 소개 430px | ![](08-20261125-develop/before/about-430.png) | ![](08-20261125-develop/after/about-430.png) |
+| 홈 700px | ![](08-20261125-develop/before/home-700.png) | ![](08-20261125-develop/after/home-700.png) |
+| 차트 (일간) 700px | ![](08-20261125-develop/before/chart-700.png) | ![](08-20261125-develop/after/chart-700.png) |
+| 차트 (연간) 700px | ![](08-20261125-develop/before/chart-year-700.png) | ![](08-20261125-develop/after/chart-year-700.png) |
+| 소개 700px | ![](08-20261125-develop/before/about-700.png) | ![](08-20261125-develop/after/about-700.png) |
+
+---
+
 ## 07 · 2026-11-25 · 공개연도별 차트 (연도 드롭다운 · 누적 칸 · 마감 안내) (develop → main)
 
 **바뀐 점**
