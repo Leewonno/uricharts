@@ -52,6 +52,11 @@ export interface DailyInput {
    * 낮에 남긴 오늘 기록이 있으면 바꿔 쓰지만, 진짜 0시 기록은 건드리지 않는다
    */
   readonly asMidnight?: boolean
+  /**
+   * 백업 실행용: 오늘 할 일(조회수 기록, 검색)이 이미 끝났으면 유튜브 API를 부르지 않고 바로 마친다.
+   * 6시가 지나 조회수를 기록할 수 없는 때도 기록은 끝난 것으로 본다
+   */
+  readonly skipIfDone?: boolean
   /** 사람이 볼 것이 있으면 이슈 본문을 이 파일에 쓴다 */
   readonly issueOut?: string
   /** 월요일이면 주간 요약을 이 파일에 쓴다 */
@@ -72,12 +77,17 @@ export async function runDaily({
   search,
   forceSnapshot = false,
   asMidnight = false,
+  skipIfDone = false,
   issueOut,
   digestOut,
   log = console,
 }: DailyInput): Promise<DailyOutcome> {
   const today = kstDate(now)
   const paths = mvPaths(dataDir)
+  if (skipIfDone && (await todayIsDone(paths, today, now))) {
+    log.info(`${today} 조회수 기록과 검색은 이미 끝났습니다. 유튜브 API를 부르지 않고 마칩니다`)
+    return { failures: [], snapshot: null, discovery: null }
+  }
   const failures: string[] = []
   const fail = (label: string, error: unknown) => {
     const message = `${label}: ${error instanceof Error ? error.message : String(error)}`
@@ -215,6 +225,22 @@ export function nextSearchSince(lastSearchAt: string | undefined, now: Date): Da
   if (kstDate(last) === kstDate(now)) return null
   const oldest = new Date(now.getTime() - MAX_SEARCH_LOOKBACK_DAYS * 86_400_000)
   return last < oldest ? oldest : last
+}
+
+/**
+ * 오늘 할 일이 끝났는지: 조회수 기록이 있거나(6시가 지났으면 더 남길 수 없다) + 오늘 검색을 했다.
+ * 검색은 새 MV 찾기와 같은 실행에서 하므로, 검색했으면 찾기도 끝난 것이다.
+ * 파일을 못 읽으면 끝나지 않은 것으로 보고 평소대로 돌린다
+ */
+async function todayIsDone(paths: ReturnType<typeof mvPaths>, today: string, now: Date): Promise<boolean> {
+  try {
+    const recorded = kstHour(now) >= SNAPSHOT_CUTOFF_HOUR || (await exists(paths.snapshot(today)))
+    if (!recorded) return false
+    const state = await readJson(paths.state, stateSchema, {})
+    return state.lastSearchAt !== undefined && nextSearchSince(state.lastSearchAt, now) === null
+  } catch {
+    return false
+  }
 }
 
 /** registry.json을 못 읽을 때, 가장 최근 기록에 있던 영상들을 대신 기록한다 */

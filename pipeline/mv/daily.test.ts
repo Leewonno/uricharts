@@ -262,6 +262,58 @@ describe('runDaily', () => {
     expect(JSON.parse(await readFile(paths.state, 'utf8'))).toEqual({ lastSearchAt: MIDNIGHT.toISOString() })
   })
 
+  describe('skipIfDone (백업 실행)', () => {
+    /** 부르기만 해도 실패하는 클라이언트: 건너뛰면 실패가 없어야 한다 */
+    const untouchable = fakeClient({})
+    for (const key of ['videos', 'channels', 'recentUploads', 'playlistVideos', 'mostPopularMusic', 'searchRecentMvs'] as const) {
+      untouchable[key] = async () => {
+        throw new Error(`${key}를 불렀다`)
+      }
+    }
+    const searchedToday = () => writeJson(paths.state, { lastSearchAt: MIDNIGHT.toISOString() })
+    const LATER = new Date(MIDNIGHT.getTime() + 3_600_000) // 01:05 KST
+
+    it('오늘 기록과 검색이 끝났으면 유튜브 API를 부르지 않는다', async () => {
+      await seedFiles()
+      await writeJson(paths.snapshot('2026-11-23'), { date: '2026-11-23', fetchedAt: 'first', views: { a: 1 }, missing: [] })
+      await searchedToday()
+
+      const result = await runDaily({ client: untouchable, dataDir: dir, now: LATER, search: true, skipIfDone: true, log: silent })
+
+      expect(result).toEqual({ failures: [], snapshot: null, discovery: null })
+    })
+
+    it('6시가 지났으면 기록이 없어도 (더 남길 수 없으니) 검색만 했으면 건너뛴다', async () => {
+      await seedFiles()
+      await searchedToday()
+
+      const result = await runDaily({ client: untouchable, dataDir: dir, now: AFTERNOON, search: true, skipIfDone: true, log: silent })
+
+      expect(result).toEqual({ failures: [], snapshot: null, discovery: null })
+    })
+
+    it('6시 전에 오늘 기록이 없으면 검색을 했어도 기록한다', async () => {
+      await seedFiles()
+      await searchedToday()
+      const client = fakeClient({ videos: [views('a', 10), views('b', 20)], uploads: { [HYBE]: [] } })
+
+      await runDaily({ client, dataDir: dir, now: LATER, search: true, skipIfDone: true, log: silent })
+
+      expect((await readSnapshot('2026-11-23')).views).toEqual({ a: 10, b: 20 })
+      expect(client.searches).toHaveLength(0)
+    })
+
+    it('오늘 검색을 안 했으면 평소대로 찾기·검색을 한다', async () => {
+      await seedFiles()
+      await writeJson(paths.snapshot('2026-11-23'), { date: '2026-11-23', fetchedAt: 'first', views: { a: 1 }, missing: [] })
+      const client = fakeClient({ uploads: { [HYBE]: [] } })
+
+      await runDaily({ client, dataDir: dir, now: LATER, search: true, skipIfDone: true, log: silent })
+
+      expect(client.searches).toHaveLength(1)
+    })
+  })
+
   it('월요일에는 주간 요약을 만든다', async () => {
     await seedFiles({ registry: [{ ...entry('a'), source: 'auto', addedAt: '2026-11-20' }] })
     const digestOut = join(dir, 'digest.md')
